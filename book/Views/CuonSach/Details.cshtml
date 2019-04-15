@@ -1,0 +1,75 @@
+﻿@model BookManagementSystem.Models.CuonSach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CuonSach</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiThieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiThieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaTien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaTien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_TheLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_TheLoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_NXB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_NXB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MainImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "List")
+</p>
