@@ -2223,6 +2223,7 @@
     <Content Include="Views\BookStore\SachBanChay.cshtml" />
     <Content Include="Views\BookStore\TieuThuyet.cshtml" />
     <Content Include="Views\Shared\_LayOutHome.cshtml" />
+    <Content Include="Views\Shared\_LayoutBlank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
