@@ -17,6 +17,7 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult List()
         {
+            ViewBag.username = "sonnx";
             List<KhachHang> list = new List<KhachHang>();
             for (int i = 0; i < 10; i++)
             {
@@ -28,6 +29,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.username = "sonnx";
+
             int i = id;
             KhachHang khachHang = new  KhachHang(i, "name " + i, "email " + i, "pw " + i
                     , "SDT " + i, (i % 2), DateTime.Now);
@@ -43,6 +46,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.username = "sonnx";
+
             return View();
         }
 
@@ -55,6 +60,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Details(int id)
         {
+            ViewBag.username = "sonnx";
+
             int i = id;
             KhachHang khachHang = new KhachHang(i, "name " + i, "email " + i, "pw " + i
                     , "SDT " + i, (i % 2), DateTime.Now);
@@ -64,6 +71,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Delete(int id)
         {
+            ViewBag.username = "sonnx";
+
             int i = id;
             KhachHang khachHang = new KhachHang(i, "name " + i, "email " + i, "pw " + i
                     , "SDT " + i, (i % 2), DateTime.Now);

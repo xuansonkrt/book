@@ -18,6 +18,7 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult List()
         {
+            ViewBag.username = "sonnx";
             List<HoaDon> list = new List<HoaDon>();
             for (int i = 0; i < 10; i++)
             {
@@ -28,6 +29,7 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.username = "sonnx";
             int i = id;
             HoaDon hoaDon = new HoaDon(i, i + 1111, "Ma giam gia " + i, i * 1000
                 , DateTime.Now, DateTime.Now);
@@ -43,6 +45,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Create()
         {
+
+            ViewBag.username = "sonnx";
             return View();
         }
 
@@ -55,6 +59,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Details(int id)
         {
+            ViewBag.username = "sonnx";
+
             int i = id;
             HoaDon hoaDon = new HoaDon(i, i + 1111, "Ma giam gia " + i, i * 1000
                 , DateTime.Now, DateTime.Now);
@@ -64,6 +70,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Delete(int id)
         {
+            ViewBag.username = "sonnx";
+
             int i = id;
             HoaDon hoaDon = new HoaDon(i, i + 1111, "Ma giam gia " + i, i * 1000
                 , DateTime.Now, DateTime.Now);

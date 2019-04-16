@@ -17,6 +17,7 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult List()
         {
+            ViewBag.username = "sonnx";
             List<GioHang> list = new List<GioHang>();
             for (int i = 0; i < 10; i++)
             {
@@ -27,6 +28,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.username = "sonnx";
+
             GioHang gioHang = new GioHang(id, DateTime.Now, 1);
             return View(gioHang);
         }
@@ -40,6 +43,7 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Create()
         {
+            ViewBag.username = "sonnx";
             return View();
         }
 
@@ -52,6 +56,7 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Details(int id)
         {
+            ViewBag.username = "sonnx";
 
             GioHang phieuNhap = new GioHang(id, DateTime.Now, 1);
             return View(phieuNhap);
@@ -60,6 +65,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Delete(int id)
         {
+            ViewBag.username = "sonnx";
+
             GioHang phieuNhap = new GioHang(id, DateTime.Now, 1);
             return View(phieuNhap);
         }

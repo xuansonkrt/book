@@ -18,6 +18,7 @@ namespace book.Controllers
         public ActionResult List()
         {
             ViewBag.username = "sonx";
+            ViewBag.avatar = "~/Content/images/IMG_9405-3.jpg";
             List<TheLoai> list = new List<TheLoai>();
             for(int i=0; i<10; i++)
             {
