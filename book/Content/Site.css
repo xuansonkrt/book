@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +21,36 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.text-black{
+    color: black;
+}
+.pointer{
+    cursor: pointer;
+}
+
+.theloai{
+    background-color: #FFFFFF;
+    color: #FE980F;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.category-products .panel-default .panel-heading .panel-title a:hover{
+    color: #FE980F;
+}
+.brands-name .nav-stacked li a:hover{
+    color: #FE980F;
+}
+a:hover{
+    color: #FE980F;
+}
+
+.img-book:hover{
+   transform: scale(1.02);
+   z-index:-111;
 }

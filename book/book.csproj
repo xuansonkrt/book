@@ -228,6 +228,7 @@
     <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
     <Compile Include="Models\VaiTro.cs" />
+    <Compile Include="Models\ViewModels\HomeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -2224,6 +2225,9 @@
     <Content Include="Views\BookStore\TieuThuyet.cshtml" />
     <Content Include="Views\Shared\_LayOutHome.cshtml" />
     <Content Include="Views\Shared\_LayoutBlank.cshtml" />
+    <Content Include="Views\Shared\_LayoutLeft.cshtml" />
+    <Content Include="Views\Shared\_LayoutFooter.cshtml" />
+    <Content Include="Views\BookStore\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

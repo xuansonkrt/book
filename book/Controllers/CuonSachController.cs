@@ -49,7 +49,7 @@ namespace BookManagementSystem.Controllers
         public ActionResult Edit(int id)
         {
             ViewBag.username = "sonnx";
-            CuonSach CuonSach = new CuonSach(id, " CuonSach 3","GioiThieu",123,2,2,4,"Image ");
+            CuonSach CuonSach = new CuonSach(id, " CuonSach 3","GioiThieu",123,2,2,4,"Image ","Tac gia");
             return View(CuonSach);
         }
         [HttpPost]
@@ -61,7 +61,7 @@ namespace BookManagementSystem.Controllers
         public ActionResult Details(int id)
         {
             ViewBag.username = "sonnx";
-            CuonSach CuonSach = new CuonSach(id, " CuonSach 3", "GioiThieu", 123, 2, 2, 4, "Image ");
+            CuonSach CuonSach = new CuonSach(id, " CuonSach 3", "GioiThieu", 123, 2, 2, 4, "Image ","Tac gia");
             return View(CuonSach);
         }
         [HttpPost]
@@ -74,7 +74,7 @@ namespace BookManagementSystem.Controllers
         public ActionResult Delete(int id)
         {
             ViewBag.username = "sonnx";
-            CuonSach CuonSach = new CuonSach(id, " CuonSach 3", "GioiThieu", 123, 2, 2, 4, "Image ");
+            CuonSach CuonSach = new CuonSach(id, " CuonSach 3", "GioiThieu", 123, 2, 2, 4, "Image ","Tac gia");
             return View(CuonSach);
 
         }

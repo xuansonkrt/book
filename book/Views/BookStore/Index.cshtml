@@ -1,226 +1,99 @@
-﻿
+﻿@model book.Models.ViewModels.HomeVM
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayOutHome.cshtml";
-}
+}   
 @section Slider {
-    <div class="carousel-inner">
+<div class="col-sm-12">
+    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#slider-carousel" data-slide-to="1"></li>
+            <li data-target="#slider-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
 
-        <div class="item active">
-            <div class="col-sm-6">
-                <h1><span>E</span>-SHOPPER</h1>
-                <h2>Free E-Commerce Template</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <button type="button" class="btn btn-default get">Get it now</button>
-            </div>
-            <div class="col-sm-6">
-                <img src="~/Content/images/home/vd8.PNG" width="460" height="440" class="girl img-responsive" alt="" />
-                <img src="~/Content/images/home/pricing.png" class="pricing" alt="" />
-            </div>
-        </div>
-        <div class="item">
-            <div class="col-sm-6">
-                <h1><span>E</span>-SHOPPER</h1>
-                <h2>100% Responsive Design</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                <button type="button" class="btn btn-default get">Get it now</button>
-            </div>
-            <div class="col-sm-6">
-                <img src="~/Content/images/home/vd8.PNG" width="460" height="440" class="girl img-responsive" alt="" />
-                <img src="~/Content/images/home/pricing.png" class="pricing" alt="" />
-            </div>
-        </div>
-
-        @*<div class="item">
+            <div class="item active">
                 <div class="col-sm-6">
                     <h1><span>E</span>-SHOPPER</h1>
-                    <h2>Free Ecommerce Template</h2>
+                    <h2>Free E-Commerce Template</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                     <button type="button" class="btn btn-default get">Get it now</button>
                 </div>
                 <div class="col-sm-6">
-                    <img src="~/Content/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+                    <img src="~/Content/images/home/vd8.PNG" width="460" height="440" class="girl img-responsive" alt="" />
                     <img src="~/Content/images/home/pricing.png" class="pricing" alt="" />
                 </div>
-            </div>*@
+            </div>
+            <div class="item">
+                <div class="col-sm-6">
+                    <h1><span>E</span>-SHOPPER</h1>
+                    <h2>100% Responsive Design</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                    <button type="button" class="btn btn-default get">Get it now</button>
+                </div>
+                <div class="col-sm-6">
+                    <img src="~/Content/images/home/vd8.PNG" width="460" height="440" class="girl img-responsive" alt="" />
+                    <img src="~/Content/images/home/pricing.png" class="pricing" alt="" />
+                </div>
+            </div>
 
+
+
+        </div>
+
+
+        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+        </a>
     </div>
+
+</div>
+   
 
 }
 <div class="col-sm-9 padding-right">
     <div class="features_items">
         <!--features_items-->
         <h2 class="title text-center">Sách bán chạy</h2>
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="~/Content/images/home/VD1.PNG " alt="" />
-                        <p>Tuổi trẻ đáng giá bao nhiêu</p>
-                        <p>Rosie Nguyen</p>
-                        <p>64.000 đ</p>
-                        @*  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>*@
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+        @foreach (var item in Model.ListCuonSach)
+        {
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <a href="/BookStore/Detail/@item.Id">
+                                <img src=@item.MainImage class="img-book" style="z-index:-11" alt="" />
+                            </a>
+                            @Html.ActionLink(item.Name, "Detail", new { id = item.Id }, new { @class = "text-black" })
+
+                            
+                            @*<p>@item.Name</p>*@
+                            <p>@item.TacGia</p>
+                            <p>@item.GiaTien</p>
                         </div>
+                        
                     </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào danh sách yêu thích</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào giỏ hàng</a></li>
-                    </ul>
+                    <div class="choose">
+                        <ul class="nav nav-pills nav-justified">
+                            <li><a href="#" title="Thêm vào giỏ hàng"><i class="fa fa-cart-plus"></i></a></li>
+                            <li><a href="#" title="Thêm vào yêu thích"><i class="fa fa-heart"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="~/Content/images/home/VD2.PNG " alt="" />
-                        <p>Nhà giả kim</p>
-                        <p>Paulo Coelho</p>
-                        <p>50.000 đ</p>
-                        @*  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>*@
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào danh sách yêu thích</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào giỏ hàng</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="~/Content/images/home/VD3.PNG " alt="" />
-                        <p>Đi tìm lẽ sống</p>
-                        <p>Viktor Frankl</p>
-                        <p>84.000 đ</p>
-                        @*  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>*@
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào danh sách yêu thích</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào giỏ hàng</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="~/Content/images/home/VD1.PNG " alt="" />
-                        <p>TUỔI TRẺ ĐÁNG GIÁ BAO NHIÊU</p>
-                        <p>Rosie Nguyen</p>
-                        <p>64.000 đ</p>
-                        @*  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>*@
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào danh sách yêu thích</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào giỏ hàng</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="~/Content/images/home/VD2.PNG " alt="" />
-                        <p>Nhà giả kim</p>
-                        <p>Paulo Coelho</p>
-                        <p>50.000 đ</p>
-                        @*  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>*@
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào danh sách yêu thích</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào giỏ hàng</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="~/Content/images/home/VD1.PNG " alt="" />
-                        <p>TUỔI TRẺ ĐÁNG GIÁ BAO NHIÊU</p>
-                        <p>Rosie Nguyen</p>
-                        <p>64.000 đ</p>
-                        @*  <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>*@
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            <h2>$56</h2>
-                            <p>Easy Polo Black Edition</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="choose">
-                    <ul class="nav nav-pills nav-justified">
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào danh sách yêu thích</a></li>
-                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào giỏ hàng</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        }
+        
 
     </div><!--features_items-->
 
     <div class="category-tab">
         <!--category-tab-->
         <div class="col-sm-12">
-            @*<ul class="nav nav-tabs">
-                    <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
-                    <li><a href="#blazers" data-toggle="tab">Blazers</a></li>
-                    <li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
-                    <li><a href="#kids" data-toggle="tab">Kids</a></li>
-                    <li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
-                </ul>*@
-
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tshirt" data-toggle="tab">Văn học việt Nam</a></li>
                 <li><a href="#blazers" data-toggle="tab">Văn học nước ngoài</a></li>
