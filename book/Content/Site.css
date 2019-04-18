@@ -54,3 +54,17 @@ a:hover{
    transform: scale(1.02);
    z-index:-111;
 }
+.btn-outline-success{
+    color: #28a745;
+    background-color: transparent;
+    background-image: none;
+    border-color: #28a745;
+}
+
+
+.btn-add-to-cart{
+    background-color:#FE980F;
+} 
+.btn-default{
+     background-color:#FE980F;
+}

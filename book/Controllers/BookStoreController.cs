@@ -1,5 +1,6 @@
 ﻿using book.Models.ViewModels;
 using BookManagementSystem.Models;
+using book.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,7 +109,7 @@ namespace Web_BookStore1.Controllers
         }
 
 
-        public ActionResult NXB(string id)
+        public ActionResult NXB(String id)
         {
             List<TheLoai> listtheloai = new List<TheLoai>();
             listtheloai.Add(new TheLoai(1, "VĂN HỌC VIỆT NAM"));
@@ -168,11 +169,20 @@ namespace Web_BookStore1.Controllers
             listnxb.Add(new NhaXuatBan(4, "THÁI HÀ"));
             listnxb.Add(new NhaXuatBan(5, "NHÀ XUẤT BẢN GIÁO DỤC"));
 
-
-
+            int i = Int32.Parse(id);
+            CuonSach cuonSach = new CuonSach();
+            cuonSach.Id = i;
+            cuonSach.Name = "Nhà giả kim";
+            cuonSach.GiaTien = 200 * i;
+            cuonSach.GioiThieu = "Nhà giả kim của Paulo Coelho như một câu chuyện cổ tích giản dị, nhân ái, giàu chất thơ, thấm đẫm những minh triết huyền bí của phương Đông. Trong lần xuất bản đầu tiên tại Brazil vào năm 1988, sách chỉ bán được 900 bản. Nhưng, với số phận đặc biệt của cuốn sách dành cho toàn nhân loại, vượt ra ngoài biên giới quốc gia, Nhà giả kim đã làm rung động hàng triệu tâm hồn, trở thành một trong những cuốn sách bán chạy nhất mọi thời đại, và có thể làm thay đổi cuộc đời người đọc.";
+            cuonSach.TacGia = "Tac gia " + i;
+            cuonSach.Id_NXB = i + 10;
+            cuonSach.ID_TheLoai = i + 20;
+            cuonSach.SoLuong = i + 3;
+            cuonSach.MainImage = "/Content/images/home/VD2.PNG";
             ViewBag.listtheloai = listtheloai;
             ViewBag.listnxb = listnxb;
-            return View();
+            return View(cuonSach);
         }
 
 

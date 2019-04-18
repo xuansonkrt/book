@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BookManagementSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BookManagementSystem.Models
+namespace book.Models
 {
     public class DanhMucVM
     {

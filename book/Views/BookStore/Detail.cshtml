@@ -1,8 +1,47 @@
-﻿
+﻿@model  book.Models.CuonSach
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_LayOutHome.cshtml";
 }
+<head>
+    <link href="~/Content/Site.css" rel="stylesheet">
+</head>
+    <h2>Chi tiết</h2>
 
-<h2>Chi tiết</h2>
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="col-sm-4">
+                <img style="width:100%" src=@Model.MainImage />
+            </div>
+            <div class="col-sm-8">
+                <h4>@Model.Name</h4>
+                <p>@Model.TacGia</p>
+                <p>@Model.GiaTien</p>
+                <p>@Model.GioiThieu</p>
+                <p><strong>Số lượng:</strong></p>
+                <!-- spinner -->
+                <input type="number" name="" id="SoLuong" class="form-control" value="1" style="width: 100px">
+              
+                <button id="btnAdd" class="btn btn-default mt-2" style="color: black">
+                    <i class="fa fa-cart-plus"></i>
+                    Thêm vào giỏ hàng
+                </button>
+                <button class="btn btn-success mt-2"><i class="fa fa-check"></i> Mua ngay</button>
+                <br>
+                <p class="mt-2" style="font-size: 90%">
+                    Để lại số điện thoại, chúng tôi sẽ tư vấn ngay
+                    sau từ 5 › 10 phút
+                </p>
+                <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+
+                    <div class="input-group-append">
+                        <button class="btn btn-danger "><i class="fa fa-phone"></i> Gọi lại cho tôi</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
