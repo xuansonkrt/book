@@ -17,6 +17,8 @@ namespace BookManagementSystem.Controllers
         // tao list CuonSach
         public ActionResult List()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             List<CuonSach> list = new List<CuonSach>();
             for (int i = 0; i <= 10; i++)
@@ -37,12 +39,15 @@ namespace BookManagementSystem.Controllers
         //tao CuonSach moi
         public ActionResult Create()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             return View();
         }
         [HttpPost]
         public ActionResult Create(CuonSach _CuonSach)
         {
+
             return RedirectToAction("List");
         }
         // Sua CuonSach duoc chon
@@ -60,6 +65,8 @@ namespace BookManagementSystem.Controllers
         // chi tiet CuonSach duoc chon
         public ActionResult Details(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             CuonSach CuonSach = new CuonSach(id, " CuonSach 3", "GioiThieu", 123, 2, 2, 4, "Image ","Tac gia");
             return View(CuonSach);
@@ -73,6 +80,8 @@ namespace BookManagementSystem.Controllers
         // xoa CuonSach duoc chon   
         public ActionResult Delete(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             CuonSach CuonSach = new CuonSach(id, " CuonSach 3", "GioiThieu", 123, 2, 2, 4, "Image ","Tac gia");
             return View(CuonSach);

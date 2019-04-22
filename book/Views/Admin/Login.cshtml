@@ -79,7 +79,21 @@
                                 </span>
                             </div>
                         </div>
-
+                        @{
+                            var text = @Session["username"];
+                            <script>
+                                console.log("@text");
+                            </script>
+                            if (@text == "")
+                            {
+                                <script>
+                                    alert("Tài khoản hoặc mật khẩu không đúng.");
+                                </script>
+                                <span>
+                                    Tài khoản hoặc mật khẩu không đúng.
+                                </span>
+                            }
+                        }
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="checkbox-custom checkbox-default">

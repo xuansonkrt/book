@@ -8,12 +8,12 @@
 <h2>Danh sách thể loại</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-info" })
+    @Html.ActionLink(" ", "Create",null, new { @class = "btn btn-info fa fa-plus", title="Thêm mới" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+           Tên thể loại@* @Html.DisplayNameFor(model => model.Name)*@
         </th>
         <th></th>
     </tr>
@@ -24,12 +24,12 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }
-                            , new { @class="btn btn-primary"}) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }
-                            , new { @class = "btn btn-success" }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }
-                            , new { @class = "btn btn-danger" })
+            @Html.ActionLink(" ", "Edit", new { id = item.ID }
+                     , new { @class = "btn btn-primary fa fa-edit", title="Sửa" }) |
+            @Html.ActionLink(" ", "Details", new { id=item.ID }
+                            , new { @class = "btn btn-success fa fa-folder-open-o", title = "Chi tiết" }) |
+            @Html.ActionLink(" ", "Delete", new { id=item.ID }
+                            , new { @class = "btn btn-danger fa fa-trash-o", title = "Xóa" })
         </td>
     </tr>
 }

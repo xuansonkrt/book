@@ -17,6 +17,8 @@ namespace BookManagementSystem.Controllers
         // tao list VaiTro
         public ActionResult List()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             List<VaiTro> list = new List<VaiTro>();
             for(int i= 0; i<=3; i++)
             {
@@ -30,6 +32,8 @@ namespace BookManagementSystem.Controllers
         //tao vai tro moi
         public ActionResult Create()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             return View();
         }
         [HttpPost]
@@ -40,6 +44,8 @@ namespace BookManagementSystem.Controllers
         // Sua vai tro duoc chon
         public ActionResult Edit(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             VaiTro VaiTro = new VaiTro(id, " vai tro 2");
             return View(VaiTro);
         }
@@ -51,6 +57,8 @@ namespace BookManagementSystem.Controllers
         // chi tiet vai tro duoc chon
         public ActionResult Details(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             VaiTro vai = new VaiTro(id, "vai tro");
             return View(vai);
         }
@@ -63,6 +71,8 @@ namespace BookManagementSystem.Controllers
         // xoa the loai duoc chon   
         public ActionResult Delete(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             VaiTro VaiTro = new VaiTro(id, "vai tro ");
             return View(VaiTro);
 

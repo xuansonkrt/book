@@ -18,6 +18,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult List()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             List<HoaDon> list = new List<HoaDon>();
             for (int i = 0; i < 10; i++)
@@ -29,6 +31,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             int i = id;
             HoaDon hoaDon = new HoaDon(i, i + 1111, "Ma giam gia " + i, i * 1000
@@ -45,7 +49,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Create()
         {
-
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             return View();
         }
@@ -59,6 +64,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Details(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
 
             int i = id;
@@ -70,6 +77,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
 
             int i = id;

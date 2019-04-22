@@ -18,6 +18,8 @@ namespace BookManagementSystem.Controllers
         // tao list TacGia
         public ActionResult List()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             List<TacGia> list = new List<TacGia>();
             for (int i = 0; i <= 10; i++)
@@ -32,6 +34,8 @@ namespace BookManagementSystem.Controllers
         //tao TacGia moi
         public ActionResult Create()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             return View();
         }
@@ -43,6 +47,8 @@ namespace BookManagementSystem.Controllers
         // Sua TacGia duoc chon
         public ActionResult Edit(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             TacGia TacGia = new TacGia(id, " TacGia 3");
             return View(TacGia);
@@ -55,6 +61,8 @@ namespace BookManagementSystem.Controllers
         // chi tiet TacGia duoc chon
         public ActionResult Details(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             TacGia vai = new TacGia(id, " TacGia");
             return View(vai);
         }
@@ -67,6 +75,8 @@ namespace BookManagementSystem.Controllers
         // xoa TacGia duoc chon   
         public ActionResult Delete(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             TacGia TacGia = new TacGia(id, " TacGia ");
             return View(TacGia);

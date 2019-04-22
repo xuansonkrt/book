@@ -17,6 +17,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult List()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             List<GioHang> list = new List<GioHang>();
             for (int i = 0; i < 10; i++)
@@ -28,6 +30,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
 
             GioHang gioHang = new GioHang(id, DateTime.Now, 1);
@@ -43,6 +47,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Create()
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
             return View();
         }
@@ -56,6 +62,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Details(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
 
             GioHang phieuNhap = new GioHang(id, DateTime.Now, 1);
@@ -65,6 +73,8 @@ namespace BookManagementSystem.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (Session["username"] == null)
+                return Redirect("/Admin/Login");
             ViewBag.username = "sonnx";
 
             GioHang phieuNhap = new GioHang(id, DateTime.Now, 1);

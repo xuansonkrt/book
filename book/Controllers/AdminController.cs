@@ -17,16 +17,26 @@ namespace book.Controllers
 
         public ActionResult Login()
         {
-
+          //  ViewBag.confirm = "begin";
             return View();
         }
         [HttpPost]
         public ActionResult Login(Admin admin)
         {
             if (admin.TaiKhoan == "sonnx" && admin.MatKhau == "a")
-                
-                return RedirectToAction("Management");
+            {
+                Session["username"] = "sonnx";
+                return Redirect("/HoaDon/List");
+
+            }
+            ViewBag.confirm = "fail";
             return RedirectToAction("Login"); 
+        }
+
+        public ActionResult Logout()
+        {
+            Session["username"] = null; 
+            return RedirectToAction("Login");
         }
 
         public ActionResult Management()
