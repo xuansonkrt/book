@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using book.Models;
+using WebApplication1.Models;
 
 namespace book
 {

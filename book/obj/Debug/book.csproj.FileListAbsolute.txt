@@ -162,3 +162,7 @@ E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book - Copy\book\bin\Microsoft.Owin.S
 E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book - Copy\book\obj\Debug\book.csprojResolveAssemblyReference.cache
 E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book - Copy\book\obj\Debug\book.dll
 E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book - Copy\book\obj\Debug\book.pdb
+E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book\book\bin\PagedList.dll
+E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book\book\bin\PagedList.Mvc.dll
+E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book\book\bin\PagedList.xml
+E:\IT_MTA\Nam 3\Ki_2\Cong nghe web\git-new\book\book\bin\PagedList.Mvc.xml

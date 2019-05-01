@@ -77,9 +77,19 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -196,39 +206,40 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BookStoreController.cs" />
-    <Compile Include="Controllers\CuonSachController.cs" />
-    <Compile Include="Controllers\GioHangController.cs" />
-    <Compile Include="Controllers\HoaDonController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\KhachHangController.cs" />
-    <Compile Include="Controllers\ListImageController.cs" />
+    <Compile Include="Controllers\LinkController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NhaXuatBanController.cs" />
-    <Compile Include="Controllers\PhieuNhapController.cs" />
-    <Compile Include="Controllers\TacGiaController.cs" />
-    <Compile Include="Controllers\TheLoaiController.cs" />
-    <Compile Include="Controllers\VaiTroController.cs" />
+    <Compile Include="Controllers\PublisherController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="DAO\AuthorDAO.cs" />
+    <Compile Include="DAO\PublisherDAO.cs" />
+    <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Global\Global.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Admin.cs" />
-    <Compile Include="Models\CuonSach.cs" />
-    <Compile Include="Models\DanhMucVM.cs" />
-    <Compile Include="Models\GioHang.cs" />
-    <Compile Include="Models\HoaDon.cs" />
+    <Compile Include="Models\Entities\Admin.cs" />
+    <Compile Include="Models\Entities\Author.cs" />
+    <Compile Include="Models\Entities\Book.cs" />
+    <Compile Include="Models\Entities\Cart.cs" />
+    <Compile Include="Models\Entities\CartDetail.cs" />
+    <Compile Include="Models\Entities\Category.cs" />
+    <Compile Include="Models\Entities\Coupon.cs" />
+    <Compile Include="Models\Entities\CouponDetail.cs" />
+    <Compile Include="Models\Entities\Customer.cs" />
+    <Compile Include="Models\Entities\Invoice.cs" />
+    <Compile Include="Models\Entities\InvoiceDetail.cs" />
+    <Compile Include="Models\Entities\ListImage.cs" />
+    <Compile Include="Models\Entities\MyDBContext.cs" />
+    <Compile Include="Models\Entities\Publisher.cs" />
+    <Compile Include="Models\Entities\Rate.cs" />
+    <Compile Include="Models\Entities\Role.cs" />
+    <Compile Include="Models\Entities\WriteBook.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\KhachHang.cs" />
-    <Compile Include="Models\ListImage.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\NhaXuatBan.cs" />
-    <Compile Include="Models\PhieuNhap.cs" />
-    <Compile Include="Models\TacGia.cs" />
-    <Compile Include="Models\TheLoai.cs" />
-    <Compile Include="Models\VaiTro.cs" />
     <Compile Include="Models\ViewModels\HomeVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1848,6 +1859,7 @@
     <Content Include="Content\images\shop\product7.jpg" />
     <Content Include="Content\images\shop\product8.jpg" />
     <Content Include="Content\images\shop\product9.jpg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -2185,45 +2197,6 @@
     <Content Include="Views\Admin\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Management.cshtml" />
-    <Content Include="Views\TheLoai\List.cshtml" />
-    <Content Include="Views\TheLoai\Create.cshtml" />
-    <Content Include="Views\TheLoai\Edit.cshtml" />
-    <Content Include="Views\TheLoai\Details.cshtml" />
-    <Content Include="Views\TheLoai\Delete.cshtml" />
-    <Content Include="Views\CuonSach\List.cshtml" />
-    <Content Include="Views\CuonSach\Create.cshtml" />
-    <Content Include="Views\CuonSach\Edit.cshtml" />
-    <Content Include="Views\CuonSach\Details.cshtml" />
-    <Content Include="Views\CuonSach\Delete.cshtml" />
-    <Content Include="Views\TacGia\List.cshtml" />
-    <Content Include="Views\TacGia\Create.cshtml" />
-    <Content Include="Views\TacGia\Edit.cshtml" />
-    <Content Include="Views\TacGia\Details.cshtml" />
-    <Content Include="Views\TacGia\Delete.cshtml" />
-    <Content Include="Views\NhaXuatBan\List.cshtml" />
-    <Content Include="Views\NhaXuatBan\Create.cshtml" />
-    <Content Include="Views\NhaXuatBan\Details.cshtml" />
-    <Content Include="Views\NhaXuatBan\Delete.cshtml" />
-    <Content Include="Views\KhachHang\List.cshtml" />
-    <Content Include="Views\KhachHang\Edit.cshtml" />
-    <Content Include="Views\KhachHang\Create.cshtml" />
-    <Content Include="Views\KhachHang\Details.cshtml" />
-    <Content Include="Views\KhachHang\Delete.cshtml" />
-    <Content Include="Views\GioHang\List.cshtml" />
-    <Content Include="Views\GioHang\Edit.cshtml" />
-    <Content Include="Views\GioHang\Create.cshtml" />
-    <Content Include="Views\GioHang\Details.cshtml" />
-    <Content Include="Views\GioHang\Delete.cshtml" />
-    <Content Include="Views\HoaDon\List.cshtml" />
-    <Content Include="Views\HoaDon\Edit.cshtml" />
-    <Content Include="Views\HoaDon\Create.cshtml" />
-    <Content Include="Views\HoaDon\Details.cshtml" />
-    <Content Include="Views\HoaDon\Delete.cshtml" />
-    <Content Include="Views\PhieuNhap\List.cshtml" />
-    <Content Include="Views\PhieuNhap\Edit.cshtml" />
-    <Content Include="Views\PhieuNhap\Create.cshtml" />
-    <Content Include="Views\PhieuNhap\Details.cshtml" />
-    <Content Include="Views\PhieuNhap\Delete.cshtml" />
     <Content Include="Views\BookStore\Index.cshtml" />
     <Content Include="Views\BookStore\SachBanChay.cshtml" />
     <Content Include="Views\BookStore\TieuThuyet.cshtml" />
@@ -2232,10 +2205,26 @@
     <Content Include="Views\Shared\_LayoutLeft.cshtml" />
     <Content Include="Views\Shared\_LayoutFooter.cshtml" />
     <Content Include="Views\BookStore\Detail.cshtml" />
-    <Content Include="Views\NhaXuatBan\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Publisher\Index.cshtml" />
+    <Content Include="Views\Publisher\Edit.cshtml" />
+    <Content Include="Views\Publisher\Delete.cshtml" />
+    <Content Include="Views\Publisher\Details.cshtml" />
+    <Content Include="Views\Publisher\Create.cshtml" />
+    <Content Include="Views\Author\Index.cshtml" />
+    <Content Include="Views\Author\Create.cshtml" />
+    <Content Include="Views\Author\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Global\" />
+    <Folder Include="UploadedFiles\" />
+    <Folder Include="Views\Link\" />
+    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
