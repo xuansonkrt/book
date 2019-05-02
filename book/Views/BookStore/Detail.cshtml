@@ -1,4 +1,4 @@
-﻿@model  book.Models.CuonSach
+﻿@model  book.Models.ViewModels.BookVM
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_LayOutHome.cshtml";
@@ -15,9 +15,9 @@
             </div>
             <div class="col-sm-8">
                 <h4>@Model.Name</h4>
-                <p>@Model.TacGia</p>
-                <p>@Model.GiaTien đ</p>
-                <p>@Model.GioiThieu</p>
+                <p>@Model.Author</p>
+                <p>@Model.Price đ</p>
+                <p>@Model.Review</p>
                 <p><strong>Số lượng:</strong></p>
                 <!-- spinner -->
                 <input type="number" name="" id="SoLuong" class="form-control" value="1" style="width: 100px">

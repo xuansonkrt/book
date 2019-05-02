@@ -1,0 +1,80 @@
+﻿@model PagedList.IPagedList<book.Models.Entities.Author>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên tác giả
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Giới tính
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+           Giới thiệu
+        </th>
+        @*<th>
+            Avatar
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @if (item.Gender == 1)
+            {
+                <span>Nam</span>
+            }
+            else
+            {
+                <span>Nữ</span>
+            }
+           @* @Html.DisplayFor(modelItem => item.Gender)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Avatar)
+        </td>*@
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+@Html.PagedListPager(Model,page=>Url.Action("Index",new { page} ))

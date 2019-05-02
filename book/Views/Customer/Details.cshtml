@@ -1,0 +1,75 @@
+﻿@model book.Models.Entities.Customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Thông tin khách hàng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @if (Model.Gender == 1)
+            {
+                <span>Nam</span>
+            }
+            else
+            {
+                <span>Nữ</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.join_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.join_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <span class="fa fa-arrow-circle-left" style="color: red"></span>
+    @Html.ActionLink("Trở lại", "Index")
+    |@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ID })
+</p>

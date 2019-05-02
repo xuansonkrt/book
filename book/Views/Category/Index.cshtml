@@ -1,0 +1,41 @@
+﻿@model PagedList.IPagedList<book.Models.Entities.Category>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách thể loại</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new {@class= " btn btn-warning " })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên thể loại
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-primary fa fa-edit" }) |
+            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o" }) |
+            @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger 	fa fa-trash-o" })
+        </td>
+    </tr>
+}
+
+</table>
+<!-- Thêm mã phân trang -->
+<br />
+@*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount*@
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
+<!-- Kết thúc -->

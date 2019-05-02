@@ -52,11 +52,12 @@
                     <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
                 </div>
                 <div class="panel-body">
-                    <form action="Login" method="post">
+                    <div >
+                        @*action="Login" method="post"*@
                         <div class="form-group mb-lg">
                             <label>Username</label>
                             <div class="input-group input-group-icon">
-                                <input name="TaiKhoan" type="text" class="form-control input-lg" />
+                                <input name="UserName" id="UserName" type="text" class="form-control input-lg"/>
                                 <span class="input-group-addon">
                                     <span class="icon icon-lg">
                                         <i class="fa fa-user"></i>
@@ -71,7 +72,7 @@
                                 <a href="pages-recover-password.html" class="pull-right">Lost Password?</a>
                             </div>
                             <div class="input-group input-group-icon">
-                                <input name="MatKhau" type="password" class="form-control input-lg" />
+                                <input name="Password" id="Password" type="password" class="form-control input-lg"/>
                                 <span class="input-group-addon">
                                     <span class="icon icon-lg">
                                         <i class="fa fa-lock"></i>
@@ -79,31 +80,17 @@
                                 </span>
                             </div>
                         </div>
-                        @{
-                            var text = @Session["username"];
-                            <script>
-                                console.log("@text");
-                            </script>
-                            if (@text == "")
-                            {
-                                <script>
-                                    alert("Tài khoản hoặc mật khẩu không đúng.");
-                                </script>
-                                <span>
-                                    Tài khoản hoặc mật khẩu không đúng.
-                                </span>
-                            }
-                        }
+
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="checkbox-custom checkbox-default">
-                                    <input id="RememberMe" name="rememberme" type="checkbox" />
+                                    <input id="RememberMe" name="rememberme" type="checkbox"/>
                                     <label for="RememberMe">Remember Me</label>
                                 </div>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
-                                <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
+                                <button id="submit" type="submit" class="btn btn-primary hidden-xs">Sign In</button>
+                                <button id="submit" type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
                             </div>
                         </div>
 
@@ -118,7 +105,7 @@
 
                         <p class="text-center">Don't have an account yet? <a href="pages-signup.html">Sign Up!</a>
 
-                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -143,7 +130,34 @@
 
     <!-- Theme Initialization Files -->
     <script src="~/assets/javascripts/theme.init.js"></script>
-
+<script>
+    $(document).ready(function () {
+        $('#submit').on("click", function () {
+            var data = {
+                UserName: $('#UserName').val()
+                , Password: $('#Password').val()
+            }
+            console.log("data: ", data);
+            $.ajax({
+                url: "/Admin/Login",
+                dataType: 'json',
+                data: data,
+                method:'post',
+                success: (data) => {
+                    if (data.ret > 0) {
+                        window.location.href = '/Category'
+                    } else {
+                        alert("Username hoặc password chưa chính xác.");
+                    }
+                },
+                error: (xhr, status, err) => {
+                    console.log(err.toString());
+                }
+            });
+        });
+    });
+        
+</script>
 </body>
 </html>
 

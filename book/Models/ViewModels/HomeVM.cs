@@ -8,6 +8,6 @@ namespace book.Models.ViewModels
 {
     public class HomeVM
     {
-      
+        public  List<BookVM> BookVMList { get; set; }
     }
 }

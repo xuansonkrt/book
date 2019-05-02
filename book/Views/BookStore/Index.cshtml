@@ -60,21 +60,22 @@
     <div class="features_items">
         <!--features_items-->
         <h2 class="title text-center">Sách bán chạy</h2>
-        @foreach (var item in Model.ListCuonSach)
+        @foreach (var item in Model.BookVMList)
         {
             <div class="col-sm-4">
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <a href="/BookStore/Detail/@item.Id">
+                            <a href="/BookStore/Detail/@item.ID">
                                 <img src=@item.MainImage class="img-book" style="z-index:-11" alt="" />
                             </a>
-                            @Html.ActionLink(item.Name, "Detail", new { id = item.Id }, new { @class = "text-black" })
+                            <br />
+                            @Html.ActionLink(item.Name, "Detail", new { id = item.ID }, new { @class = "text-black" })
 
                             
                             @*<p>@item.Name</p>*@
-                            <p>@item.TacGia</p>
-                            <p>@item.GiaTien đ</p>
+                            <p>@item.Author</p>
+                            <p>@item.Price đ</p>
                         </div>
                         
                     </div>

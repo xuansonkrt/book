@@ -7,7 +7,7 @@
     <div class="panel-group category-products" id="accordian">
         <!--category-productsr-->
 
-        @foreach (var item in ViewBag.listtheloai)
+        @foreach (var item in ViewBag.CategoryList)
         {
             var name = item.Name;
             <div class="panel panel-default">
@@ -28,9 +28,9 @@
         <h2>Nhà xuất bản</h2>
         <div class="brands-name">
             <ul class="nav nav-pills nav-stacked">
-                @foreach (var item in ViewBag.listnxb)
+                @foreach (var item in ViewBag.PublisherList)
                 {
-                    <li><a href="/BookStore/NXB/@item.id"> <span class="pull-right"></span>@item.TenNhaXuatBan</a></li>
+                    <li><a href="/BookStore/NXB/@item.ID"> <span class="pull-right"></span>@item.Name</a></li>
                 }
             </ul>
         </div>

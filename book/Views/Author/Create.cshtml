@@ -1,0 +1,108 @@
+﻿@model book.Models.Entities.Author
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm(null, null, new { @id = string.Empty }, FormMethod.Post,
+    new { @id = "myForm" })) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Author</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="radio" name="gender" value="1" > Nam
+                <input type="radio" name="gender" value="0" style="margin-left: 20px"> Nữ
+                @Html.EditorFor(model => model.Gender, new {htmlAttributes = new {@class = "form-control hidden ", @id = "gender" } })
+                @Html.ValidationMessageFor(model => model.Gender, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@using(Html.BeginForm("UploadFile","Upload", FormMethod.Post, new { enctype="multipart/form-data"}))  
+            {  
+      
+                <div>  
+                    @Html.TextBox("file", "", new {  type= "file"}) <br />  
+   
+                    <input type="submit" value="Upload" />  
+   
+                    @ViewBag.Message  
+   
+                </div>  
+      
+      
+            }*@  
+
+            @Html.LabelFor(model => model.Avatar, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <input type='file' accept=".jpg,.jpeg,.png,.bmp" id="input-avatar" />
+                @*<input type="file" accept=".jpg,.jpeg,.png,.bmp"
+                       className="form-control col-sm-6 " 
+                       id={'FILEUPLOAD'} />*@
+                @Html.EditorFor(model => model.Avatar, new {htmlAttributes = new {@class = "form-control hidden", @id="avatar", }})
+                @Html.ValidationMessageFor(model => model.Avatar, "", new {@class = "text-danger"})
+                <img  style="max-width: 300px; margin-top: 10px" class="user-avatar" />
+               @* <img  style="max-width: 300px" src="~/UploadedFiles/1556700062ANTONI FERNANDO AF-3012-3.jpg"/>*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create"  class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

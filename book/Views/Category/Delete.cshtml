@@ -1,0 +1,35 @@
+﻿@model book.Models.Entities.Category
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn có chắc chắn muốn xóa?</h3>
+<div>
+    <h4>Thể loại sách</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+           
+        </dd>
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color " style="margin-left: 190px; margin-top:20px;">
+                <input type="submit" value="Xóa" class="btn btn-danger" /> 
+            </div>
+        }
+    </dl>
+
+    
+    <span class="fa fa-arrow-circle-left" style="color: red"></span>
+    @Html.ActionLink("Trở lại", "Index")
+</div>

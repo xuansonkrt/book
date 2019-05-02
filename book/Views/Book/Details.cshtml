@@ -1,0 +1,85 @@
+﻿@model book.Models.ViewModels.BookVM
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Cuốn sách</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Review)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Review)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublisherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublisherName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MainImage)
+        </dt>
+
+        <dd>
+            <img style="max-width: 300px" src="@Model.MainImage" />
+
+        </dd>
+    </dl>
+</div>
+<p>
+    <span class="fa fa-arrow-circle-left" style="color: red"></span>
+    @Html.ActionLink("Trở lại", "Index")
+    |@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ID })
+</p>
