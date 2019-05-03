@@ -14,9 +14,12 @@ namespace book.Controllers
         CategoryDAO dao = new CategoryDAO();
 
         // GET: Category
-        public ActionResult Index(int? page=1, int pageSize=10)
+        public ActionResult Index(int? page=1, int pageSize=3)
         {
-           
+            if ((Session["username"]==null))
+            {
+                return Redirect("/Admin/Login");
+            }
             int pageNumber = page ?? 1;
 
             // var list = dao.GetAll();
@@ -28,11 +31,19 @@ namespace book.Controllers
 
         public ActionResult List()
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             return Redirect("/Category/Index");
         }
 
         public ActionResult Create()
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             return View();
         }
 
@@ -45,6 +56,10 @@ namespace book.Controllers
 
         public ActionResult Edit(int ID)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Category category = dao.GetByID(ID);
             return View(category);
         }
@@ -58,6 +73,10 @@ namespace book.Controllers
 
         public ActionResult Delete(int ID)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Category category = dao.GetByID(ID);
             return View(category);
         }
@@ -72,6 +91,10 @@ namespace book.Controllers
 
         public ActionResult Details(int ID)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Category category = dao.GetByID(ID);
             return View(category);
         }

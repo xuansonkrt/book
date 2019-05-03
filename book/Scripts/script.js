@@ -85,6 +85,8 @@
 
     $("#input-image").change(function (e) {
         // readURL(this);
+        $('.book-image').attr('src', e.target.result);
+
         var data = new FormData();
         var files = e.target.files;
         console.log("Get file");
@@ -92,9 +94,11 @@
             data.append("file" + x, files[x]);
             console.log('Have file');
         }
+        console.log('data: ',data);
         $.ajax({
                 url: "/Upload/UploadFile2",
                 type: "POST",
+             //   data: JSON.stringify(data),
                 data: data,
                 contentType: false,
                 processData: false,

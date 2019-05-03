@@ -5,15 +5,14 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Thêm mới</h2>
 
-@using (Html.BeginForm(null, null, new { @id = string.Empty }, FormMethod.Post,
-    new { @id = "myForm" })) 
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Author</h4>
+        <h4>Thông tin tác giả</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -84,10 +83,7 @@
 
             @Html.LabelFor(model => model.Avatar, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                <input type='file' accept=".jpg,.jpeg,.png,.bmp" id="input-avatar" />
-                @*<input type="file" accept=".jpg,.jpeg,.png,.bmp"
-                       className="form-control col-sm-6 " 
-                       id={'FILEUPLOAD'} />*@
+                <input type="file" accept=".jpg,.jpeg,.png,.bmp" id="input-avatar" name ="image" />
                 @Html.EditorFor(model => model.Avatar, new {htmlAttributes = new {@class = "form-control hidden", @id="avatar", }})
                 @Html.ValidationMessageFor(model => model.Avatar, "", new {@class = "text-danger"})
                 <img  style="max-width: 300px; margin-top: 10px" class="user-avatar" />
@@ -97,12 +93,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create"  class="btn btn-default" />
+                <input type="submit" value="Thêm"  class="btn btn-success" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <span class="fa fa-arrow-circle-left" style="color: red"></span>
+    @Html.ActionLink("Trở lại", "Index")
 </div>

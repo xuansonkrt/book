@@ -16,6 +16,10 @@ namespace book.Controllers
         // GET: Author
         public ActionResult Index(int? page=1, int pageSize=10)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             int pageNumber = page ?? 1;
             var list = dao.GetAll2().ToPagedList(pageNumber, pageSize);
             return View(list);
@@ -23,23 +27,36 @@ namespace book.Controllers
 
         public ActionResult List()
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             return RedirectToAction("Index");
         }
 
         public ActionResult Create()
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Author _author)
-        {
+        [ValidateInput(false)]
+        public ActionResult Create( Author _author)
+        {//HttpPostedFileBase image,
             int ret = dao.Insert(_author);
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Author author = dao.GetByID(id);
             return View(author);
         }
@@ -53,12 +70,20 @@ namespace book.Controllers
 
         public ActionResult Details(int id)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Author author = dao.GetByID(id);
             return View(author);
         }
 
         public ActionResult Delete(int id)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Author author = dao.GetByID(id);
             return View(author);
         }

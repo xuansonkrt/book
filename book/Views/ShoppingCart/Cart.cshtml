@@ -1,0 +1,35 @@
+﻿@using System.Security.Policy
+@using book.Models.Entities;
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayOutHome.cshtml";
+    ShoppingCart cart = (ShoppingCart) Session["cart"];
+    List<Item> lst=new List<Item>();
+
+    if (cart != null)
+    {
+        List<Item> lst = cart.lst;
+    }
+   
+}
+
+<table>
+    @foreach (var item in lst)
+    {
+        <tr>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @item.price
+            </td>
+            <td>
+                <input value="@item.amount"/>
+            </td>
+            <td>
+                <a href="">Xoa</a>
+            </td>
+        </tr>
+    }
+</table>
+

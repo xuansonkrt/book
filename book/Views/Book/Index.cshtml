@@ -57,9 +57,9 @@
             @Html.DisplayFor(modelItem => item.PublisherName)
         </td>
         <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-primary fa fa-edit" }) 
-            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o" }) 
-            @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger fa fa-trash-o" })
+            @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-primary fa fa-edit", @style="width:60px" }) 
+            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o", @style = "width:60px; margin-top:5px" }) 
+            @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger fa fa-trash-o", @style = "width:60px; margin-top:5px" })
         </td>
     </tr>
 }

@@ -18,6 +18,10 @@ namespace book.Controllers
         // GET: Book
         public ActionResult Index(int? page = 1, int pageSize = 10)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             List<BookVM> list = new List<BookVM>();
             int pageNumber = page ?? 1;
             var listBook = dao.GetAll2().ToPagedList(pageNumber, pageSize);
@@ -43,11 +47,19 @@ namespace book.Controllers
 
         public ActionResult List()
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             return RedirectToAction("Index");
         }
 
         public ActionResult Create()
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             List<Category> categorys = categoryDao.GetAll();
             SelectList categoryList = new SelectList(categorys, "ID", "Name");
             ViewBag.CategoryList = categoryList;
@@ -59,7 +71,7 @@ namespace book.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Book _book)
+        public ActionResult Create(HttpPostedFileBase image, Book _book)
         {
             dao.Insert(_book);
             return RedirectToAction("List");
@@ -67,6 +79,10 @@ namespace book.Controllers
 
         public ActionResult Edit(int id)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Book book = dao.GetByID(id);
             List<Category> categorys = categoryDao.GetAll();
             SelectList categoryList = new SelectList(categorys, "ID", "Name");
@@ -88,6 +104,10 @@ namespace book.Controllers
 
         public ActionResult Details(int id)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Book book = dao.GetByID(id);
             BookVM vm = new BookVM();
             vm.ID = book.ID;
@@ -105,6 +125,10 @@ namespace book.Controllers
 
         public ActionResult Delete(int id)
         {
+            if ((Session["username"] == null))
+            {
+                return Redirect("/Admin/Login");
+            }
             Book book = dao.GetByID(id);
             BookVM vm = new BookVM();
             vm.ID = book.ID;

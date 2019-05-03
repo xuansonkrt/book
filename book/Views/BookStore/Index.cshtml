@@ -1,5 +1,5 @@
 ﻿@model book.Models.ViewModels.HomeVM
-
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayOutHome.cshtml";
@@ -60,6 +60,9 @@
     <div class="features_items">
         <!--features_items-->
         <h2 class="title text-center">Sách bán chạy</h2>
+        @{
+
+        }
         @foreach (var item in Model.BookVMList)
         {
             <div class="col-sm-4">
@@ -81,14 +84,14 @@
                     </div>
                     <div class="choose">
                         <ul class="nav nav-pills nav-justified">
-                            <li><a href="#" title="Thêm vào giỏ hàng"><i class="fa fa-cart-plus"></i></a></li>
+                            <li><a href="/ShoppingCart/Add/@item.ID" title="Thêm vào giỏ hàng"><i class="fa fa-cart-plus"></i></a></li>
                             <li><a href="#" title="Thêm vào yêu thích"><i class="fa fa-heart"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         }
-        
+       @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
 
     </div><!--features_items-->
 

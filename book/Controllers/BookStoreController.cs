@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using book.DAO;
 using book.Models.Entities;
+using PagedList;
 
 namespace Web_BookStore1.Controllers
 {
@@ -14,7 +15,7 @@ namespace Web_BookStore1.Controllers
     {
         MyDBContext db = new MyDBContext();
         // GET: BookStore
-        public ActionResult Index()
+        public ActionResult Index(int? page = 1, int pageSize = 3)
         {
            // HomeVM vm = new HomeVM();
             List<Category> categoryList = db.Categories.ToList();
@@ -42,7 +43,8 @@ namespace Web_BookStore1.Controllers
                 
                 list.Add(bookVM);
             }
-
+            int pageNumber = page ?? 1;
+        //    IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list, pageNumber, pageSize, list.Count);
             var vm = new HomeVM
             {
                 //  ListTheLoai = listtheloai,

@@ -44,6 +44,7 @@ namespace book.Controllers
 
 
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult UploadFile2()
         {
             var file = Request.Files[0];

@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Chi thiết</h2>
 
 <div>
-    <h4>Publisher</h4>
+    <h4>Nhà xuất bản</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,6 +38,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <span class="fa fa-arrow-circle-left" style="color: red"></span>
+    @Html.ActionLink("Trở lại", "Index")
+    |@Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.ID })
 </p>
