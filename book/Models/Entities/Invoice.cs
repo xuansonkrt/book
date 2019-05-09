@@ -31,7 +31,11 @@ namespace book.Models.Entities
         [Column(TypeName = "date")]
         public DateTime? DeliveryDate { get; set; }
 
+        public int? ID_InvoiceStatus { get; set; }
+
         public virtual Customer Customer { get; set; }
+
+        public virtual InvoiceStatu InvoiceStatu { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }

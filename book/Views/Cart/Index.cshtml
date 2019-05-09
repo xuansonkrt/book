@@ -1,0 +1,78 @@
+﻿@model IEnumerable<book.Models.Entities.Item>
+@using book.Global
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayOutHome.cshtml";
+}
+<h3>Giỏ hàng</h3>
+<div class="col-sm-9 padding-right">
+    <table class="table table-bordered">
+        <tr style="text-align: center">
+            <th>
+                Sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            
+        </tr>
+        @{
+            double total = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="row">
+                        <a href="/BookStore/Detail/@item.id" style="cursor: pointer" class="img-book"><img class="col-sm-4 " src="@item.mainImage" style="max-width: 150px" /></a>
+                        
+                        <div class="col-sm-8">
+                            <a href="/BookStore/Detail/@item.id" style="cursor: pointer">@item.name</a>
+                            @*@Html.DisplayFor(modelItem => item.name)*@
+                            <br/>
+                            <a href="/ShoppingCart/Remove/@item.id"><i class="far fa-trash-alt trash" style="color: red" ></i></a>
+
+                        </div>
+                    </div>
+                    
+                </td>
+                <td>
+                    <input type="number" value="@item.amount" style="width: 100px" class="form-control changeSoLuong" id="SoLuong" data-id="@item.id"/>
+                   @* @Html.DisplayFor(modelItem => item.amount)*@
+                </td>
+                <td>
+                    @{
+                        var price = MyFunction.convert2String(item.price);
+                        price = price + 'đ';
+                    }
+                    @price
+                </td>
+                <td>
+                    @{
+                        total += item.price * item.amount;
+                        var totalPrice = MyFunction.convert2String(item.price * item.amount);
+                        totalPrice = totalPrice + 'đ';
+                    }
+                    @totalPrice
+                </td>
+                
+            </tr>
+         }
+        <tr>
+            <td colspan="4" style="text-align: right; font-size: 20px" class="float-right">
+               <strong><i>Tổng tiền:   @MyFunction.convert2String(total)  đ</i></strong>
+            </td>
+        </tr>
+    </table>
+    <div style="text-align: right">
+        <a href="/Cart/Checkout"  class="btn btn-default float-right"><i class="fas fa-cart-arrow-down mr-2" style="margin-right:10px"></i>Thanh toán</a>
+    </div>
+   
+
+</div>

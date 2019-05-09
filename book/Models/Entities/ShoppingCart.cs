@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using book.DAO;
 
 namespace book.Models.Entities
 {
     public class ShoppingCart
     {
-        List<Item> lst = new List<Item>();
+        public List<Item> lst { get; set; }
+        BookDAO bookDao = new BookDAO();
 
-        public void InsertItem(int id, string name, double price)
+        public ShoppingCart()
+        {
+            lst = new List<Item>();
+        }
+        public void InsertItem(int id, string name, double price, int amount)
         {
             bool check = false;
             foreach (var item in lst)
@@ -17,7 +23,7 @@ namespace book.Models.Entities
                 if (item.id == id)
                 {
                     check = true;
-                    item.amount++;
+                    item.amount+=amount;
                     break;
                 }
             }
@@ -28,7 +34,8 @@ namespace book.Models.Entities
                 item.id = id;
                 item.price = price;
                 item.name = name;
-                item.amount = 1;
+                item.amount = amount;
+                item.mainImage = bookDao.GetByID(id).MainImage;
                 lst.Add(item);
             }
         }

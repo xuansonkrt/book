@@ -23,3 +23,19 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
+/*.badge {
+    background: #D2312D;
+    color: #FFF;
+    font-size: 10px;
+    font-weight: normal;
+    height: 16px;
+    padding: 3px 5px 3px 5px;
+    position: absolute;
+    right: -8px;
+    top: -3px;
+}*/
+
+.trash: hover{
+    color: #fe980f;
+}

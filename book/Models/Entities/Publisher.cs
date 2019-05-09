@@ -1,5 +1,3 @@
-﻿using System.ComponentModel;
-
 namespace book.Models.Entities
 {
     using System;
@@ -20,15 +18,12 @@ namespace book.Models.Entities
         public int ID { get; set; }
 
         [StringLength(50)]
-        [DisplayName("Tên nhà xuất bản")]
         public string Name { get; set; }
 
         [Column(TypeName = "date")]
-        [DisplayName("Ngày tạo")]
         public DateTime? Date { get; set; }
 
         [StringLength(4000)]
-        [DisplayName("Giới thiệu")]
         public string Description { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

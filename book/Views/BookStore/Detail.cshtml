@@ -1,4 +1,5 @@
 ﻿@model  book.Models.ViewModels.BookVM
+@using book.Global
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_LayOutHome.cshtml";
@@ -16,13 +17,13 @@
             <div class="col-sm-8">
                 <h4>@Model.Name</h4>
                 <p>@Model.Author</p>
-                <p>@Model.Price đ</p>
+                <p>@MyFunction.convert2String(Model.Price) đ</p>
                 <p>@Model.Review</p>
                 <p><strong>Số lượng:</strong></p>
                 <!-- spinner -->
                 <input type="number" name="" id="SoLuong" class="form-control" value="1" style="width: 100px">
               
-                <button id="btnAdd" class="btn btn-default mt-2" style="color: black">
+                <button id="btnAdd" data-id="@Model.ID" class="btn btn-default mt-2" style="color: black">
                     <i class="fa fa-cart-plus"></i>
                     Thêm vào giỏ hàng
                 </button>

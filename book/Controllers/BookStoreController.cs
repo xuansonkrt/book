@@ -43,6 +43,8 @@ namespace Web_BookStore1.Controllers
                 
                 list.Add(bookVM);
             }
+
+         //   Session["cartAmount"] = 0;
             int pageNumber = page ?? 1;
         //    IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list, pageNumber, pageSize, list.Count);
             var vm = new HomeVM

@@ -17,7 +17,9 @@ namespace book.DAO
 
         public int Insert(Customer _customer)
         {
-            _customer.join_Date=DateTime.Now;
+            _customer.join_Date= DateTime.Now;
+            if (_customer.Password == null)
+                _customer.Password = "null";
             db.Customers.Add(_customer);
             int ret = db.SaveChanges();
             return ret;

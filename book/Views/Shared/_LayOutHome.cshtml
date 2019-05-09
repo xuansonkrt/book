@@ -6,11 +6,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Home | E-Shopper</title>
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
     @*<link href="~/Content/css/font-awesome.min.css" rel="stylesheet">*@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
           crossorigin="anonymous">
+    
     <link href="~/Content/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/Content/css/price-range.css" rel="stylesheet">
     <link href="~/Content/css/animate.css" rel="stylesheet">
@@ -65,7 +66,7 @@
                 <div class="row">
                     <div class="col-md-4 clearfix">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="~/Content/images/home/logo.png" alt="" /></a>
+                            <a href="/"><img src="~/Content/images/home/logo.png" alt="" /></a>
                         </div>
                         
                     </div>
@@ -75,7 +76,22 @@
                                 <li><a href=""><i class="fa fa-user"></i>Tài khoản </a></li>
                                 <li><a href=""><i class="fa fa-star"></i>Danh sách yêu thích</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-crosshairs"></i>Kiểm tra hóa đơn</a></li>
-                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a></li>
+                                <li>
+                                    @{
+                                        var amount = Session["cartAmount"];
+                                        if (amount == null)
+                                        {
+                                            amount = 0;
+                                        }
+                                    }
+
+                                    <a href="/Cart/Index" class="notification-icon">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span class="badge">@amount</span>
+                                        Giỏ hàng
+                                    </a>
+                                    @*<a href="cart.html"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>*@
+                                </li>
                                 <li><a href="/Admin/Login"><i class="fa fa-lock"></i>Đăng nhập</a></li>
                             </ul>
                         </div>
@@ -172,7 +188,9 @@
     <script src="~/Scripts/js/jquery.prettyPhoto.js"></script>
     <script src="~/Scripts/js/main.js"></script>
     <script src="~/Scripts/jquery-ui.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
     <script src="~/Scripts/script.js"></script>
 
 </body>

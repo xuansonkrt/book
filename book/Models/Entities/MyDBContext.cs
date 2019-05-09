@@ -23,6 +23,7 @@ namespace book.Models.Entities
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual DbSet<InvoiceStatu> InvoiceStatus { get; set; }
         public virtual DbSet<ListImage> ListImages { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
@@ -31,10 +32,6 @@ namespace book.Models.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Admin>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
             modelBuilder.Entity<Admin>()
                 .Property(e => e.Password)
                 .IsFixedLength();
@@ -119,10 +116,6 @@ namespace book.Models.Entities
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Customer>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Customer>()
                 .Property(e => e.Email)
                 .IsUnicode(false);
 
@@ -133,15 +126,15 @@ namespace book.Models.Entities
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Invoices)
+                .WithOptional(e => e.Customer)
+                .HasForeignKey(e => e.ID_Custom);
+
+            modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Rates)
                 .WithRequired(e => e.Customer)
                 .HasForeignKey(e => e.ID_Custom)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Customer>()
-                .HasMany(e => e.Invoices)
-                .WithOptional(e => e.Customer)
-                .HasForeignKey(e => e.ID_Custom);
 
             modelBuilder.Entity<Invoice>()
                 .Property(e => e.DiscountCode)
@@ -160,6 +153,15 @@ namespace book.Models.Entities
             modelBuilder.Entity<InvoiceDetail>()
                 .Property(e => e.Price)
                 .HasPrecision(18, 0);
+
+            modelBuilder.Entity<InvoiceStatu>()
+                .Property(e => e.TheOrder)
+                .IsFixedLength();
+
+            modelBuilder.Entity<InvoiceStatu>()
+                .HasMany(e => e.Invoices)
+                .WithOptional(e => e.InvoiceStatu)
+                .HasForeignKey(e => e.ID_InvoiceStatus);
 
             modelBuilder.Entity<ListImage>()
                 .Property(e => e.Link)

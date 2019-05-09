@@ -1,5 +1,3 @@
-﻿using System.ComponentModel;
-
 namespace book.Models.Entities
 {
     using System;
@@ -19,30 +17,23 @@ namespace book.Models.Entities
 
         public int ID { get; set; }
 
-        [DisplayName("Tên tác giả")]
         [StringLength(100)]
         public string Name { get; set; }
 
-        [DisplayName("Ngày sinh")]
         [Column(TypeName = "date")]
         public DateTime? DateOfBirth { get; set; }
 
-        [DisplayName("Giới tính")]
         public int? Gender { get; set; }
 
-        [DisplayName("Địa chỉ")]
         [StringLength(500)]
         public string Address { get; set; }
 
-        [DisplayName("Email")]
         [StringLength(200)]
         public string Email { get; set; }
 
-        [DisplayName("Giới thiệu")]
         [StringLength(4000)]
         public string Description { get; set; }
 
-        [DisplayName("Avatar")]
         [StringLength(500)]
         public string Avatar { get; set; }
 

@@ -11,6 +11,7 @@ namespace book.Models.Entities
         public string name { get; set; }
         public double price { get; set; }
         public int amount { get; set; }
+        public string mainImage { get; set; }
 
     }
 }

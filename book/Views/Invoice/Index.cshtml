@@ -1,0 +1,85 @@
+﻿@using book.Global
+@model PagedList.IPagedList<book.Models.Entities.Invoice>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách hóa đơn</h2>
+
+<p>
+    @Html.ActionLink("Tạo hóa đơn", "Create", null, new { @class = " btn btn-warning " })
+</p>
+@{
+    var pageNumber=1;
+    var pageSize =10;
+    if (Request.QueryString["page"]!=null)
+    {
+        pageNumber = Int32.Parse(Request.QueryString["page"]);
+    }
+    if (Request.QueryString["pageSize"] != null)
+    {
+        pageSize = Int32.Parse(Request.QueryString["pageSize"]);
+    }
+
+    var index = (pageNumber - 1)*pageSize+1;
+  
+}
+<table class="table">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            Người đặt hàng
+        </th>
+        <th>
+            Ngày đặt hàng
+        </th>
+        <th>
+            Tổng tiền
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+           @index
+           @{
+               index++;
+           }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @MyFunction.convert2String(item.Price)đ
+        </td>
+        <td>
+            @Html.LabelFor(modelItem => item.ID_InvoiceStatus, "ID_Category", htmlAttributes: new { @class = "control-label col-md-2 hidden"  })
+            @*@Html.DropDownList("ID_InvoiceStatus", (IEnumerable<SelectListItem>)ViewBag.InvoiceStatusList, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(modelItem => item.ID_InvoiceStatus, (new SelectList(ViewBag.InvoiceStatusList2, "ID", "Name", item.ID_InvoiceStatus)), htmlAttributes: new { @class = "form-control changeStatus", data_id=@item.ID })
+            @Html.ValidationMessageFor(modelItem => item.ID_InvoiceStatus, "", new { @class = "text-danger" })
+        </td>
+        
+        <td style="text-align: right">
+            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o", @style = "width:60px; margin-top:5px" ,@title="Chi tiết hóa đơn"}) 
+        </td>
+    </tr>
+}
+
+</table>
+<!-- Thêm mã phân trang -->
+<br />
+@*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount*@
+@Html.PagedListPager(Model, page => Url.Action("Index",new { page }))
+<!-- Kết thúc -->

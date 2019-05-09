@@ -23,13 +23,16 @@ namespace book.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Login(Admin admin)
+        public JsonResult Login(Admin _admin)
         {
             
             int ret = -1;
-            if (dao.Login(admin.UserName,admin.Password)>0)
+            Admin admin = dao.GetAdmin(_admin.UserName, _admin.Password);
+            if (admin!=null)
             {
-                Session["username"] = "sonnx";
+                ret = 1;
+                Session["username"] = admin.Name;
+                Session["avatar"] = admin.Avatar;
                 ret = 1;
             }
             return Json(new

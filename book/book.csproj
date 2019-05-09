@@ -210,9 +210,11 @@
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BookStoreController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\LinkController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
@@ -220,13 +222,17 @@
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="DAO\AuthorDAO.cs" />
     <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\InvoiceDetailDAO.cs" />
+    <Compile Include="DAO\InvoiceDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
+    <Compile Include="DAO\InvoiceStatusDAO.cs" />
     <Compile Include="DAO\PublisherDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\AdminDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Global\MyFunction.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Admin.cs" />
     <Compile Include="Models\Entities\Author.cs" />
@@ -239,6 +245,7 @@
     <Compile Include="Models\Entities\Customer.cs" />
     <Compile Include="Models\Entities\Invoice.cs" />
     <Compile Include="Models\Entities\InvoiceDetail.cs" />
+    <Compile Include="Models\Entities\InvoiceStatu.cs" />
     <Compile Include="Models\Entities\Item.cs" />
     <Compile Include="Models\Entities\ListImage.cs" />
     <Compile Include="Models\Entities\MyDBContext.cs" />
@@ -1801,6 +1808,7 @@
     <Content Include="Content\css\prettyPhoto.css" />
     <Content Include="Content\css\price-range.css" />
     <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\font-awesome.css" />
     <Content Include="Content\images\404\404.png" />
     <Content Include="Content\images\blog\blog-one.jpg" />
     <Content Include="Content\images\blog\blog-three.jpg" />
@@ -2242,11 +2250,16 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Customer\Delete.cshtml" />
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Invoice\List.cshtml" />
+    <Content Include="Views\Invoice\Create.cshtml" />
+    <Content Include="Views\Invoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Global\" />
     <Folder Include="UploadedFiles\" />
+    <Folder Include="Views\InvoiceStatus\" />
     <Folder Include="Views\Link\" />
     <Folder Include="Views\Upload\" />
   </ItemGroup>

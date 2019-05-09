@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using book.Models.Entities;
+using System.Data.SqlClient;
+using WebGrease.Css.Ast.Selectors;
 
 namespace book.DAO
 {
@@ -22,6 +24,20 @@ namespace book.DAO
                 return 1;
             else
                 return -1;
+        }
+
+        public Admin GetAdmin(string UserName, string Password)
+        {
+            using (var context = new MyDBContext())
+            {
+                var query = from ad in context.Admins
+                    where ad.UserName == UserName && ad.Password==Password
+                            select ad;
+
+                var admin =(Admin) query.FirstOrDefault<Admin>();
+                return admin;
+
+            };
         }
     }
 }

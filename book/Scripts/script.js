@@ -1,4 +1,27 @@
-﻿$(document).ready(function () {
+﻿
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+var delete_cookie = function (name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+$(document).ready(function () {
     //$("#SoLuong").spinner({
     //    min: 1,
     //    max: 100,
@@ -85,6 +108,7 @@
 
     $("#input-image").change(function (e) {
         // readURL(this);
+
         $('.book-image').attr('src', e.target.result);
 
         var data = new FormData();
@@ -116,4 +140,163 @@
                 //$(this).addClass("done");
             });
     });
+    $("#btnAdd").on('click',function () {
+        // readURL(this);
+
+        var id = $(this).data("id");
+        var amount = $('#SoLuong').val();
+        var data = {
+            id : id,
+            amount : amount
+        };
+        
+        console.log("data: ", data);
+        $.ajax({
+                url: "/ShoppingCart/Add2",
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+              //  contentType: false,
+              //  processData: false,
+                success: function (data) {
+                    console.log(data.ret);
+                    if (data.ret >= 0) {
+                        location.reload();
+                    }
+                }.bind(this)
+            })
+            .done(function () {
+                console.log("xong roi");
+                //$(this).addClass("done");
+            });
+    });
+    $("#checkOut").on('click', function () {
+        // readURL(this);
+
+       
+        
+        var data = {
+            Name: $('#name').val(),
+            Email: $('#email').val(),
+            Telephone: $('#phone').val(),
+            Address: $('#address').val(),
+        };
+
+        console.log("data: ", data);
+        $.ajax({
+                url: "/Cart/Checkout2",
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                //  contentType: false,
+                //  processData: false,
+                success: function (data) {
+                    console.log(data.ret);
+                    if (data.ret >= 0) {
+                        swal({
+                                 title: 'Thành công',
+                                 text: 'Thanh toán thành công',
+                                 type:'success' ,
+                                 timer:1500
+                             }
+                        
+                         ).then(function() {
+                             window.location.href="/";
+                         });
+                    } else {
+                        swal({
+                                title: 'Thất bại',
+                                text: 'Thanh toán không thành công',
+                                type: 'error'
+                              //  timer: 1500
+                            }
+
+                        )
+                    }
+                }.bind(this)
+            })
+            .done(function () {
+                console.log("xong roi");
+                //$(this).addClass("done");
+            });
+    });
+
+    $('.changeSoLuong').on('change',
+        function() {
+            var id = $(this).data('id');
+            var amount = $(this).val();
+            var data=
+            {
+                id: id,
+                 amount: amount
+            };
+            console.log("data: ", data);
+            $.ajax({
+                    url: "/ShoppingCart/ChangeAmount",
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    //  contentType: false,
+                    //  processData: false,
+                    success: function (data) {
+                        console.log(data.ret);
+                        if (data.ret >= 0) {
+                            location.reload();
+                        } else {
+                            swal({
+                                    title: 'Thất bại',
+                                    text: 'Xử lý không thành công',
+                                    type: 'error'
+                                    //  timer: 1500
+                                }
+
+                            )
+                        }
+                    }.bind(this)
+                })
+                .done(function () {
+                    console.log("xong roi");
+                    //$(this).addClass("done");
+                });
+        });
+
+    $('.changeStatus').on('change',
+        function () {
+            var id = $(this).data('id');
+            var status = $(this).val();
+            //alert( id+' : '+status);
+            var data =
+            {
+                ID: id,
+                ID_InvoiceStatus: status
+            };
+            console.log("data: ", data);
+            $.ajax({
+                    url: "/Invoice/ChangeStatus",
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    //  contentType: false,
+                    //  processData: false,
+                    success: function (data) {
+                        console.log(data.ret);
+                        if (data.ret >= 0) {
+                           // location.reload();
+                        } else {
+                            swal({
+                                    title: 'Thất bại',
+                                    text: 'Xử lý không thành công',
+                                    type: 'error'
+                                    //  timer: 1500
+                                }
+
+                            )
+                        }
+                    }.bind(this)
+                })
+                .done(function () {
+                    console.log("xong roi");
+                    //$(this).addClass("done");
+                });
+        });
 });
