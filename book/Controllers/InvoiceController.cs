@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using book.DAO;
 using book.Models.Entities;
+using book.Models.ViewModels;
 using PagedList;
 
 namespace book.Controllers
@@ -44,5 +46,72 @@ namespace book.Controllers
             },JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Details(string id)
+        {
+            if (Session["username"] == null)
+            {
+                return Redirect("/Admin/Login");
+            }
+            InvoiceDAO dao = new InvoiceDAO();
+            Invoice invoice = dao.GetByID(Int32.Parse(id));
+            List<Item> list = new List<Item>();
+            foreach (var item in invoice.InvoiceDetails)
+            {
+                Item temp = new Item();
+                temp.id = item.ID;
+                temp.amount =(int) item.Quantity;
+                temp.price = (double)item.Price;
+                temp.name = item.Book.Name;
+                temp.mainImage = item.Book.MainImage;
+                list.Add(temp);
+            }
+
+            Customer customer = new Customer();
+            customer.Name = invoice.Customer.Name;
+            customer.Address = invoice.Customer.Address;
+            customer.Email = invoice.Customer.Email;
+            customer.Telephone = invoice.Customer.Telephone;
+            var vm = new InvoiceDetailVM
+            {
+                invoice = invoice,
+                customer = customer,
+                list = list
+            };
+            return View(vm);
+        }
+
+        public ActionResult Print(string id)
+        {
+            if (Session["username"] == null)
+            {
+                return Redirect("/Admin/Login");
+            }
+            InvoiceDAO dao = new InvoiceDAO();
+            Invoice invoice = dao.GetByID(Int32.Parse(id));
+            List<Item> list = new List<Item>();
+            foreach (var item in invoice.InvoiceDetails)
+            {
+                Item temp = new Item();
+                temp.id = item.ID;
+                temp.amount = (int)item.Quantity;
+                temp.price = (double)item.Price;
+                temp.name = item.Book.Name;
+                temp.mainImage = item.Book.MainImage;
+                list.Add(temp);
+            }
+
+            Customer customer = new Customer();
+            customer.Name = invoice.Customer.Name;
+            customer.Address = invoice.Customer.Address;
+            customer.Email = invoice.Customer.Email;
+            customer.Telephone = invoice.Customer.Telephone;
+            var vm = new InvoiceDetailVM
+            {
+                invoice = invoice,
+                customer = customer,
+                list = list
+            };
+            return View("~/Views/Invoice/print.cshtml",vm);
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace book.Models.Entities
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Tên")]
         public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

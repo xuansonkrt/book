@@ -59,10 +59,10 @@ namespace book.DAO
         //    return ret;
         //}
 
-        //public Customer GetByID(int id)
-        //{
-        //    return db.Customers.Find(id);
-        //}
+        public Invoice GetByID(int id)
+        {
+            return db.Invoices.Find(id);
+        }
         public dynamic GetAll()
         {
             var list = db.Invoices.SqlQuery("SELECT * FROM Invoice");

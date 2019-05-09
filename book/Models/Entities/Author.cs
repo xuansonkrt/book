@@ -1,4 +1,4 @@
-namespace book.Models.Entities
+﻿namespace book.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -18,20 +18,24 @@ namespace book.Models.Entities
         public int ID { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Họ và tên")]
         public string Name { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Ngày sinh")]
         public DateTime? DateOfBirth { get; set; }
-
+        [Display(Name = "Giới tính")]
         public int? Gender { get; set; }
 
         [StringLength(500)]
+        [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
 
         [StringLength(200)]
         public string Email { get; set; }
 
         [StringLength(4000)]
+        [Display(Name = "Giới thiệu")]
         public string Description { get; set; }
 
         [StringLength(500)]

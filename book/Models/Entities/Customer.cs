@@ -1,4 +1,4 @@
-namespace book.Models.Entities
+﻿namespace book.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace book.Models.Entities
 
         [Required]
         [StringLength(200)]
+        [Display(Name = "Họ và tên")]
         public string Name { get; set; }
 
         [Required]
@@ -31,17 +32,22 @@ namespace book.Models.Entities
         [StringLength(50)]
         public string Password { get; set; }
 
-        public int Telephone { get; set; }
+        [Display(Name = "Số điện thoại")]
+        public string Telephone { get; set; }
 
+        [Display(Name = "Giới tính")]
         public int? Gender { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Ngày tham gia")]
         public DateTime? join_Date { get; set; }
 
         [Column(TypeName = "date")]
+        [Display(Name = "Ngày sinh")]
         public DateTime? DateOfBirth { get; set; }
 
         [StringLength(500)]
+        [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
