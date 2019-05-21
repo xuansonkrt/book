@@ -26,7 +26,8 @@
     <link rel="stylesheet" href="~/assets/vendor/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="~/assets/vendor/magnific-popup/magnific-popup.css" />
     <link rel="stylesheet" href="~/assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
-
+    
+    @RenderSection("style",false);
     <!-- Theme CSS -->
     <link rel="stylesheet" href="~/assets/stylesheets/theme.css" />
 
@@ -471,6 +472,6 @@
     <script src="~/assets/javascripts/theme.init.js"></script>
     <script src="~/Scripts/script.js"></script>
     <script src="~/Scripts/script-2.js"></script>
-
+    @RenderSection("scripts", false);
 </body>
 </html>

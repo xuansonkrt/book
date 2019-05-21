@@ -6,7 +6,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+@section style{
+    <link rel="stylesheet" href="~/Content/jquery-ui.css" />
+}
 <h2>Danh sách hóa đơn</h2>
 
 @*<p>
@@ -27,6 +29,14 @@
     var index = (pageNumber - 1)*pageSize+1;
   
 }
+
+
+<p>
+    <label for="amount">Price range:</label>
+    <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+ 
+<div id="slider-range"></div>
 <table class="table">
     <tr>
         <th>
@@ -83,3 +93,7 @@
 @*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount*@
 @Html.PagedListPager(Model, page => Url.Action("Index",new { page }))
 <!-- Kết thúc -->
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui.js"></script>
+}
