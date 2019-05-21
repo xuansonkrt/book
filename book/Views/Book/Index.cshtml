@@ -8,9 +8,27 @@
 
 <h2>Danh sách sách</h2>
 
-<p>
-    @Html.ActionLink("Thêm mới", "Create", null, new { @class = " btn btn-warning " })
-</p>
+<div class="row">
+    <div class="col-sm-6">
+        <p>
+            @Html.ActionLink("Thêm mới", "Create", null, new { @class = " btn btn-warning " })
+        </p>
+    </div>
+    
+    <div class="col-sm-6" style="text-align: right">
+        <p>
+            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-facebook"><i class="fa fa-filter" style="margin-right: 5px"></i>Lọc</button>
+        </p>
+    </div>
+</div>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+</div>
+
 <table class="table">
     <tr>
         <th style="width: 300px">

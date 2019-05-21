@@ -161,7 +161,16 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data.ret);
                     if (data.ret >= 0) {
-                        location.reload();
+                        swal({
+                                title: 'Thành công',
+                                text: 'Thêm vào giỏ hàng thành công',
+                                type: 'success',
+                                timer: 1500
+                            }
+
+                        ).then(function () {
+                            window.location.reload();
+                        });
                     }
                 }.bind(this)
             })
@@ -181,6 +190,47 @@ $(document).ready(function () {
             Telephone: $('#phone').val(),
             Address: $('#address').val(),
         };
+
+        if (data.Name == "") {
+            swal({
+                title: 'Thất bại',
+                text: 'Chưa nhập tên người nhận',
+                type: 'error',
+                timer: 1500
+            });
+            $('#name').focus();
+            return;
+        }
+        if (data.Email == "") {
+            swal({
+                title: 'Thất bại',
+                text: 'Chưa nhập email',
+                type: 'error',
+                timer: 1500
+            });
+            $('#email').focus();
+            return;
+        }
+        if (data.Telephone == "") {
+            swal({
+                title: 'Thất bại',
+                text: 'Chưa nhập số điện thoại',
+                type: 'error',
+                timer: 1500
+            });
+            $('#phone').trigger("focus");
+            return;
+        }
+        if (data.Address == "") {
+            swal({
+                title: 'Thất bại',
+                text: 'Chưa nhập địa chỉ',
+                type: 'error',
+                timer: 1500
+            });
+            $('#email').focus();
+            return;
+        }
 
         console.log("data: ", data);
         $.ajax({
@@ -281,7 +331,17 @@ $(document).ready(function () {
                     success: function (data) {
                         console.log(data.ret);
                         if (data.ret >= 0) {
-                           // location.reload();
+                            // location.reload();
+                            swal({
+                                    title: 'Thành công',
+                                    text: 'Cập nhật thành công',
+                                    type: 'success',
+                                    timer: 1500
+                                }
+
+                            //).then(function () {
+                            //    window.location.reload();}
+                            );
                         } else {
                             swal({
                                     title: 'Thất bại',

@@ -9,14 +9,14 @@ namespace book.Global
     {
         public static string convert2String(double price)
         {
-            string result = price.ToString("##,###");
+            string result = price.ToString("##.###");
             return result;
         }
 
         public static string convert2String(decimal? price)
         {
             double temp =(double) price.Value;
-            string result = temp.ToString("##,###");
+            string result = temp.ToString("##.###");
             return result;
         }
     }
