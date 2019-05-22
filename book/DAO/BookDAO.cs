@@ -19,6 +19,7 @@ namespace book.DAO
 
         public int Insert(Book book)
         {
+            book.Status = 1;
             db.Books.Add(book);
             int ret = db.SaveChanges();
             return ret;
@@ -56,7 +57,8 @@ namespace book.DAO
             if (book != null)
             {
 
-                db.Books.Remove(book);
+                //db.Books.Remove(book);
+                book.Status = 0;
                 ret = db.SaveChanges();
             }
             else

@@ -1,4 +1,4 @@
-namespace book.Models.Entities
+﻿namespace book.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -19,28 +19,38 @@ namespace book.Models.Entities
             ListImages = new HashSet<ListImage>();
         }
 
+        [Display(Name = "Mã")]
         public int ID { get; set; }
 
         [Required]
         [StringLength(200)]
+        [Display(Name = "Tên sách")]
+
         public string Name { get; set; }
 
         [StringLength(1000)]
+        [Display(Name = "Giới thiệu")]
         public string Review { get; set; }
 
+        [Display(Name = "Giá")]
         public decimal? Price { get; set; }
 
+        [Display(Name = "Thể loại")]
         public int? ID_Category { get; set; }
 
+        [Display(Name = "Nhà xuất bản")]
         public int? ID_Publisher { get; set; }
 
+        [Display(Name = "Số lượng")]
         public int? Quantity { get; set; }
 
         [StringLength(1000)]
+        [Display(Name = "Hình ảnh")]
         public string MainImage { get; set; }
 
         [StringLength(500)]
-        public string Author { get; set; }
+        [Display(Name = "Tác giả")]
+        string Author { get; set; }
 
         public int? Status { get; set; }
 

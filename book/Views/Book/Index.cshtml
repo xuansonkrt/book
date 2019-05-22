@@ -62,8 +62,8 @@
                         <label><strong>Tầm giá:</strong></label>
                         <div class="wrapper">
                             @{
-                                int min = Int32.Parse(Request.QueryString["min"]);
-                                int max = Int32.Parse(Request.QueryString["max"]);
+                                int min = Int32.Parse(Request.QueryString["min"]==null?"0": Request.QueryString["min"]);
+                                int max = Int32.Parse(Request.QueryString["max"] == null ? "0" : Request.QueryString["max"]);
                             }
                             <div class="range-slider">
                                 <input type="text" class="js-range-slider" value="@min,@max"/>
