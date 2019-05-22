@@ -23,7 +23,7 @@ namespace book.Models.Entities
                 if (item.id == id)
                 {
                     check = true;
-                    item.amount+=amount;
+                    item.amount += amount;
                     break;
                 }
             }

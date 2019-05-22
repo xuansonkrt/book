@@ -1,4 +1,4 @@
-﻿namespace book.Models.Entities
+namespace book.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -24,30 +24,22 @@
 
         [Required]
         [StringLength(200)]
-        [Display(Name = "Tên")]
         public string Name { get; set; }
 
         [StringLength(1000)]
-        [Display(Name = "Giới thiệu")]
         public string Review { get; set; }
 
-        [Display(Name = "Giá")]
         public decimal? Price { get; set; }
 
-        [Display(Name = "Thể loại")]
         public int? ID_Category { get; set; }
 
-        [Display(Name = "Nhà xuất bản")]
         public int? ID_Publisher { get; set; }
 
-        [Display(Name = "Số lượng")]
         public int? Quantity { get; set; }
 
-        [Display(Name = "Hình ảnh")]
         [StringLength(1000)]
         public string MainImage { get; set; }
 
-        [Display(Name = "Tác giả")]
         [StringLength(500)]
         public string Author { get; set; }
 

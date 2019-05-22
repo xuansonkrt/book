@@ -4,7 +4,6 @@ namespace book.Models.Entities
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Spatial;
 
     [Table("Admin")]
@@ -23,11 +22,6 @@ namespace book.Models.Entities
         [Required]
         [StringLength(200)]
         public string Name { get; set; }
-
-        public static explicit operator Admin(DbSqlQuery<Admin> v)
-        {
-            throw new NotImplementedException();
-        }
 
         [StringLength(10)]
         public string Password { get; set; }

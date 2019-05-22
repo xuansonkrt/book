@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using book.DAO;
 using book.Models.Entities;
 using PagedList;
+using System.Data.SqlClient;
 
 namespace Web_BookStore1.Controllers
 {
@@ -24,8 +25,22 @@ namespace Web_BookStore1.Controllers
             List<Publisher> publisherList = db.Publishers.ToList();
             ViewBag.PublisherList = publisherList;
 
+
+            string _publisherId = Request.QueryString["publisherId"];
+            string _categoryId = Request.QueryString["categoryId"];
+            int categoryId=0, publisherId=0;
+            if (_publisherId != null)
+            {
+                publisherId = Int32.Parse(_publisherId);
+            }
+            if (_categoryId != null)
+            {
+                categoryId = Int32.Parse(_categoryId);
+            }
             List<Book> books = new List<Book>();
-            books = db.Books.ToList();
+            books = db.Books.SqlQuery("exec Book_Search @categoryId, @publisherId",
+                new SqlParameter("categoryId", categoryId),
+                new SqlParameter("publisherId", publisherId)).ToList();
             List<BookVM> list = new List<BookVM>();
             foreach (var item in books)
             {

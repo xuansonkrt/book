@@ -145,6 +145,10 @@ namespace book.Models.Entities
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<Invoice>()
+                .Property(e => e.PhoneNumber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Invoice>()
                 .HasMany(e => e.InvoiceDetails)
                 .WithRequired(e => e.Invoice)
                 .HasForeignKey(e => e.ID_Invoice)

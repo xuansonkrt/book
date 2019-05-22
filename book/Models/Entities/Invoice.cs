@@ -25,13 +25,24 @@ namespace book.Models.Entities
         [Column(TypeName = "money")]
         public decimal? Price { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? OrderDate { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime? DeliveryDate { get; set; }
 
         public int? ID_InvoiceStatus { get; set; }
+
+        [StringLength(250)]
+        public string CustomerName { get; set; }
+
+        [StringLength(100)]
+        public string Email { get; set; }
+
+        [StringLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [StringLength(500)]
+        public string Address { get; set; }
 
         public virtual Customer Customer { get; set; }
 
