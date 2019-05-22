@@ -26,6 +26,8 @@ namespace book.Models.Entities
         [StringLength(4000)]
         public string Description { get; set; }
 
+        public int? Status { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Books { get; set; }
     }

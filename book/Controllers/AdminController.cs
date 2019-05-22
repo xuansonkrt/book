@@ -22,35 +22,35 @@ namespace book.Controllers
             //  ViewBag.confirm = "begin";
             return View();
         }
-        [HttpPost]
-        public JsonResult Login(Admin _admin)
-        {
+        //[HttpPost]
+        //public JsonResult Login(Admin _admin)
+        //{
             
-            int ret = -1;
-            Admin admin = dao.GetAdmin(_admin.UserName, _admin.Password);
-            if (admin!=null)
-            {
-                ret = 1;
-                Session["username"] = admin.Name;
-                Session["avatar"] = admin.Avatar;
-                ret = 1;
-            }
-            return Json(new
-            {
-                ret //ok
-            }, JsonRequestBehavior.AllowGet);
-        }
+        //    int ret = -1;
+        //    Admin admin = dao.GetAdmin(_admin.UserName, _admin.Password);
+        //    if (admin!=null)
+        //    {
+        //        ret = 1;
+        //        Session["username"] = admin.Name;
+        //        Session["avatar"] = admin.Avatar;
+        //        ret = 1;
+        //    }
+        //    return Json(new
+        //    {
+        //        ret //ok
+        //    }, JsonRequestBehavior.AllowGet);
+        //}
 
-        public ActionResult Logout()
-        {
-            Session["username"] = null;
-            return RedirectToAction("Login");
-        }
+        //public ActionResult Logout()
+        //{
+        //    Session["username"] = null;
+        //    return RedirectToAction("Login");
+        //}
 
-        public ActionResult Management()
-        {
-            ViewBag.username = "sonnx";
-            return View();
-        }
+        //public ActionResult Management()
+        //{
+        //    ViewBag.username = "sonnx";
+        //    return View();
+        //}
     }
 }

@@ -19,14 +19,10 @@ namespace book.Models.Entities
 
         public DateTime? Date { get; set; }
 
-        public int? ID_Admin { get; set; }
-
         [StringLength(500)]
         public string Name { get; set; }
 
         public decimal? Value { get; set; }
-
-        public virtual Admin Admin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CouponDetail> CouponDetails { get; set; }

@@ -17,27 +17,27 @@ namespace book.DAO
             db = new MyDBContext();
         }
 
-        public int Login(string UserName, string Password)
-        {
-            var ret = db.Admins.Count(x => x.UserName == UserName && x.Password == Password);
-            if (ret > 0)
-                return 1;
-            else
-                return -1;
-        }
+        //public int Login(string UserName, string Password)
+        //{
+        //    var ret = db.Admins.Count(x => x.UserName == UserName && x.Password == Password);
+        //    if (ret > 0)
+        //        return 1;
+        //    else
+        //        return -1;
+        //}
 
-        public Admin GetAdmin(string UserName, string Password)
-        {
-            using (var context = new MyDBContext())
-            {
-                var query = from ad in context.Admins
-                    where ad.UserName == UserName && ad.Password==Password
-                            select ad;
+        //public Admin GetAdmin(string UserName, string Password)
+        //{
+        //    using (var context = new MyDBContext())
+        //    {
+        //        var query = from ad in context.Admins
+        //            where ad.UserName == UserName && ad.Password==Password
+        //                    select ad;
 
-                var admin =(Admin) query.FirstOrDefault<Admin>();
-                return admin;
+        //        var admin =(Admin) query.FirstOrDefault<Admin>();
+        //        return admin;
 
-            };
-        }
+        //    };
+        //}
     }
 }

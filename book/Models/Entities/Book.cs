@@ -17,7 +17,6 @@ namespace book.Models.Entities
             CouponDetails = new HashSet<CouponDetail>();
             Rates = new HashSet<Rate>();
             ListImages = new HashSet<ListImage>();
-            WriteBooks = new HashSet<WriteBook>();
         }
 
         public int ID { get; set; }
@@ -43,6 +42,8 @@ namespace book.Models.Entities
         [StringLength(500)]
         public string Author { get; set; }
 
+        public int? Status { get; set; }
+
         public virtual Publisher Publisher { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -61,8 +62,5 @@ namespace book.Models.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ListImage> ListImages { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WriteBook> WriteBooks { get; set; }
     }
 }

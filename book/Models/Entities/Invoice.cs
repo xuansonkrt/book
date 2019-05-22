@@ -17,7 +17,7 @@ namespace book.Models.Entities
 
         public int ID { get; set; }
 
-        public int? ID_Custom { get; set; }
+        public int? ID_Account { get; set; }
 
         [StringLength(50)]
         public string DiscountCode { get; set; }
@@ -44,7 +44,7 @@ namespace book.Models.Entities
         [StringLength(500)]
         public string Address { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        public virtual Account Account { get; set; }
 
         public virtual InvoiceStatu InvoiceStatu { get; set; }
 
