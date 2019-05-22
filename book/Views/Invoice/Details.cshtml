@@ -74,21 +74,21 @@
                     <div class="col-md-6">
                         <div class="bill-to">
                             <p class="h5 mb-xs text-dark text-semibold">Người nhận:</p>
-                            <address >
-                                @Model.customer.Name
+                            <address style="margin-left:15px">
+                                Họ và tên: <strong>@Model.invoice.CustomerName</strong>
                                 <br />
-                                @Model.customer.Address
+                                Số điện thoại: <strong>@Model.invoice.PhoneNumber</strong>
                                 <br />
-                                @Model.customer.Telephone
+                                Email: <strong>@Model.invoice.Email</strong>
                                 <br />
-                                @Model.customer.Email
+                                Địa chỉ: <strong>@Model.invoice.Address</strong>
                             </address>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="bill-data text-right">
                             <p class="mb-none">
-                                <span class="text-dark">Ngày đặt hàng:   @Model.invoice.OrderDate</span>
+                                <span class="text-dark">Ngày đặt hàng:   @MyFunction.convert2String(Model.invoice.OrderDate)</span>
                                
                             </p>
                             @*<p class="mb-none">

@@ -19,22 +19,22 @@ namespace book.DAO
 
         public int Login(string UserName, string Password)
         {
-            var ret = db.Admins.Count(x => x.UserName == UserName && x.Password == Password);
+            var ret = db.Accounts.Count(x => x.UserName == UserName && x.Password == Password);
             if (ret > 0)
                 return 1;
             else
                 return -1;
         }
 
-        public Admin GetAdmin(string UserName, string Password)
+        public Account GetAdmin(string UserName, string Password)
         {
             using (var context = new MyDBContext())
             {
-                var query = from ad in context.Admins
-                    where ad.UserName == UserName && ad.Password==Password
+                var query = from ad in context.Accounts
+                            where ad.UserName == UserName && ad.Password==Password
                             select ad;
 
-                var admin =(Admin) query.FirstOrDefault<Admin>();
+                var admin =(Account) query.FirstOrDefault<Account>();
                 return admin;
 
             };

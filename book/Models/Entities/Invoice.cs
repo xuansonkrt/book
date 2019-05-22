@@ -17,7 +17,7 @@ namespace book.Models.Entities
 
         public int ID { get; set; }
 
-        public int? ID_Custom { get; set; }
+        public int? ID_Account { get; set; }
 
         [StringLength(50)]
         public string DiscountCode { get; set; }
@@ -25,7 +25,6 @@ namespace book.Models.Entities
         [Column(TypeName = "money")]
         public decimal? Price { get; set; }
 
-        [Column(TypeName = "date")]
         public DateTime? OrderDate { get; set; }
 
         [Column(TypeName = "date")]
@@ -33,7 +32,19 @@ namespace book.Models.Entities
 
         public int? ID_InvoiceStatus { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        [StringLength(250)]
+        public string CustomerName { get; set; }
+
+        [StringLength(100)]
+        public string Email { get; set; }
+
+        [StringLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [StringLength(500)]
+        public string Address { get; set; }
+
+        public virtual Account Account { get; set; }
 
         public virtual InvoiceStatu InvoiceStatu { get; set; }
 

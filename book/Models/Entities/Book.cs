@@ -17,14 +17,15 @@
             CouponDetails = new HashSet<CouponDetail>();
             Rates = new HashSet<Rate>();
             ListImages = new HashSet<ListImage>();
-            WriteBooks = new HashSet<WriteBook>();
         }
 
+        [Display(Name = "Mã")]
         public int ID { get; set; }
 
         [Required]
         [StringLength(200)]
-        [Display(Name = "Tên")]
+        [Display(Name = "Tên sách")]
+
         public string Name { get; set; }
 
         [StringLength(1000)]
@@ -43,13 +44,15 @@
         [Display(Name = "Số lượng")]
         public int? Quantity { get; set; }
 
-        [Display(Name = "Hình ảnh")]
         [StringLength(1000)]
+        [Display(Name = "Hình ảnh")]
         public string MainImage { get; set; }
 
-        [Display(Name = "Tác giả")]
         [StringLength(500)]
-        public string Author { get; set; }
+        [Display(Name = "Tác giả")]
+        string Author { get; set; }
+
+        public int? Status { get; set; }
 
         public virtual Publisher Publisher { get; set; }
 
@@ -69,8 +72,5 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ListImage> ListImages { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WriteBook> WriteBooks { get; set; }
     }
 }

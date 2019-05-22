@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using PagedList;
 
 namespace book.DAO
 {
@@ -18,6 +19,7 @@ namespace book.DAO
 
         public int Insert(Book book)
         {
+            book.Status = 1;
             db.Books.Add(book);
             int ret = db.SaveChanges();
             return ret;
@@ -55,7 +57,8 @@ namespace book.DAO
             if (book != null)
             {
 
-                db.Books.Remove(book);
+                //db.Books.Remove(book);
+                book.Status = 0;
                 ret = db.SaveChanges();
             }
             else
@@ -77,22 +80,46 @@ namespace book.DAO
             return list;
         }
 
-        public IEnumerable<Book> GetAll2()
+        public IEnumerable<Book> GetAll2(int? categoryId, int? min, int? max
+                        , string keyWord)
         {
-            var list = db.Books.OrderBy(x => x.Name);
-
+            // var list = db.Books.OrderBy(x => x.Name);
+            MyDBContext db2 = new MyDBContext();
+            var list = db2.Books.SqlQuery("exec Book_GetAllSearch @categoryId, @min, @max, @keyWord ",
+                new SqlParameter("categoryId", categoryId),
+                new SqlParameter("min", min),
+                new SqlParameter("max", max),
+                new SqlParameter("keyWord", keyWord)).ToList();
+            // var list = db2.Books.SqlQuery("select * from Book").ToList();
             return list;
+            //if (categoryId == 0)
+            //{
+            //    return from b in db.Books
+            //        where min <= b.Price && max >= b.Price && b.Name.Contains(@"/"+keyWord+"/")
+            //              && b.Review.Contains(@"/" + keyWord + "/")
+            //           select b;
+            //}
+            //else
+            //{
+            //    return from b in db.Books
+            //        where categoryId==b.ID_Category && min <= b.Price && max >= b.Price
+            // && b.Name.Contains(@"/" + keyWord + "/")
+            //              && b.Review.Contains(@"/" + keyWord + "/")
+            //           select b;
+            //}
         }
 
         public dynamic GetByCategory(int categoryId)
         {
-            var list = db.Books.SqlQuery("SELECT * FROM Book WHERE ID_Category=@categoryID", new SqlParameter("categoryId", categoryId));
+            var list = db.Books.SqlQuery("SELECT * FROM Book WHERE ID_Category=@categoryID"
+                , new SqlParameter("categoryId", categoryId));
 
             return list;
         }
         public dynamic GetByPublisher(int publisherId)
         {
-            var list = db.Books.SqlQuery("SELECT * FROM Book WHERE ID_Publisher=@publisherId", new SqlParameter("publisherId", publisherId));
+            var list = db.Books.SqlQuery("SELECT * FROM Book WHERE ID_Publisher=@publisherId"
+                , new SqlParameter("publisherId", publisherId));
             return list;
         }
     }

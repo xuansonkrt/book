@@ -1,4 +1,4 @@
-﻿namespace book.Models.Entities
+namespace book.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -6,12 +6,13 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Customer")]
-    public partial class Customer
+    [Table("Account")]
+    public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public Account()
         {
+            Account_Role = new HashSet<Account_Role>();
             Carts = new HashSet<Cart>();
             Invoices = new HashSet<Invoice>();
             Rates = new HashSet<Rate>();
@@ -21,8 +22,11 @@
 
         [Required]
         [StringLength(200)]
-        [Display(Name = "Họ và tên")]
         public string Name { get; set; }
+
+        [Required]
+        [StringLength(200)]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -32,23 +36,27 @@
         [StringLength(50)]
         public string Password { get; set; }
 
-        [Display(Name = "Số điện thoại")]
+        [StringLength(20)]
         public string Telephone { get; set; }
 
-        [Display(Name = "Giới tính")]
         public int? Gender { get; set; }
 
         [Column(TypeName = "date")]
-        [Display(Name = "Ngày tham gia")]
-        public DateTime? join_Date { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [Column(TypeName = "date")]
-        [Display(Name = "Ngày sinh")]
         public DateTime? DateOfBirth { get; set; }
 
         [StringLength(500)]
-        [Display(Name = "Địa chỉ")]
         public string Address { get; set; }
+
+        public int? Status { get; set; }
+
+        [StringLength(500)]
+        public string Avatar { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account_Role> Account_Role { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }

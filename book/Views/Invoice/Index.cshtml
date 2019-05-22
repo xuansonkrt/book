@@ -6,7 +6,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+@*@section style{
+    <link rel="stylesheet" href="~/Content/jquery-ui.css" />
+}*@
 <h2>Danh sách hóa đơn</h2>
 
 @*<p>
@@ -27,13 +29,100 @@
     var index = (pageNumber - 1)*pageSize+1;
   
 }
-<table class="table">
+
+@*<div class="wrapper" style="padding:20px;">
+    <div class="range-slider">
+        <input type="text" class="js-range-slider" value="" />
+    </div>
+    <hr>
+    <div class="extra-controls form-inline">
+        <div class="form-group">
+            <input type="text" class="js-input-from form-control hidden" value="0" />
+            <input type="text" class="js-input-to form-control hidden" value="0" />
+        </div>
+    </div>
+</div>*@
+<div class="row">
+    <div class="col-sm-6">
+       
+    </div>
+
+    <div class="col-sm-6" style="text-align: right">
+        <p>
+            <button id="dLabel" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-facebook"><i class="fa fa-filter" style="margin-right: 5px"></i>Lọc</button>
+        </p>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form action="/Invoice/Index" style="padding: 5px 30px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lọc</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><strong>Danh mục:</strong></label>
+                        @{
+                            string InvoiceStatusID = Request.QueryString["InvoiceStatusID"];
+                        }
+
+
+                        <select class="form-control" name="InvoiceStatusID" value="@InvoiceStatusID">
+                            <option value="0">---Tất cả---</option>
+                            @foreach (var item in ViewBag.InvoiceStatusList2)
+                            {
+
+                                if (InvoiceStatusID != null && Int32.Parse(InvoiceStatusID) == item.ID)
+                                {
+                                    <option value="@item.ID" selected="selected">@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><strong>Tìm kiếm:</strong></label>
+                        @{
+                            string keyWord = Request.QueryString["keyWord"];
+                        }
+                        <input name="keyWord" class="form-control" value="@keyWord" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-primary">Lọc</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<table class="table  table-bordered">
     <tr>
         <th>
             STT
         </th>
         <th>
             Người đặt hàng
+        </th>
+        <th>
+            SĐT
+        </th>
+        <th>
+            Địa chỉ
         </th>
         <th>
             Ngày đặt hàng
@@ -56,12 +145,19 @@
            }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Customer.Name)
+            @Html.DisplayFor(modelItem => item.CustomerName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
         </td>
-        <td style="text-align: right; position: relative; left: -40px">
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+
+        <td style="text-align: right    ">
+            @MyFunction.convert2String(item.OrderDate)
+        </td>
+        <td style="text-align: right; ">
             @MyFunction.convert2String(item.Price)đ
         </td>
         <td>
@@ -71,7 +167,7 @@
             @Html.ValidationMessageFor(modelItem => item.ID_InvoiceStatus, "", new { @class = "text-danger" })
         </td>
         
-        <td style="text-align: right">
+        <td style="text-align: center">
             @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o", @style = "width:60px; margin-top:5px" ,@title="Chi tiết hóa đơn"}) 
         </td>
     </tr>
@@ -83,3 +179,11 @@
 @*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount*@
 @Html.PagedListPager(Model, page => Url.Action("Index",new { page }))
 <!-- Kết thúc -->
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/slider.js"></script>
+    <script>
+       
+    </script>
+}

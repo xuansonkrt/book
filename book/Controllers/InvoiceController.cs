@@ -24,13 +24,26 @@ namespace book.Controllers
             }
             int pageNumber = page ?? 1;
 
+            string _invoiceStatusID = Request.QueryString["InvoiceStatusID"];
+            string _keyWord = Request.QueryString["keyWord"];
+
+            int invoiceStatusId = 0;
+            string keyWord = "";
+            if (_invoiceStatusID!=null)
+            {
+                invoiceStatusId= Int32.Parse(_invoiceStatusID);
+            }
+            if (_keyWord != null)
+            {
+                keyWord = _keyWord;
+            }
             InvoiceStatusDAO invoiceStatusDao = new InvoiceStatusDAO();
             List<InvoiceStatu> invoiceStatus = invoiceStatusDao.GetAll();
             SelectList statusList = new SelectList(invoiceStatus, "ID", "Name");
             ViewBag.InvoiceStatusList = statusList;
             ViewBag.InvoiceStatusList2 = invoiceStatus;
             // var list = dao.GetAll();
-            var list = dao.GetAll2().ToPagedList(pageNumber, pageSize);
+            var list = dao.GetAll2(invoiceStatusId, keyWord).ToPagedList(pageNumber, pageSize);
             //var list = (from l in db.Categories
             //            select l).OrderBy(x => x.Name);
             return View(list);
@@ -66,15 +79,10 @@ namespace book.Controllers
                 list.Add(temp);
             }
 
-            Customer customer = new Customer();
-            customer.Name = invoice.Customer.Name;
-            customer.Address = invoice.Customer.Address;
-            customer.Email = invoice.Customer.Email;
-            customer.Telephone = invoice.Customer.Telephone;
+           
             var vm = new InvoiceDetailVM
             {
                 invoice = invoice,
-                customer = customer,
                 list = list
             };
             return View(vm);
@@ -99,16 +107,10 @@ namespace book.Controllers
                 temp.mainImage = item.Book.MainImage;
                 list.Add(temp);
             }
-
-            Customer customer = new Customer();
-            customer.Name = invoice.Customer.Name;
-            customer.Address = invoice.Customer.Address;
-            customer.Email = invoice.Customer.Email;
-            customer.Telephone = invoice.Customer.Telephone;
+            
             var vm = new InvoiceDetailVM
             {
                 invoice = invoice,
-                customer = customer,
                 list = list
             };
             return View("~/Views/Invoice/print.cshtml",vm);
