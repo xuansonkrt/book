@@ -22,9 +22,54 @@ namespace book.Controllers
             {
                 return Redirect("/Admin/Login");
             }
+            string _categoryId = Request.QueryString["categoryId"];
+            string _min = Request.QueryString["min"];
+            string _max = Request.QueryString["max"];
+            string _keyWord = Request.QueryString["keyWord"];
+
+            int? categoryId, min, max;
+            string keyWord;
+
+            if (_keyWord == null)
+            {
+                keyWord = "";
+            }
+            else
+            {
+                keyWord = _keyWord;
+            }
+            if (_categoryId != null)
+            {
+                categoryId = Int32.Parse(_categoryId);
+            }
+            else
+            {
+                categoryId = 0;
+            }
+
+            if (_min != null)
+            {
+                min = Int32.Parse(_min);
+            }
+            else
+            {
+                min = 0;
+            }
+
+            if (_max != null)
+            {
+                max = Int32.Parse(_max);
+            }
+            else
+            {
+                max = 5000000;
+            }
+
+
             List<BookVM> list = new List<BookVM>();
             int pageNumber = page ?? 1;
-            var listBook = dao.GetAll2().ToPagedList(pageNumber, pageSize);
+            var list1 = dao.GetAll2(categoryId,min,max,keyWord);
+            var listBook = list1.ToPagedList(pageNumber, pageSize);
             foreach (var item in listBook)
             {
                 BookVM vm = new BookVM();
@@ -41,7 +86,10 @@ namespace book.Controllers
                 list.Add(vm);
             }
 
-            IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list,pageNumber,pageSize,listBook.Count);
+            var categoryList = categoryDao.GetAll();
+            ViewBag.categoryList = categoryList;
+            IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list
+                ,pageNumber,pageSize,listBook.Count());
             return View(pageBook);
         }
 

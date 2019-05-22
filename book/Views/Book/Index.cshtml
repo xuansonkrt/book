@@ -1,4 +1,5 @@
 ﻿@model PagedList.IPagedList<book.Models.ViewModels.BookVM>
+@using book.Global
 @using PagedList.Mvc;
 
 @{
@@ -17,70 +18,165 @@
     
     <div class="col-sm-6" style="text-align: right">
         <p>
-            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-facebook"><i class="fa fa-filter" style="margin-right: 5px"></i>Lọc</button>
+            <button id="dLabel" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-facebook"><i class="fa fa-filter" style="margin-right: 5px"></i>Lọc</button>
         </p>
     </div>
 </div>
-<div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form action="/Book/Index" style="padding: 5px 30px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lọc</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label ><strong>Danh mục:</strong></label>
+                        @{
+                            string categoryId = Request.QueryString["categoryId"];
+                        }
+                        
+
+                        <select class="form-control" name="categoryId" value="@categoryId">
+                            <option value="0">---Tất cả---</option>
+                            @foreach (var item in ViewBag.categoryList)
+                            {
+                                
+                                if (categoryId!=null && Int32.Parse(categoryId) == item.ID)
+                                {
+                                    <option value="@item.ID"  selected="selected" >@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID" >@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Tầm giá:</strong></label>
+                        <div class="wrapper">
+                            @{
+                                int min = Int32.Parse(Request.QueryString["min"]);
+                                int max = Int32.Parse(Request.QueryString["max"]);
+                            }
+                            <div class="range-slider">
+                                <input type="text" class="js-range-slider" value="@min,@max"/>
+                            </div>
+                            <div class="extra-controls form-inline">
+                                <div class="form-group">
+                                    <input type="text" name="min" class="js-input-from form-control hidden" value="0"/>
+                                    <input type="text" name="max" class="js-input-to form-control hidden" value="0"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Tìm kiếm:</strong></label>
+                        @{
+                            string keyWord = Request.QueryString["keyWord"];
+                        }
+                        <input name="keyWord" class="form-control" value="@keyWord"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-primary">Lọc</button>
+                </div>
+            </form>
+            
+        </div>
+
+    </div>
 </div>
 
-<table class="table">
-    <tr>
-        <th style="width: 300px">
+<table class="table table-bordered">
+    <tr style="text-align: center">
+        <th style="width: 60px">STT</th>
+        <th style="width: 320px; text-align: center">
             Tên cuốn sách
         </th>
-        <th>
+        <th style="width: 350px; text-align: center">
             Giới thiệu
         </th>
-        <th>
+        <th style="text-align: center">
             Giá
         </th>
-        <th>
+        @*<th style="width: 100px; text-align: center">
             Số lượng
-        </th>
-       
-        <th style="width: 100px">
+        </th>*@
+
+        <th style="width: 100px; text-align: center">
             Thể loại
         </th>
-        <th style="width: 130px">
+        <th style="width: 150px; text-align: center">
             Nhà xuất bản
         </th>
-        <th></th>
+        <th style="text-align: center"></th>
     </tr>
+    @{
+        var pageNumber = 1;
+        var pageSize = 3;
+        if (Request.QueryString["page"] != null)
+        {
+            pageNumber = Int32.Parse(Request.QueryString["page"]);
+        }
+        if (Request.QueryString["pageSize"] != null)
+        {
+            pageSize = Int32.Parse(Request.QueryString["pageSize"]);
+        }
 
+        var index = (pageNumber - 1) * pageSize + 1;
+
+    }
 @foreach (var item in Model) {
     <tr>
+        <td >
+            @index
+            @{
+                index++;
+            }
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Review)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
+        <td style="width: 100px; text-align: right">
+            @*@Html.DisplayFor(modelItem => item.Price)*@
+            @MyFunction.convert2String(item.Price) đ
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        
+        </td>*@
+
         <td>
             @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PublisherName)
         </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-primary fa fa-edit", @style="width:60px" }) 
-            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o", @style = "width:60px; margin-top:5px" }) 
-            @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger fa fa-trash-o", @style = "width:60px; margin-top:5px" })
+        <td style="text-align: center">
+            @Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit", @style = "width:60px"})
+            @Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o", @style = "width:60px; margin-top:5px"})
+            @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger fa fa-trash-o", @style = "width:60px; margin-top:5px"})
         </td>
     </tr>
 }
 
 </table>
 @Html.PagedListPager(Model, page => Url.Action("Index",new { page }))
+@section scripts{
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/slider.js"></script>
+    <script>
+
+    </script>
+}

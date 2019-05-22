@@ -17,7 +17,7 @@ namespace book.Models.Entities
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID_Custom { get; set; }
+        public int ID_Account { get; set; }
 
         public int? Comment { get; set; }
 
@@ -25,8 +25,8 @@ namespace book.Models.Entities
         [StringLength(500)]
         public string Rate1 { get; set; }
 
-        public virtual Book Book { get; set; }
+        public virtual Account Account { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        public virtual Book Book { get; set; }
     }
 }

@@ -26,7 +26,7 @@
     var index = (pageNumber - 1) * pageSize + 1;
 
 }
-<table class="table">
+<table class="table  table-bordered">
     <tr>
         <th>
             STT
@@ -34,6 +34,8 @@
         <th>
             Tên thể loại
         </th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -45,13 +47,23 @@
                 index++;
             }
         </td>
-        <td>
+        <td style="width: 75%">
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit"}) |
-            @Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o"}) |
-            @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o"})
+        <td style="text-align: center">
+            @Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit", @title="Chỉnh sửa"}) 
+            @*@Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o"}) |
+            @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o"})*@
+        </td>
+        <td style="text-align: center">
+            @*@Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-primary fa fa-edit" }) |*@
+            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o" , @title="Chi tiết"}) 
+            @*@Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger 	fa fa-trash-o" })*@
+        </td>
+        <td style="text-align: center">
+            @*@Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-primary fa fa-edit" }) |
+            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o" }) |*@
+            @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger 	fa fa-trash-o" , @title="Xóa"})
         </td>
     </tr>
 }

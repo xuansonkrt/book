@@ -10,22 +10,47 @@
 <p>
     @Html.ActionLink("Thêm mới", "Create", null, new {@class="btn btn-warning"})
 </p>
-<table class="table">
+<table class="table  table-bordered">
     <tr>
+        <th>
+            STT
+        </th>
         <th>
             Tên nhà xuất bản
         </th>
         <th>
-           Ngày tạo
+            Ngày tạo
         </th>
         <th>
             Giới thiệu
         </th>
         <th></th>
+        <th></th>
+        <th></th>
     </tr>
+    @{
+        var pageNumber = 1;
+        var pageSize = 3;
+        if (Request.QueryString["page"] != null)
+        {
+            pageNumber = Int32.Parse(Request.QueryString["page"]);
+        }
+        if (Request.QueryString["pageSize"] != null)
+        {
+            pageSize = Int32.Parse(Request.QueryString["pageSize"]);
+        }
 
+        var index = (pageNumber - 1) * pageSize + 1;
+
+    }
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @index
+            @{
+                index++;
+            }
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -35,10 +60,22 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "btn btn-primary fa fa-edit" }) |
-            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "btn btn-success fa fa-folder-open-o" }) |
-            @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "btn btn-danger 	fa fa-trash-o" })
+        <td style="text-align: center">
+            @Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit", @title="Chỉnh sửa"}) 
+        @*    @Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o"}) |*@
+          @*  @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o"})*@
+        </td>
+        
+        <td style="text-align: center">
+         @*   @Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit"}) |*@
+            @Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o",@title="Chi tiết"}) 
+          @*  @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o"})*@
+        </td>
+        
+        <td style="text-align: center">
+            @*@Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit"})*@ 
+            @*@Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o"}) |*@
+           @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o", @title="Xóa"})
         </td>
     </tr>
 }

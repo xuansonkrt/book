@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using book.Models.Entities;
+using System.Data.SqlClient;
 
 namespace book.DAO
 {
@@ -70,10 +71,12 @@ namespace book.DAO
             return list;
         }
 
-        public IEnumerable<Invoice> GetAll2()
+        public IEnumerable<Invoice> GetAll2(int invoiceStatusID, string keyword)
         {
-            var list = db.Invoices.OrderBy(x => x.OrderDate);
-
+        //    var list = db.Invoices.OrderBy(x => x.OrderDate);
+        var list = db.Invoices.SqlQuery("EXEC Invoice_GetAllSearch @invoiceStatusID, @keyword",
+            new SqlParameter("invoiceStatusID", invoiceStatusID),
+            new SqlParameter("keyword", keyword)).ToList();
             return list;
         }
 

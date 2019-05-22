@@ -8,7 +8,7 @@ namespace book.Models.ViewModels
 {
     public class InvoiceDetailVM
     {
-        public Customer customer { get; set; }
+        public Account account { get; set; }
         public List<Item> list { get; set; }
         public Invoice invoice { get; set; }
     }

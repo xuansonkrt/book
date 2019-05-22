@@ -23,11 +23,11 @@ namespace book.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Login(Admin _admin)
+        public JsonResult Login(Account _admin)
         {
             
             int ret = -1;
-            Admin admin = dao.GetAdmin(_admin.UserName, _admin.Password);
+            Account admin = dao.GetAdmin(_admin.UserName, _admin.Password);
             if (admin!=null)
             {
                 ret = 1;
