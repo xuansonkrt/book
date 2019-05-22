@@ -106,6 +106,11 @@ $(document).ready(function () {
         $('#gender').val($('input[name=gender]:checked').val());
     });
 
+    $('#uploadImage').on('click',
+        function() {
+            $("#input-image").trigger('click');
+        });
+
     $("#input-image").change(function (e) {
         // readURL(this);
 
