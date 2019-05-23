@@ -5,10 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using PagedList;
-
+using System.IO;
+using System.Web.Mvc;
 namespace book.DAO
 {
-    public class BookDAO
+    public class BookDAO : Controller
     {
         private MyDBContext db;
 
@@ -32,6 +33,15 @@ namespace book.DAO
             Book book = db.Books.Find(_book.ID);
             if (book != null)
             {
+                //var filePath = Server.MapPath("~" + book.MainImage);
+                if (book.MainImage != null)
+                {
+                    string server = HttpRuntime.AppDomainAppPath.ToString();
+                    ///  string filePath = Path.Combine(server, book.MainImage);
+                    var arr = book.MainImage.Split('/');
+                    string filePath = server + arr[1] + "\\" + arr[2];
+                    System.IO.File.Delete(filePath);
+                }
 
                 book.Name = _book.Name;
                 book.Review = _book.Review;

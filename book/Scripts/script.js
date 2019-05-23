@@ -1,4 +1,65 @@
-﻿
+﻿function updateAcc() {
+
+    var data = {
+        ID: $('#accountId').val(),
+        Name: $('#name').val(),
+        UserName: $('#username').val(),
+        Email: $('#email').val(),
+        Telephone: $('#phonenumber').val(),
+        Address: $('#address').val(),
+        Avatar: $('#image2').val(),
+        DateOfBirth: $('#dateofbirth').val(),
+        Gender: $("input[name='gender']:checked").val() == 'male' ? 1 : 0
+    }
+    console.log('data: ', data);
+    $.ajax({
+        url: "/Account/Update",
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        //  contentType: false,
+        //  processData: false,
+        success: function (data) {
+            console.log('data return: ', data);
+            if (data.ret >= 0) {
+                swal({
+                    title: 'Thành công',
+                    text: 'Cập nhật tài khoản thành công',
+                    type: 'success',
+                    timer: 1500
+                }).then(function () {
+                    window.location.reload();
+                });
+            } else {
+                swal({
+                    title: 'Thất bại',
+                    text: 'Lỗi ghi dữ liệu',
+                    type: 'error',
+                    timer: 1500
+                });
+            }
+        }.bind(this)
+    })
+        .done(function () {
+            console.log("xong roi");
+            //$(this).addClass("done");
+        });
+};
+function convertDate(date) {
+    var today = new Date(date);
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    var today = dd + '/' + mm + '/' + yyyy;
+    return today;
+}
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -22,12 +83,304 @@ function getCookie(name) {
 }
 
 $(document).ready(function () {
+    $('.date').datetimepicker({
+        format: 'DD/MM/YYYY',
+        keepInvalid: true
+    });
     //$("#SoLuong").spinner({
     //    min: 1,
     //    max: 100,
     //    step: 1
     //});
+    $("#input-image2").change(function (e) {
+        readURL2(this);
+    });
+    $("#uploadImage2").on('click',
+        function() {
+            $('#input-image2').trigger('click');
+        });
+    $('#btnUpdate').on('click',
+        function() {
+            var data = new FormData();
+            var files = $("#input-image2")[0].files[0];
+            if (files != null ) {
+                data.append('file', $("#input-image2")[0].files[0]);
+                console.log('data: ', data);
+                $.ajax({
+                        url: "/Upload/UploadFile2",
+                        type: "POST",
+                        //   data: JSON.stringify(data),
+                        data: data,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            console.log(data.sussess);
+                            if (data.sussess >= 0) {
+                                $("#image2").val(data.filename);
+                                updateAcc();
+                            }
+                        }.bind(this)
+                    })
+                    .done(function() {
+                        console.log("xong roi");
+                        //$(this).addClass("done");
+                    });
+            } else {
+                updateAcc();
+            }
+        });
+    $('.detailsAcc').on('click',
+        function() {
+            var accountId = $(this).data("id");
+            var data = {
+                accountId: accountId
+            };
+            
+            console.log('data sent: ', data);
+            var postData = JSON.stringify(data);
+            console.log('postData: ', postData);
 
+            $.ajax({
+                url: "/Account/GetAccount",
+                    type: 'POST',
+                    data: {
+                        accountId: accountId
+                    },
+                    dataType: 'json',
+                    //  contentType: false,
+                    //  processData: false,
+                    success: function (data) {
+                        console.log('data return: ', data);
+                        if (data.ret >= 0) {
+                            
+                            console.log('data ok: ', data.obj);
+                            console.log('data ok: ', data.obj["Name"]);
+                            $('#accountId').val(data.obj.ID);
+                            $('#name').val(data.obj.Name);
+                            $('#username').val(data.obj.UserName);
+                            $('#email').val(data.obj.Email);
+                            $('#address').val(data.obj.Address);
+                            $('#phonenumber').val(data.obj.Telephone);
+                            $('#image2').val(data.obj.Avatar);
+                            $('#dateofbirth').val(convertDate(data.obj.DateOfBirth));
+                            $('#img-avatar').attr('src', data.obj.Avatar);
+                            if (data.obj.Gender == 1) {
+                                $("input[name=gender][value=male]").prop('checked', true);
+                            } else
+                                $("input[name=gender][value=female]").prop('checked', true);
+                        } else {
+                            
+                        }
+                    }.bind(this)
+                })
+                .done(function () {
+                    console.log("xong roi");
+                    //$(this).addClass("done");
+                });
+        });
+
+    $('#btnSignUp').on("click", function () {
+        if ($("#username").val() == "") {
+            swal({
+                title: 'Thất bại',
+                text: 'Chưa điền tên tài khoản',
+                type: 'error',
+                timer: 1500
+            }).then(function () {
+                $("#username").focus();
+                return;
+            });
+        } else
+            if ($("#email").val() == "") {
+                swal({
+                    title: 'Thất bại',
+                    text: 'Chưa điền email',
+                    type: 'error',
+                    timer: 1500
+                }).then(function () {
+                    $("#email").focus();
+                    return;
+                });
+            } else
+                if ($("#password").val() == "") {
+                    swal({
+                        title: 'Thất bại',
+                        text: 'Chưa điền mật khẩu',
+                        type: 'error',
+                        timer: 1500
+                    }).then(function () {
+                        $("#password").focus();
+                        return;
+                    });
+                } else
+                    if ($("#passwordconfirm").val() == "") {
+                        swal({
+                            title: 'Thất bại',
+                            text: 'Chưa nhập lại mật khẩu',
+                            type: 'error',
+                            timer: 1500
+                        }).then(function () {
+                            $("#passwordconfirm").focus();
+                            return;
+                        });
+                    } else
+                        if ($("#passwordconfirm").val() != $("#password").val()) {
+                            swal({
+                                title: 'Thất bại',
+                                text: 'Mật khẩu không trùng nhau',
+                                type: 'error',
+                                timer: 1500
+                            }).then(function () {
+                                $("#password").focus();
+                                return;
+                            });
+                        } else {
+                            $.ajax({
+                                url: "/Account/Register",
+                                dataType: 'json',
+                                data: {
+                                    username: $('#username').val(),
+                                    email: $('#email').val(),
+                                    password: $('#password').val()
+                                },
+                                method: 'post',
+                                success: (data) => {
+                                    console.log('data: ', data);
+                                    if (data.ret > 0) {
+                                        window.location.href = '/Account/Login'
+                                    } else {
+                                        if (data.ret = -100) {
+                                            swal({
+                                                title: 'Thất bại',
+                                                text: 'Tên tài khoản không khả dụng',
+                                                type: 'error',
+                                                timer: 1500
+                                            }).then(function() {
+                                                $('#username').focus();
+                                                return;
+                                            });
+
+                                        } else {
+                                            swal({
+                                                title: 'Thất bại',
+                                                text: 'Lỗi ghi dữ liệu',
+                                                type: 'error',
+                                                timer: 1500
+                                            }).then(function () {
+                                                return;
+                                            });
+                                        }
+                                    }
+                                },
+                                error: (xhr, status, err) => {
+                                    console.log(err.toString());
+                                }
+                            });
+                        }
+
+
+    });
+    $('.delAcc').on('click',
+        function() {
+            var accountId = $(this).data("id");
+            swal({
+                title: 'Xóa tài khoản?',
+                text: "Bạn sẽ không có khả năng khôi phục!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
+            }).then(function (result) {
+                if (result.value) {
+                    $.ajax({
+                            url: "/Account/Delete",
+                            type: 'POST',
+                            data: {
+                                accountId: accountId
+                            },
+                            dataType: 'json',
+                            //  contentType: false,
+                            //  processData: false,
+                            success: function (data) {
+                                console.log('data return: ', data);
+                                if (data.ret >= 0) {
+                                    // location.reload();
+                                    swal({
+                                            title: 'Thành công',
+                                            text: 'Cập nhật thành công',
+                                            type: 'success',
+                                            timer: 1500
+                                        }).then(function () {
+                                            window.location.reload();
+                                        });
+                                } else {
+                                    swal({
+                                            title: 'Thất bại',
+                                            text: 'Xử lý không thành công',
+                                            type: 'error'
+                                            //  timer: 1500
+                                        }
+                                    )
+                                }
+                            }.bind(this)
+                        })
+                        .done(function () {
+                            console.log("xong roi");
+                            //$(this).addClass("done");
+                        }); 
+                }
+            });
+        });
+    
+
+    $('.changeRole').on('change',
+        function() {
+            var accountId = $(this).data("id");
+            var roleId = $(this).val();
+            var data = {};
+            data.accountId = accountId;
+            data.roleId = roleId;
+            console.log('data: ', data);
+            $.ajax({
+                    url: "/Account/ChangeRole",
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    //  contentType: false,
+                    //  processData: false,
+                    success: function (data) {
+                        console.log('data return: ', data);
+                        if (data.ret >= 0) {
+                            // location.reload();
+                            swal({
+                                    title: 'Thành công',
+                                    text: 'Cập nhật thành công',
+                                    type: 'success',
+                                    timer: 1500
+                                }
+
+                                //).then(function () {
+                                //    window.location.reload();}
+                            );
+                        } else {
+                            swal({
+                                    title: 'Thất bại',
+                                    text: 'Xử lý không thành công',
+                                    type: 'error'
+                                    //  timer: 1500
+                                }
+
+                            )
+                        }
+                    }.bind(this)
+                })
+                .done(function () {
+                    console.log("xong roi");
+                    //$(this).addClass("done");
+                });
+        });
 
     $("#SoLuong").on("change", function () {
         var amount = $("#SoLuong").val();
@@ -46,7 +399,15 @@ $(document).ready(function () {
             reader.readAsDataURL(input.files[0]);
         }
     }
-
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img-avatar').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     $("#input-avatar").change(function (e) {
         // readURL(this);

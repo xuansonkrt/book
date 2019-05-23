@@ -7,7 +7,7 @@
 
 <h2>Thêm mới</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Book", FormMethod.Post, new {@id="myForm"}))
 {
     @Html.AntiForgeryToken()
     
@@ -75,7 +75,8 @@
                     @*@Html.LabelFor(model => model.MainImage, htmlAttributes: new { @class = "control-label col-md-3" })*@
                     <div class="col-md-9 hidden">
                         <input type='file' accept=".jpg,.jpeg,.png,.bmp" id="input-image" />
-                        @Html.EditorFor(model => model.MainImage, new {htmlAttributes = new {@class = "form-control hidden", @id="image"}})
+                        @* @Html.EditorFor(model => model.MainImage, new {htmlAttributes = new {@class = "form-control hidden", @id="image"}})*@
+                        <input type="text" name="MainImage" id="image"/>
                         @Html.ValidationMessageFor(model => model.MainImage, "", new {@class = "text-danger"})
                     </div>
                     <img style="max-height: 300px; margin-top: 10px" class="book-image" />

@@ -6,7 +6,6 @@
 <!doctype html>
 <html class="fixed">
 <head>
-    
     <!-- Basic -->
     <meta charset="UTF-8">
 
@@ -16,7 +15,8 @@
 
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Đăng nhập - Cửa hàng sách MS</title>
+    <title>Đăng ký - Cửa hàng sách MS</title>
+
     <!-- Web Fonts  -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
@@ -49,61 +49,56 @@
 
             <div class="panel panel-sign">
                 <div class="panel-title-sign mt-xl text-right">
-                    <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Đăng nhập</h2>
+                    <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Đăng ký</h2>
                 </div>
                 <div class="panel-body">
-                    <div >
-                        @*action="Login" method="post"*@
+                    <div>
                         <div class="form-group mb-lg">
-                            <label>Tài khoản</label>
-                            <div class="input-group input-group-icon">
-                                <input name="UserName" id="UserName" type="text" class="form-control input-lg"/>
-                                <span class="input-group-addon">
-                                    <span class="icon icon-lg">
-                                        <i class="fa fa-user"></i>
-                                    </span>
-                                </span>
-                            </div>
+                            <label>Tên tài khoản</label>
+                            <input name="name" id="username" type="text" class="form-control input-lg" />
                         </div>
 
                         <div class="form-group mb-lg">
-                            <div class="clearfix">
-                                <label class="pull-left">Mật khẩu</label>
-                               @* <a href="pages-recover-password.html" class="pull-right">Lost Password?</a>*@
-                            </div>
-                            <div class="input-group input-group-icon">
-                                <input name="Password" id="Password" type="password" class="form-control input-lg"/>
-                                <span class="input-group-addon">
-                                    <span class="icon icon-lg">
-                                        <i class="fa fa-lock"></i>
-                                    </span>
-                                </span>
+                            <label>Email</label>
+                            <input name="email" id="email" type="email" class="form-control input-lg" />
+                        </div>
+
+                        <div class="form-group mb-none">
+                            <div class="row">
+                                <div class="col-sm-6 mb-lg">
+                                    <label>Mật khẩu</label>
+                                    <input name="pwd" id="password" type="password" class="form-control input-lg" />
+                                </div>
+                                <div class="col-sm-6 mb-lg">
+                                    <label>Xác nhận mật khẩu</label>
+                                    <input name="pwd_confirm" id="passwordconfirm" type="password" class="form-control input-lg" />
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-8">
-                                <div class="checkbox-custom checkbox-default hidden">
-                                    <input id="RememberMe" name="rememberme" type="checkbox"/>
-                                    <label for="RememberMe">Remember Me</label>
+                                <div class="checkbox-custom checkbox-default">
+                                    <input id="AgreeTerms" name="agreeterms" type="checkbox" />
+                                    <label for="AgreeTerms">Tôi đồng ý với <a href="#">điều khoản</a></label>
                                 </div>
                             </div>
                             <div class="col-sm-4 text-right">
-                                <button id="submit" type="submit" class="btn btn-primary hidden-xs">Đăng nhập</button>
-                                <button id="submit" type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
+                                <button id="btnSignUp"  class="btn btn-primary hidden-xs">Đăng ký</button>
+                                <button id="btnSignUp" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Đăng ký</button>
                             </div>
                         </div>
 
                         @*<span class="mt-lg mb-lg line-thru text-center text-uppercase">
                             <span>or</span>
-                        </span>*@
+                        </span>
 
-                        @*<div class="mb-xs text-center">
+                        <div class="mb-xs text-center">
                             <a class="btn btn-facebook mb-md ml-xs mr-xs">Connect with <i class="fa fa-facebook"></i></a>
                             <a class="btn btn-twitter mb-md ml-xs mr-xs">Connect with <i class="fa fa-twitter"></i></a>
                         </div>*@
                         <hr/>
-                        <p class="text-center">Bạn chưa có tài khoản? <a href="/Account/SignUp">Đăng kí!</a>
+                        <p class="text-center">Bạn đã có tài khoản? <a href="/Account/Login">Đăng nhập!</a>
 
                     </div>
                 </div>
@@ -121,7 +116,9 @@
     <script src="~/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="~/assets/vendor/magnific-popup/magnific-popup.js"></script>
     <script src="~/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
     <!-- Theme Base, Components and Settings -->
     <script src="~/assets/javascripts/theme.js"></script>
 
@@ -129,41 +126,11 @@
     <script src="~/assets/javascripts/theme.custom.js"></script>
 
     <!-- Theme Initialization Files -->
-<script src="~/assets/javascripts/theme.init.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="~/assets/javascripts/theme.init.js"></script>
+    <script src="~/Scripts/script.js"></script>
 <script>
     $(document).ready(function () {
-        $('#submit').on("click", function () {
-            var data = {
-                UserName: $('#UserName').val()
-                , Password: $('#Password').val()
-            }
-            console.log("data: ", data);
-            $.ajax({
-                url: "/Account/Login",
-                dataType: 'json',
-                data: data,
-                method:'post',
-                success: (data) => {
-                    if (data.ret > 0) {
-                        window.location.href = '/Category'
-                    } else {
-                        swal({
-                                title: 'Thất bại',
-                                text: 'Tài khoản hoặc mật khẩu không chính xác',
-                                type: 'error',
-                                timer: 1500
-                            });
-                    }
-                },
-                error: (xhr, status, err) => {
-                    console.log(err.toString());
-                }
-            });
-        });
+       
     });
         
 </script>

@@ -220,6 +220,8 @@
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\WareHouseController.cs" />
+    <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\AuthorDAO.cs" />
     <Compile Include="DAO\BookDAO.cs" />
     <Compile Include="DAO\InvoiceDetailDAO.cs" />
@@ -229,6 +231,8 @@
     <Compile Include="DAO\PublisherDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\AdminDAO.cs" />
+    <Compile Include="DAO\RoleDAO.cs" />
+    <Compile Include="Extensions\VARIABLE_ROLE.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +258,7 @@
     <Compile Include="Models\Entities\ShoppingCart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\AccountVM.cs" />
     <Compile Include="Models\ViewModels\BookVM.cs" />
     <Compile Include="Models\ViewModels\HomeVM.cs" />
     <Compile Include="Models\ViewModels\InvoiceDetailVM.cs" />
@@ -1798,6 +1803,8 @@
     <Content Include="assets\vendor\summernote\summernote-bs3.css" />
     <Content Include="assets\vendor\summernote\summernote.css" />
     <Content Include="assets\vendor\summernote\summernote.js" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\animate.css" />
@@ -1885,6 +1892,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -2174,6 +2183,7 @@
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\price-range.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\script-2.js" />
@@ -2258,6 +2268,8 @@
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\print.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Admin\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2265,6 +2277,7 @@
     <Folder Include="Views\InvoiceStatus\" />
     <Folder Include="Views\Link\" />
     <Folder Include="Views\Upload\" />
+    <Folder Include="Views\WareHouse\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
