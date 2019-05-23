@@ -27,6 +27,7 @@ namespace book.Models.Entities
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

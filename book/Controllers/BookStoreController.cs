@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using book.DAO;
 using book.Models.Entities;
 using PagedList;
+using System.Data.SqlClient;
 
 namespace Web_BookStore1.Controllers
 {
@@ -23,10 +24,55 @@ namespace Web_BookStore1.Controllers
 
             List<Publisher> publisherList = db.Publishers.ToList();
             ViewBag.PublisherList = publisherList;
+            //
+            //string _CategoryId = Request.QueryString["CategoryId"];
+            //string _PublisherId = Request.QueryString["PublisherId"];
+            //string _price1 = Request.QueryString["price1"];
+            //string _price2 = Request.QueryString["price2"];
+
+            //int CategoryId = 0, PublisherId = 0;
+            //decimal price1 = 0, price2 = 0;
+
+            //if (_CategoryId != null)
+            //{
+            //    CategoryId = Int32.Parse(_CategoryId);
+            //}
+            //if (_PublisherId != null)
+            //{
+            //    PublisherId = Int32.Parse(_PublisherId);
+            //}
+            //if( _price1 != null)
+            //{
+            //    price1 = Convert.ToDecimal(_price1);
+            //}
+            //if (_price2 != null)
+            //{
+            //    price2 = Convert.ToDecimal(_price2);
+            //}
 
             List<Book> books = new List<Book>();
-            books = db.Books.ToList();
-            List<BookVM> list = new List<BookVM>();
+            //books = db.Books.SqlQuery("exec Loc @IDcategory , @Idpublisher , @price1  , @price2  ",
+            //    new SqlParameter("IDcategory", CategoryId),
+            //    new SqlParameter("Idpublisher", PublisherId),
+            //    new SqlParameter("price1", price1),
+            //    new SqlParameter("price2", price2)).ToList();
+            /////////
+            string _publisherId = Request.QueryString["publisherId"];
+            string _categoryId = Request.QueryString["categoryId"];
+            int categoryId = 0, publisherId = 0;
+            if (_publisherId != null)
+            {
+                publisherId = Int32.Parse(_publisherId);
+            }
+            if (_categoryId != null)
+            {
+                categoryId = Int32.Parse(_categoryId);
+            }
+
+            books = db.Books.SqlQuery("exec Loc @categoryId, @publisherId,0,0",
+               new SqlParameter("categoryId", categoryId),
+               new SqlParameter("publisherId", publisherId)).ToList();
+            List <BookVM> list = new List<BookVM>();
             foreach (var item in books)
             {
                 BookVM bookVM = new BookVM();
