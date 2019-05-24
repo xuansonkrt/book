@@ -18,7 +18,8 @@ namespace Web_BookStore1.Controllers
         // GET: BookStore
         public ActionResult Index(int? page = 1, int pageSize = 3)
         {
-            Session["username"] = "manh";
+           
+           // Session["id"] = 1;
             
            // HomeVM vm = new HomeVM();
             List<Category> categoryList = db.Categories.ToList();

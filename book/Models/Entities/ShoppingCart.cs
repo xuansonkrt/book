@@ -15,7 +15,7 @@ namespace book.Models.Entities
         {
             lst = new List<Item>();
         }
-        public void InsertItem(int id, string name, double price, int amount)
+        public void InsertItem(int id, string name, decimal price, int amount)
         {
             bool check = false;
             foreach (var item in lst)
@@ -82,9 +82,9 @@ namespace book.Models.Entities
             return total;
         }
 
-        public double GetTotalMoney()
+        public decimal GetTotalMoney()
         {
-            double total = 0;
+            decimal total = 0;
             foreach (var item in lst)
             {
                 total += item.amount * item.price;

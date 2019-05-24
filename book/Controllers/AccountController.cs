@@ -47,6 +47,9 @@ namespace book.Controllers
                 Session["username"] = admin.Name;
                 Session["acc"] = admin.UserName;
                 Session["avatar"] = admin.Avatar;
+                Session["id"] = admin.ID;
+                CartUserDAO cartUserDAO = new CartUserDAO();
+                Session["cartAmount"] = cartUserDAO.GetAmount(admin.ID);
                 ret = 1;
             }
             return Json(new
@@ -89,6 +92,7 @@ namespace book.Controllers
         public ActionResult Logout()
         {
             Session["username"] = null;
+            Session["id"] = null;
             return RedirectToAction("Login");
         }
 
