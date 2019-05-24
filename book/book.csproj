@@ -256,6 +256,7 @@
     <Compile Include="Models\Entities\sysdiagram.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\BookSearch.cs" />
     <Compile Include="Models\ViewModels\BookVM.cs" />
     <Compile Include="Models\ViewModels\HomeVM.cs" />
     <Compile Include="Models\ViewModels\InvoiceDetailVM.cs" />
@@ -2260,6 +2261,7 @@
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\print.cshtml" />
+    <Content Include="Views\BookStore\TimKiem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

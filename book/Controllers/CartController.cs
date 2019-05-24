@@ -51,67 +51,67 @@ namespace book.Controllers
         }
 
 
-        //public JsonResult Checkout2(Customer customer)
-        //{
-        //    MyDBContext db = new MyDBContext();
-            
-        //    //int amount = 1;
-        //    ShoppingCart cart = (ShoppingCart)Session["cart"];
-        //    if (cart == null)
-        //    {
-        //        return Json(new
-        //        {
-        //            ret = -1
-        //        }, JsonRequestBehavior.AllowGet);
-        //    }
+        public JsonResult Checkout2(Invoice customer)
+        {
+            MyDBContext db = new MyDBContext();
 
-        //    CustomerDAO customerDao = new CustomerDAO();
-        //    Customer obj = new Customer();
-        //    obj.Email = customer.Email;
-        //    obj.Address = customer.Address;
-        //    obj.Telephone = customer.Telephone;
-        //    obj.Name = customer.Name;
+            int amount = 1;
+            ShoppingCart cart = (ShoppingCart)Session["cart"];
+            if (cart == null)
+            {
+                return Json(new
+                {
+                    ret = -1
+                }, JsonRequestBehavior.AllowGet);
+            }
 
-        //  //  db.Customers.Add(customer);
-        //    int ret = customerDao.Insert(obj);
-        //    if (ret > 0)
-        //    {
-        //        InvoiceDAO invoiceDao =new InvoiceDAO();
-        //        Invoice invoice = new Invoice();
-        //        invoice.ID_Custom = obj.ID;
-        //        invoice.OrderDate= DateTime.Now;
-        //        invoice.Price =(decimal?) cart.GetTotalMoney();
-        //        ret = invoiceDao.Insert(invoice);
-        //        if (ret > 0)
-        //        {
-        //            BookDAO bookDao = new BookDAO();
-        //            InvoiceDetailDAO invoiceDetailDao = new InvoiceDetailDAO();
-        //            foreach (var item in cart.lst)
-        //            {
-        //                InvoiceDetail invoiceDetail = new InvoiceDetail();
-        //                invoiceDetail.ID_Book = item.id;
-        //                invoiceDetail.ID_Invoice = invoice.ID;
-        //                invoiceDetail.Price = (decimal?)item.price;
-        //                invoiceDetail.Quantity = item.amount;
-        //                ret = invoiceDetailDao.Insert(invoiceDetail);
-        //                if (ret<0)
-        //                {
-        //                    break;
-        //                }
-        //            }
-        //        }
-        //    }
+            //    CustomerDAO customerDao = new CustomerDAO();
+            //    Customer obj = new Customer();
+            //    obj.Email = customer.Email;
+            //    obj.Address = customer.Address;
+            //    obj.Telephone = customer.Telephone;
+            //    obj.Name = customer.Name;
 
-        //    if (ret > 0)
-        //    {
-        //        Session["cartAmount"] = 0;
-        //        Session["cart"] = null;
-        //    }
-            
-        //    return Json(new
-        //    {
-        //        ret
-        //    }, JsonRequestBehavior.AllowGet);
-        //}
+            //    db.Customers.Add(customer);
+            //    int ret = customerDao.Insert(obj);
+            //    if (ret > 0)
+            //    {
+            //        InvoiceDAO invoiceDao = new InvoiceDAO();
+            //        Invoice invoice = new Invoice();
+            //        invoice.ID_Custom = obj.ID;
+            //        invoice.OrderDate = DateTime.Now;
+            //        invoice.Price = (decimal?)cart.GetTotalMoney();
+            //        ret = invoiceDao.Insert(invoice);
+            //        if (ret > 0)
+            //        {
+            //            BookDAO bookDao = new BookDAO();
+            //            InvoiceDetailDAO invoiceDetailDao = new InvoiceDetailDAO();
+            //            foreach (var item in cart.lst)
+            //            {
+            //                InvoiceDetail invoiceDetail = new InvoiceDetail();
+            //                invoiceDetail.ID_Book = item.id;
+            //                invoiceDetail.ID_Invoice = invoice.ID;
+            //                invoiceDetail.Price = (decimal?)item.price;
+            //                invoiceDetail.Quantity = item.amount;
+            //                ret = invoiceDetailDao.Insert(invoiceDetail);
+            //                if (ret < 0)
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //    }
+
+            //    if (ret > 0)
+            //    {
+            //        Session["cartAmount"] = 0;
+            //        Session["cart"] = null;
+            //    }
+
+            return Json(new
+            {
+                ret=-1
+            }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

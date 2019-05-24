@@ -158,5 +158,7 @@ namespace book.Models.Entities
                 .Property(e => e.Name)
                 .IsFixedLength();
         }
+
+        public System.Data.Entity.DbSet<book.Models.ViewModels.BookVM> BookVMs { get; set; }
     }
 }

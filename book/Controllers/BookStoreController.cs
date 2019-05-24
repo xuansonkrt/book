@@ -18,6 +18,8 @@ namespace Web_BookStore1.Controllers
         // GET: BookStore
         public ActionResult Index(int? page = 1, int pageSize = 3)
         {
+            Session["username"] = "manh";
+            
            // HomeVM vm = new HomeVM();
             List<Category> categoryList = db.Categories.ToList();
             ViewBag.CategoryList = categoryList;
@@ -207,7 +209,25 @@ namespace Web_BookStore1.Controllers
                 bookVM.PublisherName = book.Publisher.Name;
             return View(bookVM);
         }
+        public ActionResult TimKiem( string SearchString)
+        {
+            List<Category> categoryList = db.Categories.ToList();
+            ViewBag.CategoryList = categoryList;
 
+            List<Publisher> publisherList = db.Publishers.ToList();
+            ViewBag.PublisherList = publisherList;
+
+
+            var links = from l in db.Books
+                        select l;
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                links = links.Where(s => s.Name.Contains(SearchString));
+            }
+
+            return View(links.ToList());
+        }
 
 
     }

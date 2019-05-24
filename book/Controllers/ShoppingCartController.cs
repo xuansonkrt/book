@@ -18,8 +18,15 @@ namespace book.Controllers
 
         public ActionResult Add(int id)
         {
+             
+            if(Session["username"] != null)
+            {
+
+            }
             int amount = 1;
+            
             cart= (ShoppingCart)Session["cart"];
+
             if (cart == null)
             {
                 cart= new ShoppingCart();
