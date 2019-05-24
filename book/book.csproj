@@ -264,11 +264,8 @@
     <Compile Include="Models\Entities\sysdiagram.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-<<<<<<< HEAD
     <Compile Include="Models\ViewModels\BookSearch.cs" />
-=======
     <Compile Include="Models\ViewModels\AccountVM.cs" />
->>>>>>> sonnx
     <Compile Include="Models\ViewModels\BookVM.cs" />
     <Compile Include="Models\ViewModels\HomeVM.cs" />
     <Compile Include="Models\ViewModels\InvoiceDetailVM.cs" />
@@ -2279,14 +2276,11 @@
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\print.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\BookStore\TimKiem.cshtml" />
-=======
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Admin\SignUp.cshtml" />
     <Content Include="Views\WareHouse\Index.cshtml" />
     <Content Include="Views\WareHouse\Import.cshtml" />
->>>>>>> sonnx
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
