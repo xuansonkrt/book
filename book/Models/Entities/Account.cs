@@ -14,13 +14,13 @@ namespace book.Models.Entities
         {
             Account_Role = new HashSet<Account_Role>();
             Carts = new HashSet<Cart>();
+            Imports = new HashSet<Import>();
             Invoices = new HashSet<Invoice>();
             Rates = new HashSet<Rate>();
         }
 
         public int ID { get; set; }
 
-        [Required]
         [StringLength(200)]
         public string Name { get; set; }
 
@@ -60,6 +60,9 @@ namespace book.Models.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Import> Imports { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }

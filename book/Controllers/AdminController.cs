@@ -41,6 +41,11 @@ namespace book.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult SignUp()
+        {
+            return View();
+        }
         public ActionResult Logout()
         {
             Session["username"] = null;

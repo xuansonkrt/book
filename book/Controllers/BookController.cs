@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using book.DAO;
 using book.Models.Entities;
@@ -89,7 +90,7 @@ namespace book.Controllers
             var categoryList = categoryDao.GetAll();
             ViewBag.categoryList = categoryList;
             IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list
-                ,pageNumber,pageSize,listBook.Count());
+                ,pageNumber,pageSize,list1.Count());
             return View(pageBook);
         }
 
@@ -197,6 +198,28 @@ namespace book.Controllers
         {
             dao.Delete(_book);
             return RedirectToAction("List");
+        }
+
+
+        public JsonResult GetAllSearch(string keyword)
+        {
+            BookDAO bookDao = new BookDAO();
+            List<Book> listBook = dao.Search(keyword);
+            List<BookVM> lst = new List<BookVM>();
+            foreach (var item in listBook)
+            {
+                BookVM vm = new BookVM();
+                vm.ID = item.ID;
+                vm.Name = item.Name;
+                vm.Author = item.Author;
+                lst.Add(vm);
+            }
+
+            int ret = lst == null ? -1 : 1;
+            return Json(new
+            {
+                ret, lst
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

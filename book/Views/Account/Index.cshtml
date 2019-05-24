@@ -1,0 +1,245 @@
+﻿@model PagedList.IPagedList<book.Models.ViewModels.AccountVM>
+@using book.Global
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách tài khoản</h2>
+@{
+    var pageNumber = 1;
+    var pageSize = 3;
+    if (Request.QueryString["page"] != null)
+    {
+        pageNumber = Int32.Parse(Request.QueryString["page"]);
+    }
+    if (Request.QueryString["pageSize"] != null)
+    {
+        pageSize = Int32.Parse(Request.QueryString["pageSize"]);
+    }
+
+    var index = (pageNumber - 1) * pageSize + 1;
+
+
+}
+
+<div class="row">
+    <div class="col-sm-6">
+
+    </div>
+
+    <div class="col-sm-6" style="text-align: right">
+        <p>
+            <button id="dLabel" type="button" data-toggle="modal" data-target="#myModal" class="btn btn-facebook"><i class="fa fa-filter" style="margin-right: 5px"></i>Lọc</button>
+        </p>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form action="/Account/Index" style="padding: 5px 30px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lọc</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><strong>Vai trò:</strong></label>
+                        @{
+                            string roleId = Request.QueryString["roleId"];
+                        }
+
+
+                        <select class="form-control" name="roleId" value="@roleId">
+                            <option value="0">---Tất cả---</option>
+                            @foreach (var item in ViewBag.listRole)
+                            {
+
+                                if (roleId != null && Int32.Parse(roleId) == item.ID)
+                                {
+                                    <option value="@item.ID" selected="selected">@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>Tìm kiếm:</strong></label>
+                        @{
+                            string keyWord = Request.QueryString["keyWord"];
+                        }
+                        <input name="keyWord" class="form-control" value="@keyWord" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                    <button type="submit" class="btn btn-primary">Lọc</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<table class="table  table-bordered">
+    <tr>
+        <th>
+            STT
+        </th>
+        <th>
+            Họ và tên
+        </th>
+        <th>
+            Tài khoản
+        </th>
+        <th>
+            Ngày sinh
+        </th>
+        <th>
+            Giới tính
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            SĐT
+        </th>
+        <th>
+            Vai trò
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @index
+            @{
+                index++;
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @item.DateOfBirth
+        </td>
+        @if (item.Gender == 1)
+        {
+            <td>
+                Nam
+            </td>
+        }
+        else
+        {
+            <td>
+                Nữ
+            </td>
+        }
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+        </td>
+        
+        <td>
+            @Html.DropDownListFor(modelItem => item.RoleID, (new SelectList(ViewBag.listRole, "ID", "Name", item.RoleID)), htmlAttributes: new { @class = "form-control changeRole", data_id = @item.ID })
+            @Html.ValidationMessageFor(modelItem => item.RoleID, "", new { @class = "text-danger" })
+        </td>
+        <td style="text-align: center">
+            <a class="btn btn-primary fa fa-edit detailsAcc" style="cursor: pointer" data-id="@item.ID"
+                                data-toggle="modal" data-target="#myModal2"></a>
+
+            @*@Html.ActionLink(" ", "Edit", new {id = item.ID}, new { @class = "btn btn-primary fa fa-edit", @title = "Chỉnh sửa" })*@
+        </td>
+        <td style="text-align: center">
+            <a class = "btn btn-danger fa fa-trash delAcc" style="cursor: pointer" data-id="@item.ID"></a>
+            @*@Html.ActionLink(" ", null, null, new {@class = "btn btn-danger fa fa-trash delAcc", data_id = @item.ID, @title = "Xóa tài khoản"})*@
+        </td>
+    </tr>
+}
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
+
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog " style="width: 900px">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông tin tài khoản</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6" style="text-align: center">
+                        <img id="img-avatar"style="max-height: 300px; margin-top: 10px"/>
+                        <div class="mx-auto my-auto" style="margin-top: 15px">
+                            <a class="btn btn-danger" id="uploadImage2"><i class="fa fa-upload" style="margin-right: 10px"></i>Tải ảnh lên</a>
+                        </div>
+                        <div class="hidden">
+                            <input type='file' accept=".jpg,.jpeg,.png,.bmp" id="input-image2" />
+                            <input type="text" name="MainImage" id="image2"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="hidden" type="text" id="accountId"/>
+                        <div class="form-group">
+                            <label><strong>Họ và tên:</strong></label>
+                            <input class="form-control" id="name"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Tên tài khoản:</strong></label>
+                            <input class="form-control " id="username" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Giới tính:</strong></label>
+                            <input type="radio" name="gender" value="male" style="margin-left: 20px"/> Nam
+                            <input type="radio" name="gender" value="female" style="margin-left: 20px"/> Nữ
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Ngày sinh:</strong></label>
+                            <input class="form-control date" id="dateofbirth"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Email:</strong></label>
+                            <input class="form-control" id="email"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Số điện thoại:</strong></label>
+                            <input class="form-control" id="phonenumber"/>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Địa chỉ:</strong></label>
+                            <input class="form-control" id="address"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-success" id="btnUpdate">Cập nhật</button>
+            </div>
+        </div>
+
+    </div>
+</div>

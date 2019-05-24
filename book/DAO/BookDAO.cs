@@ -5,10 +5,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using PagedList;
-
+using System.IO;
+using System.Web.Mvc;
 namespace book.DAO
 {
-    public class BookDAO
+    public class BookDAO : Controller
     {
         private MyDBContext db;
 
@@ -32,6 +33,15 @@ namespace book.DAO
             Book book = db.Books.Find(_book.ID);
             if (book != null)
             {
+                //var filePath = Server.MapPath("~" + book.MainImage);
+                if (book.MainImage != null)
+                {
+                    string server = HttpRuntime.AppDomainAppPath.ToString();
+                    ///  string filePath = Path.Combine(server, book.MainImage);
+                    var arr = book.MainImage.Split('/');
+                    string filePath = server + arr[1] + "\\" + arr[2];
+                    System.IO.File.Delete(filePath);
+                }
 
                 book.Name = _book.Name;
                 book.Review = _book.Review;
@@ -79,6 +89,12 @@ namespace book.DAO
 
             return list;
         }
+        public List<Book> GetAll3()
+        {
+            var list = db.Books.Where(x=>x.Status==1).ToList();
+
+            return list;
+        }
 
         public IEnumerable<Book> GetAll2(int? categoryId, int? min, int? max
                         , string keyWord)
@@ -121,6 +137,20 @@ namespace book.DAO
             var list = db.Books.SqlQuery("SELECT * FROM Book WHERE ID_Publisher=@publisherId"
                 , new SqlParameter("publisherId", publisherId));
             return list;
+        }
+
+        public List<Book> Search(string keyword)
+        {
+            List<Book> list = new List<Book>();
+            list = db.Books.Where(x => (x.Name.Contains(keyword) || x.ID.ToString().Contains(keyword))&&x.Status==1).ToList();
+            return list;
+        }
+
+        public int ChangeAmount(int ID, int Amount)
+        {
+            Book book = db.Books.Find(ID);
+            book.Quantity += Amount;
+            return db.SaveChanges();
         }
     }
 }

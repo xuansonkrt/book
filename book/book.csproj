@@ -221,8 +221,11 @@
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\WareHouseController.cs" />
+    <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\AuthorDAO.cs" />
     <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\ImportDAO.cs" />
     <Compile Include="DAO\InvoiceDetailDAO.cs" />
     <Compile Include="DAO\InvoiceDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
@@ -230,6 +233,8 @@
     <Compile Include="DAO\PublisherDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\AdminDAO.cs" />
+    <Compile Include="DAO\RoleDAO.cs" />
+    <Compile Include="Extensions\VARIABLE_ROLE.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,10 +248,13 @@
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Coupon.cs" />
     <Compile Include="Models\Entities\CouponDetail.cs" />
+    <Compile Include="Models\Entities\Import.cs" />
+    <Compile Include="Models\Entities\ImportDetail.cs" />
     <Compile Include="Models\Entities\Invoice.cs" />
     <Compile Include="Models\Entities\InvoiceDetail.cs" />
     <Compile Include="Models\Entities\InvoiceStatu.cs" />
     <Compile Include="Models\Entities\Item.cs" />
+    <Compile Include="Models\Entities\ItemImport.cs" />
     <Compile Include="Models\Entities\ListImage.cs" />
     <Compile Include="Models\Entities\MyDBContext.cs" />
     <Compile Include="Models\Entities\Publisher.cs" />
@@ -256,7 +264,11 @@
     <Compile Include="Models\Entities\sysdiagram.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\ViewModels\BookSearch.cs" />
+=======
+    <Compile Include="Models\ViewModels\AccountVM.cs" />
+>>>>>>> sonnx
     <Compile Include="Models\ViewModels\BookVM.cs" />
     <Compile Include="Models\ViewModels\HomeVM.cs" />
     <Compile Include="Models\ViewModels\InvoiceDetailVM.cs" />
@@ -1801,6 +1813,8 @@
     <Content Include="assets\vendor\summernote\summernote-bs3.css" />
     <Content Include="assets\vendor\summernote\summernote.css" />
     <Content Include="assets\vendor\summernote\summernote.js" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\animate.css" />
@@ -1888,6 +1902,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -2159,6 +2175,7 @@
     <Content Include="assets\vendor\style-switcher\less\skin.less" />
     <Content Include="assets\vendor\style-switcher\less\variables.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\import.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2177,6 +2194,7 @@
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\price-range.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\script-2.js" />
@@ -2261,7 +2279,14 @@
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\print.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\BookStore\TimKiem.cshtml" />
+=======
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Admin\SignUp.cshtml" />
+    <Content Include="Views\WareHouse\Index.cshtml" />
+    <Content Include="Views\WareHouse\Import.cshtml" />
+>>>>>>> sonnx
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

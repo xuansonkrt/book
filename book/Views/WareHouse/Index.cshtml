@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<book.Models.Entities.Book>
+@using book.Global
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Số lượng sách trong kho</h2>
+@{
+    var pageNumber = 1;
+    var pageSize = 10;
+    if (Request.QueryString["page"] != null)
+    {
+        pageNumber = Int32.Parse(Request.QueryString["page"]);
+    }
+    if (Request.QueryString["pageSize"] != null)
+    {
+        pageSize = Int32.Parse(Request.QueryString["pageSize"]);
+    }
+
+    var index = (pageNumber - 1) * pageSize + 1;
+
+}
+<table class="table  table-bordered">
+    <tr>
+        <th>STT</th>
+        <th>
+            Tên sách
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Số lượng
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="width: 50px">
+            @index
+            @{
+                index++;
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+
+        <td style="text-align: right;width: 10%">
+            @MyFunction.convert2String(item.Price)đ
+        </td>
+        <td style="width: 10%">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+    </tr>
+}
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

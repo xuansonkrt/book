@@ -32,6 +32,7 @@ namespace book.DAO
             {
                 var query = from ad in context.Accounts
                             where ad.UserName == UserName && ad.Password==Password
+                                  && ad.Status==1
                             select ad;
 
                 var admin =(Account) query.FirstOrDefault<Account>();

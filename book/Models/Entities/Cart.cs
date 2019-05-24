@@ -15,11 +15,9 @@ namespace book.Models.Entities
             CartDetails = new HashSet<CartDetail>();
         }
 
-        public int ID_Account { get; set; }
+        public int ID { get; set; }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ID_Cart { get; set; }
+        public int ID_Account { get; set; }
 
         public int? Status { get; set; }
 
