@@ -1,4 +1,4 @@
-namespace book.Models.Entities
+﻿namespace book.Models.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace book.Models.Entities
 
         [Required]
         [StringLength(100)]
+        [Display(Name = "Tên thể loại")]
         public string Name { get; set; }
 
         public int? Status { get; set; }

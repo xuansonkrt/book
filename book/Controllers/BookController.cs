@@ -77,6 +77,7 @@ namespace book.Controllers
                 vm.ID = item.ID;
                 vm.Name = item.Name;
                 vm.Price = item.Price;
+                vm.Author = item.Author;
                 vm.MainImage = item.MainImage;
                 vm.Review = item.Review;
                 vm.Quantity = item.Quantity;
@@ -162,6 +163,7 @@ namespace book.Controllers
             vm.ID = book.ID;
             vm.Name = book.Name;
             vm.Price = book.Price;
+            vm.Author = book.Author;
             vm.MainImage = book.MainImage;
             vm.Review = book.Review;
             vm.Quantity = book.Quantity;

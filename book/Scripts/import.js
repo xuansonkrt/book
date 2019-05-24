@@ -2,7 +2,9 @@
     lst: [],
     total:0
 };
-
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
 function setTable() {
     $('#table-body').empty();
     state.total = 0;
@@ -13,16 +15,58 @@ function setTable() {
             "<td>"+(i+1)+"</td>" +
             "<td>" + state.lst[i].Name + "</td>" +
             "<td>" + state.lst[i].Amount + "</td>" +
-            "<td style='text-align:right'>" + (state.lst[i].Price) + "</td>" +
-            "<td style='text-align:right'>" + state.lst[i].Price * state.lst[i].Amount + "</td>" +
+            "<td style='text-align:right'>" + formatNumber(state.lst[i].Price) + "đ</td>" +
+            "<td style='text-align:right'>" + formatNumber(state.lst[i].Price * state.lst[i].Amount) + "đ</td>" +
             "</tr>"
             );
-        $('#totalPrice').text(state.total);
+        $('#totalPrice').text(formatNumber(state.total) + 'đ');
     }
 }
 
 
 $(document).ready(function () {
+    $('#btnThem').on('click', function() {
+        $('#table-body').empty();
+        $('#table-body').append("<tr><td colspan='5'></td></tr>");
+        $('#bookid').val("");
+        $('#book').val("");
+        $('#amount').val("");
+        $('#price').val("");
+        $('#totalPrice').text("0đ");
+    })
+    $('.btnDetails').on('click',
+        function() {
+            var id = $(this).data("id");
+            $.ajax({
+                    url: "/WareHouse/GetDetail",
+                    type: 'POST',
+                    data: {
+                       id:id
+                    },
+                    dataType: 'json',
+                    //  contentType: false,
+                    //  processData: false,
+                    success: function (data) {
+                        console.log('data return: ', data);
+                        if (data.ret >= 0) {
+                            console.log('lst: ', data.lst);
+                            state.lst = data.lst;
+                            setTable();
+                        } else {
+                            swal({
+                                title: 'Thất bại',
+                                text: 'Lỗi ghi dữ liệu',
+                                type: 'error',
+                                timer: 1500
+                            });
+                        }
+                    }.bind(this)
+                })
+                .done(function () {
+                    console.log("xong roi");
+                    //$(this).addClass("done");
+                });
+        });
     $('#btnGhiNhan').on('click',
         function() {
             var lst = state.lst;

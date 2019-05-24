@@ -18,9 +18,9 @@
         <th>
             Tên nhà xuất bản
         </th>
-        <th>
+        @*<th>
             Ngày tạo
-        </th>
+        </th>*@
         <th>
             Giới thiệu
         </th>
@@ -54,25 +54,25 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Date)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td style="text-align: center">
+        <td style="text-align: center; width: 80px">
             @Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit", @title="Chỉnh sửa"}) 
         @*    @Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o"}) |*@
           @*  @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o"})*@
         </td>
         
-        <td style="text-align: center">
+        <td style="text-align: center; width: 80px">
          @*   @Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit"}) |*@
             @Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o",@title="Chi tiết"}) 
           @*  @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o"})*@
         </td>
         
-        <td style="text-align: center">
+        <td style="text-align: center; width: 80px">
             @*@Html.ActionLink(" ", "Edit", new {id = item.ID}, new {@class = "btn btn-primary fa fa-edit"})*@ 
             @*@Html.ActionLink(" ", "Details", new {id = item.ID}, new {@class = "btn btn-success fa fa-folder-open-o"}) |*@
            @Html.ActionLink(" ", "Delete", new {id = item.ID}, new {@class = "btn btn-danger 	fa fa-trash-o", @title="Xóa"})

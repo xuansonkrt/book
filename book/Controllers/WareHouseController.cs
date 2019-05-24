@@ -55,5 +55,27 @@ namespace book.Controllers
                 ret
             }, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetDetail(string id)
+        {
+            ImportDetailDAO dao = new ImportDetailDAO();
+            List<ImportDetail> list = dao.GetList(Int32.Parse(id));
+            List<ItemImport> lst = new List<ItemImport>();
+            foreach (var item in list)
+            {
+                ItemImport obj = new ItemImport();
+                obj.ID = item.ID;
+                obj.Name = item.Book.Name;
+                obj.Amount = (double)item.Amount;
+                obj.Price = (decimal)item.Price;
+                lst.Add(obj);
+            }
+            int ret = list == null ? -1 : 1;
+            return Json(new
+            {
+                ret, lst
+            }, JsonRequestBehavior.AllowGet);
+
+        }
     }
 }

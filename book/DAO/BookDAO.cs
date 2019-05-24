@@ -21,6 +21,7 @@ namespace book.DAO
         public int Insert(Book book)
         {
             book.Status = 1;
+            book.Quantity = 0;
             db.Books.Add(book);
             int ret = db.SaveChanges();
             return ret;
@@ -45,6 +46,7 @@ namespace book.DAO
 
                 book.Name = _book.Name;
                 book.Review = _book.Review;
+                book.Author = _book.Author;
                 book.Price = _book.Price;
                 book.Quantity = _book.Quantity;
                 book.MainImage = _book.MainImage;

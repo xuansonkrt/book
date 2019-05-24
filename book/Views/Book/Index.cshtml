@@ -102,15 +102,15 @@
         <th style="width: 320px; text-align: center">
             Tên cuốn sách
         </th>
-        <th style="width: 350px; text-align: center">
+        <th style="width: 270px; text-align: center">
             Giới thiệu
         </th>
         <th style="text-align: center">
             Giá
         </th>
-        @*<th style="width: 100px; text-align: center">
-            Số lượng
-        </th>*@
+       <th style="width: 150px; text-align: center">
+            Tác giả
+        </th>
 
         <th style="width: 100px; text-align: center">
             Thể loại
@@ -153,9 +153,9 @@
             @*@Html.DisplayFor(modelItem => item.Price)*@
             @MyFunction.convert2String(item.Price) đ
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
 
         <td>
             @Html.DisplayFor(modelItem => item.CategoryName)

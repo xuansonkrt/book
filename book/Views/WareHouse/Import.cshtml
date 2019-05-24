@@ -25,7 +25,7 @@
 <div class="row">
     <div class="col-sm-6">
         <p>
-            <a class="btn btn-warning" data-toggle="modal" data-target="#myModal"><i class="fa fa-cloud-download" style="margin-right: 10px"></i>Nhập sách</a>
+            <a id="btnThem"class="btn btn-warning" data-toggle="modal" data-target="#myModal"><i class="fa fa-cloud-download" style="margin-right: 10px"></i>Nhập sách</a>
         </p>
     </div>
 
@@ -45,7 +45,7 @@
             <div class="modal-body" style="background-color: aliceblue;">
                 <div class="row">
                     <div class="col-sm-5">
-                        <div class="input-group">
+                        <div class="input-group" style="padding-left: 5px;">
                             <span class="input-group-addon"><i class="fa fa-search"></i></span>
                             <input id="bookid" class="hidden" type="text"/>
                             <input id="book" type="text" class="form-control" name="msg" placeholder="Nhập tên hoặc mã sách">
@@ -53,20 +53,20 @@
                     </div>
                     
                     <div class="col-sm-2">
-                        <div class="input-group">
+                        <div class="input-group" style="position: relative; left: 13px;">
                             <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
                             <input id="amount" type="number" class="form-control" name="msg" placeholder="Nhập SL">
                         </div>
                     </div>
                     
                     <div class="col-sm-3">
-                        <div class="input-group">
+                        <div class="input-group" style="position: relative; left: 20px;">
                             <span class="input-group-addon"><i class="fa fa-money"></i></span>
                             <input id="price" type="number" class="form-control" name="msg" placeholder="Nhập giá">
                         </div>
                     </div>
                     
-                    <div class="col-sm-2" style="text-align: center">
+                    <div class="col-sm-2" style="text-align: right; padding-right: 21px">
                         <a class="btn btn-facebook" id="btnNhap">Nhập</a>
                     </div>
                 </div>
@@ -134,8 +134,8 @@
         <td  style="text-align: right">
             @MyFunction.convert2String(item.TotalPrice)đ
         </td>
-        <td>
-            <a class="btn btn-warning" data-toggle="modal" data-target="#myModal"><i class="fa fa-cloud-download" style="margin-right: 10px"></i>Nhập sách</a>
+        <td style="text-align: center">
+            <a class="btn btn-primary btnDetails" data-id="@item.ID" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit" title="Chi tiết"></i></a>
   
         </td>
     </tr>

@@ -1,0 +1,93 @@
+﻿@using book.Models.ViewModels
+@using book.Global
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    var obj = ViewBag.ProfitInWeek;
+}
+<div class="row">
+    <div class="col-sm-6">
+        <section class="panel panel-featured-left panel-featured-secondary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-secondary">
+                            <i class="fa fa-usd"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary">
+                            <h4 class="title">Danh thu trong tuần</h4>
+                            <div class="info">
+                                <strong class="amount">@MyFunction.convert2String(ViewBag.TotalPriceOfWeek)đ</strong>
+                            </div>
+                        </div>
+                        <div class="summary-footer">
+                            <a class="text-muted text-uppercase hidden">(withdraw all)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-sm-6">
+        
+						
+        <section class="panel panel-featured-left panel-featured-tertiary">
+            <div class="panel-body">
+                <div class="widget-summary">
+                    <div class="widget-summary-col widget-summary-col-icon">
+                        <div class="summary-icon bg-tertiary">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                    <div class="widget-summary-col">
+                        <div class="summary">
+                            <h4 class="title">Số đơn đặt hàng trong tuần</h4>
+                            <div class="info ">
+                                <strong class="amount">@ViewBag.TotalOrderOfWeek</strong>
+                            </div>
+                        </div>
+                        <div class="summary-footer ">
+                            <a class="text-muted text-uppercase hidden">(statement)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="">
+            <div class="card-body mx-auto">
+                <canvas id="chart-profit" style="height: 250px"></canvas>
+
+
+                <!--<canvas id="chart-count-product-sold" style="height: 300px"></canvas>-->
+            </div>
+
+        </div>
+    </div>
+
+</div>
+  
+@section scripts{
+    
+    <script src="~/Scripts/chart.js"></script>
+    <script src="~/Scripts/Chart.bundle.js"></script>
+    @{
+        <script>
+            var vm = @Html.Raw(Json.Encode(obj.list));
+            console.log('vm: ', vm);
+        </script>
+
+    }
+    <script src="~/Scripts/mychart.js"></script>
+    
+}
