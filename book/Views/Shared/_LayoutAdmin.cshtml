@@ -26,7 +26,8 @@
     <link rel="stylesheet" href="~/assets/vendor/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="~/assets/vendor/magnific-popup/magnific-popup.css" />
   @*  <link rel="stylesheet" href="~/assets/vendor/bootstrap-datepicker/css/datepicker3.css" />*@
-    
+    <link rel="stylesheet" href="~/Content/jquery-ui.css" />
+
     <!-- Theme CSS -->
     <link rel="stylesheet" href="~/assets/stylesheets/theme.css" />
     <link rel="stylesheet" href="~/Content/bootstrap-datetimepicker.min.css" />
@@ -166,11 +167,19 @@
                                         </li>*@
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="/Invoice/Index">
+                                <li class="nav-parent ">
+                                    <a>
                                         <i class="fa fa-industry" aria-hidden="true"></i>
                                         <span>Kho</span>
                                     </a>
+                                    <ul class="nav nav-children">
+                                        <li>
+                                            @Html.ActionLink("Tồn kho", "Index", "WareHouse")
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Phiếu nhập", "Import", "WareHouse")
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="/Invoice/Index">
@@ -227,6 +236,7 @@
 
     <!-- Vendor -->
     <script src="~/assets/vendor/jquery/jquery.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
     <script src="~/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.js"></script>
     <script src="~/assets/vendor/nanoscroller/nanoscroller.js"></script>

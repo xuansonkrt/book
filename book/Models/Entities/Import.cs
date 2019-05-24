@@ -6,27 +6,27 @@ namespace book.Models.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Cart")]
-    public partial class Cart
+    [Table("Import")]
+    public partial class Import
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cart()
+        public Import()
         {
-            CartDetails = new HashSet<CartDetail>();
+            ImportDetails = new HashSet<ImportDetail>();
         }
 
         public int ID { get; set; }
 
-        public int ID_Account { get; set; }
-
-        public int? Status { get; set; }
-
         [Column(TypeName = "date")]
-        public DateTime? Date { get; set; }
+        public DateTime? CreatedDate { get; set; }
+
+        public int? AccountID { get; set; }
+
+        public decimal? TotalPrice { get; set; }
 
         public virtual Account Account { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartDetail> CartDetails { get; set; }
+        public virtual ICollection<ImportDetail> ImportDetails { get; set; }
     }
 }

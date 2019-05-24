@@ -45,6 +45,7 @@ namespace book.Controllers
             {
                 ret = 1;
                 Session["username"] = admin.Name;
+                Session["acc"] = admin.UserName;
                 Session["avatar"] = admin.Avatar;
                 ret = 1;
             }

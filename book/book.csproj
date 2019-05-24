@@ -224,6 +224,7 @@
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\AuthorDAO.cs" />
     <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\ImportDAO.cs" />
     <Compile Include="DAO\InvoiceDetailDAO.cs" />
     <Compile Include="DAO\InvoiceDAO.cs" />
     <Compile Include="DAO\CustomerDAO.cs" />
@@ -246,10 +247,13 @@
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Coupon.cs" />
     <Compile Include="Models\Entities\CouponDetail.cs" />
+    <Compile Include="Models\Entities\Import.cs" />
+    <Compile Include="Models\Entities\ImportDetail.cs" />
     <Compile Include="Models\Entities\Invoice.cs" />
     <Compile Include="Models\Entities\InvoiceDetail.cs" />
     <Compile Include="Models\Entities\InvoiceStatu.cs" />
     <Compile Include="Models\Entities\Item.cs" />
+    <Compile Include="Models\Entities\ItemImport.cs" />
     <Compile Include="Models\Entities\ListImage.cs" />
     <Compile Include="Models\Entities\MyDBContext.cs" />
     <Compile Include="Models\Entities\Publisher.cs" />
@@ -2165,6 +2169,7 @@
     <Content Include="assets\vendor\style-switcher\less\skin.less" />
     <Content Include="assets\vendor\style-switcher\less\variables.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\import.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2270,6 +2275,8 @@
     <Content Include="Views\Invoice\print.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Admin\SignUp.cshtml" />
+    <Content Include="Views\WareHouse\Index.cshtml" />
+    <Content Include="Views\WareHouse\Import.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2277,7 +2284,6 @@
     <Folder Include="Views\InvoiceStatus\" />
     <Folder Include="Views\Link\" />
     <Folder Include="Views\Upload\" />
-    <Folder Include="Views\WareHouse\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

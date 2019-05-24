@@ -16,6 +16,7 @@ namespace book.Models.Entities
             InvoiceDetails = new HashSet<InvoiceDetail>();
             CouponDetails = new HashSet<CouponDetail>();
             Rates = new HashSet<Rate>();
+            ImportDetails = new HashSet<ImportDetail>();
             ListImages = new HashSet<ListImage>();
         }
 
@@ -59,6 +60,9 @@ namespace book.Models.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rate> Rates { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ImportDetail> ImportDetails { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ListImage> ListImages { get; set; }

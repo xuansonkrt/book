@@ -80,6 +80,11 @@ namespace book.DAO
             return db.Accounts.Find(id);
         }
 
+        public Account GetOnlineSession(string username)
+        {
+            return db.Accounts.Where(x => x.UserName == username).FirstOrDefault();
+        }
+
         public int Update(Account _account)
         {
             Account account = db.Accounts.Find(_account.ID);

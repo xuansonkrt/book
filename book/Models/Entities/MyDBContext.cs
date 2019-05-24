@@ -20,6 +20,8 @@ namespace book.Models.Entities
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CouponDetail> CouponDetails { get; set; }
+        public virtual DbSet<Import> Imports { get; set; }
+        public virtual DbSet<ImportDetail> ImportDetails { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual DbSet<InvoiceStatu> InvoiceStatus { get; set; }
@@ -96,6 +98,7 @@ namespace book.Models.Entities
             modelBuilder.Entity<Cart>()
                 .HasMany(e => e.CartDetails)
                 .WithRequired(e => e.Cart)
+                .HasForeignKey(e => e.ID_Cart)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Category>()
@@ -112,6 +115,14 @@ namespace book.Models.Entities
                 .WithRequired(e => e.Coupon)
                 .HasForeignKey(e => e.ID_Coupon)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Import>()
+                .Property(e => e.TotalPrice)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<ImportDetail>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Invoice>()
                 .Property(e => e.DiscountCode)
