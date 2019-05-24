@@ -6,20 +6,84 @@
     <h2>Thể loại</h2>
     <div class="panel-group category-products" id="accordian">
         <!--category-productsr-->
-
+        @{
+            var flag = 0;
+            var idpublisher = 0;
+            var idcategory = 0;
+        }
         @foreach (var item in ViewBag.CategoryList)
         {
             var name = item.Name;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                    <a class="pointer theloai" href="/BookStore/TheLoai/@item.ID">@item.Name</a>
-                       @* @Html.ActionLink(name, "TheLoai","BookStore", new { id = item.ID },null)*@
+
+                        @{
+
+                            string publisherId = Request.QueryString["publisherId"];
+                            if (publisherId != null)
+                            {
+                                idpublisher = Convert.ToInt32(publisherId);
+                                string categoryId = Request.QueryString["categoryId"];
+                                if (categoryId != null)
+                                {
+                                    if (item.ID == Int32.Parse(categoryId))
+                                    {
+                                        <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?categoryId=@item.ID&publisherId=@publisherId">@item.Name</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="pointer theloai " href="/BookStore?categoryId=@item.ID&publisherId=@publisherId">@item.Name</a>
+                                    }
+                                    flag = 1;
+                                }
+                                else
+                                {
+                                    <a class="pointer theloai " href="/BookStore?categoryId=@item.ID&publisherId=@publisherId">@item.Name</a>
+
+                                }
+
+                            }
+                            else
+                            {
+                                string categoryId = Request.QueryString["categoryId"];
+                                if (categoryId != null)
+                                {
+                                    if (item.ID == Int32.Parse(categoryId))
+                                    {
+                                        <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?categoryId=@item.ID">@item.Name</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="pointer theloai " href="/BookStore?categoryId=@item.ID">@item.Name</a>
+                                    }
+                                    flag = 1;
+                                }
+                                else
+                                {
+                                    <a class="pointer theloai " href="/BookStore?categoryId=@item.ID">@item.Name</a>
+
+                                }
+
+                            }
+
+
+                        }
+                        @* @Html.ActionLink(name, "TheLoai","BookStore", new { id = item.ID },null)*@
                     </h4>
                 </div>
             </div>
         }
-     
+        @{
+            if (flag == 1)
+            {
+                <div class="panel-title" style="  margin-top: 15px; margin-left: 20px; color: brown">
+                    <a class="pointer theloai " href="/BookStore?&publisherId=@idpublisher">Hủy lựa chọn</a>
+                </div>
+                flag = 0;
+
+            }
+        }
 
     </div><!--/category-products-->
 
@@ -28,13 +92,78 @@
         <h2>Nhà xuất bản</h2>
         <div class="brands-name">
             <ul class="nav nav-pills nav-stacked">
+
                 @foreach (var item in ViewBag.PublisherList)
                 {
-                    <li><a href="/BookStore/NXB/@item.ID"> <span class="pull-right"></span>@item.Name</a></li>
+
+                    string categoryId = Request.QueryString["categoryId"];
+                    if (categoryId != null)
+                    {
+                        idcategory = Convert.ToInt32(categoryId);
+                        string publisherId = Request.QueryString["publisherId"];
+                        if (publisherId != null)
+                        {
+                            if (item.ID == Int32.Parse(publisherId))
+                            {
+                                <li><a class="pointer theloai " style="color: #fe980f;" href="/BookStore?publisherId=@item.ID&categoryId=@categoryId">@item.Name</a></li>
+                            }
+                            else
+                            {
+                                <li><a class="pointer theloai " href="/BookStore?publisherId=@item.ID&categoryId=@categoryId">@item.Name</a></li>
+
+                            }
+                            flag = 1;
+                        }
+                        else
+                        {
+                            <li><a class="pointer theloai " href="/BookStore?publisherId=@item.ID&categoryId=@categoryId">@item.Name</a></li>
+
+
+                        }
+                    }
+                    else
+                    {
+                        string publisherId = Request.QueryString["publisherId"];
+                        if (publisherId != null)
+                        {
+                            if (item.ID == Int32.Parse(publisherId))
+                            {
+                                <li> <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?publisherId=@item.ID">@item.Name</a> </li>
+                            }
+                            else
+                            {
+                                <li><a class="pointer theloai " href="/BookStore?publisherId=@item.ID">@item.Name</a></li>
+                            }
+                            flag = 1;
+
+                        }
+                        else
+                        {
+                            <li> <a class="pointer theloai " href="/BookStore?publisherId=@item.ID">@item.Name</a></li>
+
+                        }
+
+                    }
+
+
+                    @*<li><a href="/BookStore/NXB/@item.ID"> <span class="pull-right"></span>@item.Name</a></li>*@
+                }
+
+                @{
+                    if (flag == 1)
+                    {
+                        <div class="panel-title" style="  margin-top: 8px; margin-left: 25px; color: brown">
+                            <a class="pointer theloai " href="/BookStore?&categoryId=@idcategory">Hủy lựa chọn</a>
+                        </div>
+                        flag = 0;
+
+                    }
                 }
             </ul>
         </div>
-    </div><!--/brands_products-->
+    </div>
+    
+    <!--/brands_products-->
     @*<div class="price-range">
             <!--price-range-->
             <h2>Price Range</h2>
