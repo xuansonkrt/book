@@ -9,7 +9,7 @@ namespace book.Models.Entities
     {
         public int id { get; set; }
         public string name { get; set; }
-        public decimal price { get; set; }
+        public double price { get; set; }
         public int amount { get; set; }
         public string mainImage { get; set; }
 

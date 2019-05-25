@@ -4,6 +4,42 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayOutHome.cshtml";
 }
+<<<<<<< HEAD
+=======
+<h3>Giỏ hàng</h3>
+<div class="col-sm-9 padding-right">
+    <table class="table table-bordered">
+        <tr style="text-align: center">
+            <th>
+                Sản phẩm
+            </th>
+            <th>
+                Số lượng
+            </th>
+            <th>
+                Giá
+            </th>
+            <th>
+                Thành tiền
+            </th>
+            
+        </tr>
+        @{
+            double total = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="row">
+                        <a href="/BookStore/Detail/@item.id" style="cursor: pointer" class="img-book"><img class="col-sm-4 " src="@item.mainImage" style="max-width: 150px" /></a>
+                        
+                        <div class="col-sm-8">
+                            <a href="/BookStore/Detail/@item.id" style="cursor: pointer">@item.name</a>
+                            @*@Html.DisplayFor(modelItem => item.name)*@
+                            <br/>
+                            <a href="/ShoppingCart/Remove/@item.id"><i class="far fa-trash-alt trash" style="color: red" ></i></a>
+>>>>>>> 6f53dc05fdb21f04bdaa42727a8221b9111d7308
 
 <div class="col-sm-9 padding-right">
     <div class="features_items">

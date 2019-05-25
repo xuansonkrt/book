@@ -73,7 +73,7 @@ namespace book.Controllers
                 Item temp = new Item();
                 temp.id = item.ID;
                 temp.amount =(int) item.Quantity;
-                temp.price = (decimal)item.Price;
+                temp.price = (double)item.Price;
                 temp.name = item.Book.Name;
                 temp.mainImage = item.Book.MainImage;
                 list.Add(temp);
@@ -102,7 +102,7 @@ namespace book.Controllers
                 Item temp = new Item();
                 temp.id = item.ID;
                 temp.amount = (int)item.Quantity;
-                temp.price = (decimal)item.Price;
+                temp.price = (double)item.Price;
                 temp.name = item.Book.Name;
                 temp.mainImage = item.Book.MainImage;
                 list.Add(temp);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using book.DAO;
 using book.Models.Entities;
 
 namespace book.Controllers
@@ -19,6 +18,7 @@ namespace book.Controllers
 
         public ActionResult Add(int id)
         {
+<<<<<<< HEAD
            
            // int idBook = Int32.Parse(index);
             MyDBContext db = new MyDBContext();
@@ -76,31 +76,34 @@ namespace book.Controllers
                 // Get total 
                 CartUserDAO cartUserDAO = new CartUserDAO();
                 Session["cartAmount"] = cartUserDAO.GetTotal(idcart);
-            }
-            else// chua login 
+=======
+             
+            if(Session["username"] != null)
             {
-                amount = 1;
 
-                cart = (ShoppingCart)Session["cart"];
+            }
+            int amount = 1;
+            
+            cart= (ShoppingCart)Session["cart"];
 
-                if (cart == null)
-                {
-                    cart = new ShoppingCart();
-                }
-
-                if (book != null)
-                {
-                    cart.InsertItem(book.ID, book.Name, (decimal)book.Price, amount);
-                }
-
-                Session["cartAmount"] = cart.GetTotal();
-                Session["cart"] = cart;
+            if (cart == null)
+            {
+                cart= new ShoppingCart();
+>>>>>>> 6f53dc05fdb21f04bdaa42727a8221b9111d7308
+            }
+            MyDBContext db= new MyDBContext();
+            Book book = db.Books.Find(id);
+            if (book != null)
+            {
+                cart.InsertItem(book.ID,book.Name,(double)book.Price,amount);
             }
 
+            Session["cartAmount"] = cart.GetTotal();
+            Session["cart"] = cart;
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        //     [HttpPost]
+   //     [HttpPost]
         public JsonResult Add2(int id, int amount)
         {
             //int amount = 1;
@@ -113,7 +116,7 @@ namespace book.Controllers
             Book book = db.Books.Find(id);
             if (book != null)
             {
-                cart.InsertItem(book.ID, book.Name, (decimal)book.Price, amount);
+                cart.InsertItem(book.ID, book.Name, (double)book.Price, amount);
             }
 
             Session["cartAmount"] = cart.GetTotal();
@@ -173,6 +176,7 @@ namespace book.Controllers
                 cartDetail = db.CartDetails.Find(id, idcart);
                 if( amount > 0)
                 {
+<<<<<<< HEAD
                     cartDetail.Quantity = amount;
                     db.SaveChanges();
                 }
@@ -196,10 +200,17 @@ namespace book.Controllers
                 Session["cart"] = cart;
             }
            
+=======
+                    ret = -1
+                }, JsonRequestBehavior.AllowGet);
+            }
+            cart.UpdateAmount(id,amount);
+            Session["cart"] = cart;
+>>>>>>> 6f53dc05fdb21f04bdaa42727a8221b9111d7308
             return Json(new
             {
-                ret = 1
-            }, JsonRequestBehavior.AllowGet);
+                ret=1
+            },JsonRequestBehavior.AllowGet);
         }
     }
 }

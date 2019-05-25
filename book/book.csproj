@@ -225,7 +225,6 @@
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\AuthorDAO.cs" />
     <Compile Include="DAO\BookDAO.cs" />
-    <Compile Include="DAO\CartUserDAO.cs" />
     <Compile Include="DAO\ImportDAO.cs" />
     <Compile Include="DAO\InvoiceDetailDAO.cs" />
     <Compile Include="DAO\InvoiceDAO.cs" />

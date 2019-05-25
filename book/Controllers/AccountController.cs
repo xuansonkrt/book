@@ -47,6 +47,7 @@ namespace book.Controllers
                 Session["username"] = admin.Name;
                 Session["acc"] = admin.UserName;
                 Session["avatar"] = admin.Avatar;
+<<<<<<< HEAD
                 Session["id"] = admin.ID;
 
                 // hien thi amount khi dang nhap
@@ -56,6 +57,8 @@ namespace book.Controllers
                 int idcart = cartUser.getID(idAcc);
                 Session["cartAmount"] = cartUserDAO.GetTotal(idcart);
                 ///
+=======
+>>>>>>> 6f53dc05fdb21f04bdaa42727a8221b9111d7308
                 ret = 1;
             }
             return Json(new
@@ -98,7 +101,6 @@ namespace book.Controllers
         public ActionResult Logout()
         {
             Session["username"] = null;
-            Session["id"] = null;
             return RedirectToAction("Login");
         }
 

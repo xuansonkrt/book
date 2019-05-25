@@ -83,10 +83,10 @@ function getCookie(name) {
 }
 
 $(document).ready(function () {
-    //$('.date').datetimepicker({
-    //    format: 'DD/MM/YYYY',
-    //    keepInvalid: true
-    //});
+    $('.date').datetimepicker({
+        format: 'DD/MM/YYYY',
+        keepInvalid: true
+    });
     //$("#SoLuong").spinner({
     //    min: 1,
     //    max: 100,
@@ -551,9 +551,9 @@ $(document).ready(function () {
        
         
         var data = {
-            CustomerName: $('#name').val(),
+            Name: $('#name').val(),
             Email: $('#email').val(),
-            PhoneNumber: $('#phone').val(),
+            Telephone: $('#phone').val(),
             Address: $('#address').val(),
         };
 
