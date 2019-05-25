@@ -18,7 +18,7 @@ namespace book.Controllers
         // GET: Invoice
         public ActionResult Index(int? page = 1, int pageSize = 10)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -61,7 +61,7 @@ namespace book.Controllers
 
         public ActionResult Details(string id)
         {
-            if (Session["username"] == null)
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -90,7 +90,7 @@ namespace book.Controllers
 
         public ActionResult Print(string id)
         {
-            if (Session["username"] == null)
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }

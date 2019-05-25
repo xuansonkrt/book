@@ -16,7 +16,7 @@ namespace book.Controllers
         // GET: Category
         public ActionResult Index(int? page=1, int pageSize=3)
         {
-            if ((Session["username"]==null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -31,7 +31,7 @@ namespace book.Controllers
 
         public ActionResult List()
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -40,7 +40,7 @@ namespace book.Controllers
 
         public ActionResult Create()
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -50,16 +50,21 @@ namespace book.Controllers
         [HttpPost]
         public ActionResult Create(Category _category)
         {
+            if (!(bool)Session["isAdmin"])
+            {
+                return Redirect("/Admin/Login");
+            }
             dao.Insert(_category);
             return RedirectToAction("List");
         }
 
         public ActionResult Edit(int ID)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
+            
             Category category = dao.GetByID(ID);
             return View(category);
         }
@@ -67,13 +72,17 @@ namespace book.Controllers
         [HttpPost]
         public ActionResult Edit(Category _category)
         {
+            if (!(bool)Session["isAdmin"])
+            {
+                return Redirect("/Admin/Login");
+            }
             dao.Update(_category);
             return RedirectToAction("List");
         }
 
         public ActionResult Delete(int ID)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -84,6 +93,10 @@ namespace book.Controllers
         [HttpPost]
         public ActionResult Delete(Category _category)
         {
+            if (!(bool)Session["isAdmin"])
+            {
+                return Redirect("/Admin/Login");
+            }
             dao.Delete(_category);
             return RedirectToAction("List");
         }
@@ -91,7 +104,7 @@ namespace book.Controllers
 
         public ActionResult Details(int ID)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }

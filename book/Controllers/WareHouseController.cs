@@ -14,6 +14,10 @@ namespace book.Controllers
         // GET: WareHouse
         public ActionResult Index(int? page = 1, int pageSize = 10)
         {
+            if (!(bool)Session["isAdmin"])
+            {
+                return Redirect("/Admin/Login");
+            }
             int pageNumber = page ?? 1;
             BookDAO dao = new BookDAO();
             List<Book> list = dao.GetAll3();
@@ -25,6 +29,10 @@ namespace book.Controllers
 
         public ActionResult Import(int? page = 1, int pageSize = 10)
         {
+            if (!(bool)Session["isAdmin"])
+            {
+                return Redirect("/Admin/Login");
+            }
             int pageNumber = page ?? 1;
             List<Import> list = new List<Import>();
             ImportDAO dao = new ImportDAO();
@@ -46,6 +54,13 @@ namespace book.Controllers
                 {
                     ret=-1
                 },JsonRequestBehavior.AllowGet);
+            }
+            if (lst == null)
+            {
+                return Json(new
+                {
+                    ret = -2
+                }, JsonRequestBehavior.AllowGet);
             }
             ImportDAO dao = new ImportDAO();
             int ret = dao.Add(lst, login.ID, Decimal.Parse(totalPrice));

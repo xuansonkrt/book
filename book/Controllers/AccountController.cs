@@ -16,6 +16,7 @@ using WebApplication1.Models;
 using book.Models.Entities;
 using book.Models.ViewModels;
 using System.Web.Script.Serialization;
+using book.Extensions;
 using Newtonsoft.Json;
 
 namespace book.Controllers
@@ -43,11 +44,25 @@ namespace book.Controllers
             Account admin = dao.GetAdmin(_admin.UserName, _admin.Password);
             if (admin != null)
             {
-                ret = 1;
-                Session["username"] = admin.Name;
+                RoleDAO roleDao = new RoleDAO();
+                Account_Role accountRole = roleDao.GetByAccount(admin.ID);
+                if (accountRole.RoleID == VARIABLE_ROLE.ADMIN)
+                {
+                    Session["isAdmin"] = true;
+                    ret = 1;
+                }
+                else
+                {
+                    Session["isAdmin"] = false;
+                    ret = 2;
+                }
+                    
+
+                Session["accountLogin"] = admin;
+                Session["username"] = admin.UserName;
+                Session["name"] = admin.Name;
                 Session["acc"] = admin.UserName;
                 Session["avatar"] = admin.Avatar;
-                ret = 1;
             }
             return Json(new
             {

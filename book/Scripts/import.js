@@ -3,7 +3,7 @@
     total:0
 };
 function formatNumber(num) {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
 }
 function setTable() {
     $('#table-body').empty();
@@ -25,7 +25,9 @@ function setTable() {
 
 
 $(document).ready(function () {
-    $('#btnThem').on('click', function() {
+    $('#btnThem').on('click', function () {
+        $('#btnGhiNhan').show();
+        $('#infor').show();
         $('#table-body').empty();
         $('#table-body').append("<tr><td colspan='5'></td></tr>");
         $('#bookid').val("");
@@ -35,7 +37,9 @@ $(document).ready(function () {
         $('#totalPrice').text("0đ");
     })
     $('.btnDetails').on('click',
-        function() {
+        function () {
+            $('#btnGhiNhan').hide();
+            $('#infor').hide();
             var id = $(this).data("id");
             $.ajax({
                     url: "/WareHouse/GetDetail",
@@ -68,8 +72,18 @@ $(document).ready(function () {
                 });
         });
     $('#btnGhiNhan').on('click',
-        function() {
+        function () {
+            
             var lst = state.lst;
+            if (lst.length == undefined) {
+                swal({
+                    title: 'Thất bại',
+                    text: 'Phiếu trống',
+                    type: 'error',
+                    timer: 1500
+                });
+                return;
+            };
             console.log('data sent: ', lst);
             console.log('state sent: ', state.total);
             $.ajax({
@@ -171,8 +185,16 @@ $(document).ready(function () {
             obj.Name = $('#book').val();
             obj.Amount = $('#amount').val();
             obj.Price = $('#price').val();
-            if (obj.ID == "" || obj.Name == "" || obj.Amount == "" | obj.Price == "")
+            if (obj.ID == "" || obj.Name == "" || obj.Amount == "" | obj.Price == "") {
+                swal({
+                    title: 'Thất bại',
+                    text: 'Chưa nhập thông tin',
+                    type: 'error',
+                    timer: 1500
+                });
                 return;
+
+            }
             else {
                 state.lst.push(obj);
                 setTable();

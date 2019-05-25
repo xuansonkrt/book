@@ -11,7 +11,7 @@ namespace book.Global
         {
             if (price == null)
                 return "0";
-            string result = price.ToString("##,###");
+            string result = price.ToString("##,###").Replace(",", ".");
             return result;
         }
 
@@ -20,7 +20,7 @@ namespace book.Global
             if (price == null)
                 return "0";
             double temp =(double) price.Value;
-            string result = temp.ToString("##,###");
+            string result = temp.ToString("##,###").Replace(",", ".");
             return result;
         }
 

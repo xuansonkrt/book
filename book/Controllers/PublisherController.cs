@@ -17,7 +17,7 @@ namespace book.Controllers
         // GET: Category
         public ActionResult Index(int? page=1, int pageSize=10)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -29,7 +29,7 @@ namespace book.Controllers
 
         public ActionResult List()
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -38,7 +38,7 @@ namespace book.Controllers
 
         public ActionResult Create()
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -54,7 +54,7 @@ namespace book.Controllers
 
         public ActionResult Edit(int ID)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -71,7 +71,7 @@ namespace book.Controllers
 
         public ActionResult Delete(int ID)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }
@@ -89,7 +89,7 @@ namespace book.Controllers
 
         public ActionResult Details(int ID)
         {
-            if ((Session["username"] == null))
+            if (!(bool)Session["isAdmin"])
             {
                 return Redirect("/Admin/Login");
             }

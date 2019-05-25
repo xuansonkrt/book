@@ -14,6 +14,10 @@ namespace book.Controllers
         // GET: Report
         public ActionResult Index()
         {
+            if (!(bool)Session["isAdmin"])
+            {
+                return Redirect("/Admin/Login");
+            }
             ReportDAO dao = new ReportDAO();
             int TotalOrderOfWeek = dao.TotalOrderOfWeek();
             decimal TotalPriceOfWeek = dao.TotalPriceOfWeek();

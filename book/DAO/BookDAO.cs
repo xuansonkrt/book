@@ -35,7 +35,7 @@ namespace book.DAO
             if (book != null)
             {
                 //var filePath = Server.MapPath("~" + book.MainImage);
-                if (book.MainImage != null)
+                if (book.MainImage != null && book.MainImage!=_book.MainImage)
                 {
                     string server = HttpRuntime.AppDomainAppPath.ToString();
                     ///  string filePath = Path.Combine(server, book.MainImage);

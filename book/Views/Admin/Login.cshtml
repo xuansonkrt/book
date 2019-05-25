@@ -135,6 +135,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
 <script>
+    
     $(document).ready(function () {
         $('#submit').on("click", function () {
             var data = {
@@ -149,14 +150,17 @@
                 method:'post',
                 success: (data) => {
                     if (data.ret > 0) {
-                        window.location.href = '/Report'
+                        if (data.ret == 1)
+                            window.location.href = '/Report';
+                        else
+                            window.location.href = '/';
                     } else {
                         swal({
-                                title: 'Thất bại',
-                                text: 'Tài khoản hoặc mật khẩu không chính xác',
-                                type: 'error',
-                                timer: 1500
-                            });
+                            title: 'Thất bại',
+                            text: 'Tài khoản hoặc mật khẩu không chính xác',
+                            type: 'error',
+                            timer: 1500
+                        });
                     }
                 },
                 error: (xhr, status, err) => {
@@ -165,7 +169,7 @@
             });
         });
     });
-        
+
 </script>
 </body>
 </html>
