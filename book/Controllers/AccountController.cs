@@ -48,8 +48,14 @@ namespace book.Controllers
                 Session["acc"] = admin.UserName;
                 Session["avatar"] = admin.Avatar;
                 Session["id"] = admin.ID;
+
+                // hien thi amount khi dang nhap
                 CartUserDAO cartUserDAO = new CartUserDAO();
-                Session["cartAmount"] = cartUserDAO.GetAmount(admin.ID);
+                int idAcc = Convert.ToInt16(Session["id"]);
+                CartUserDAO cartUser = new CartUserDAO();
+                int idcart = cartUser.getID(idAcc);
+                Session["cartAmount"] = cartUserDAO.GetTotal(idcart);
+                ///
                 ret = 1;
             }
             return Json(new

@@ -33,13 +33,13 @@ namespace book.Controllers
                 var sql = " exec bookcart " + idcart;
                 lst = (from b in db.Books
                            join a in db.CartDetails on b.ID equals a.ID_Book
-                           join c in db.Carts.Where(c => c.ID == idAcc) on a.ID_Cart equals c.ID
+                           join c in db.Carts.Where(c => c.ID == idcart) on a.ID_Cart equals c.ID
                            select new Item
                            {
                                id = b.ID,
                                name = b.Name,
                                price =(decimal)( b.Price),
-                               amount = (int)(b.Quantity),
+                               amount = (int)(a.Quantity),
                                mainImage = b.MainImage
                            }).ToList<Item>();
                
@@ -75,8 +75,18 @@ namespace book.Controllers
 
             List<Publisher> publisherList = db.Publishers.ToList();
             ViewBag.PublisherList = publisherList;
+            int idAcc = Convert.ToInt16(Session["id"]);
+            if (idAcc != 0)
+            {
+                Account ac = new Account();
+                ac = db.Accounts.Find(idAcc);
+                ViewBag.HoTen = ac.Name;
+                ViewBag.Email = ac.Email;
+                ViewBag.Phone = ac.Telephone;
+                ViewBag.address = ac.Address;
+            }
 
-            return View();
+                return View();
         }
 
 

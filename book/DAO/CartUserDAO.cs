@@ -41,9 +41,15 @@ namespace book.DAO
             var sql = "exec Dem " + id;
             var lst = db.Database.SqlQuery<int>(sql).FirstOrDefault();
             return lst;
-                        
-                     
-                     
+                                 
         }
+        public int GetTotal( int idcart)
+        {
+            var sql = " select SUM ([Quantity]) from CartDetail where ID_Cart =" + idcart;
+            var lst = db.Database.SqlQuery<int>(sql).ToList().FirstOrDefault();
+            return lst;
+        }
+        
+
     }
 }

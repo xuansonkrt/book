@@ -153,7 +153,7 @@
                     if (flag == 1)
                     {
                         <div class="panel-title" style="  margin-top: 8px; margin-left: 25px; color: brown">
-                            <a class="pointer theloai " href="/BookStore?&categoryId=@idcategory">Hủy lựa chọn</a>
+                            <a class="pointer theloai " href="/BookStore?categoryId=@idcategory">Hủy lựa chọn</a>
                         </div>
                         flag = 0;
 
@@ -162,25 +162,107 @@
             </ul>
         </div>
     </div>
-    
-    <!--/brands_products-->
-    @*<div class="price-range">
-            <!--price-range-->
-            <h2>Price Range</h2>
-            <div class="well text-center">
-                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
-                <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-            </div>
-        </div><!--/price-range-->*@
 
-    <div class="shipping text-center">
-        <!--shipping-->
-        <img src="~/Content/images/home/shipping.jpg" alt="" />
-    </div><!--/shipping-->
+    @*<div class="brands_products">
+            <h2>Price</h2>
+            <div class="brands-name">
+                <div style="margin: 25px">
+                    <input type="number" name="price1" style="width:96px; margin-right:2px" /> -
+                    <input type="number" name="price2" style="width:96px; margin-left: 2px"/>
+                </div>
+                <div style="margin-left: 25px">
+                    <input type="submit" name="name" value="OK" />
+                </div>
+
+            </div>
+
+        </div>*@
+    
+    <div class="brands_products" style="margin-bottom: 30px">
+        <!--brands_products-->
+        <h2>Price</h2>
+        <div class="brands-name">
+            <ul class="nav nav-pills nav-stacked">
+                @{
+                    string price1 = Request.QueryString["price1"];
+                    string price2 = Request.QueryString["price2"];
+                    if (price1 != null || price2 != null)
+                    {
+                        if(price1== null)
+                        {
+                            price1 ="0";
+                        }
+                        if(price2== null)
+                        {
+                            price2 = "0";
+                        }
+                        if (Int32.Parse(price2) == 50000 )
+                        {
+                            <li> <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
+                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
+                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
+                            <li> <a class="pointer theloai " href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
+                        }
+                        else if (Int32.Parse(price1) == 50000 && Int32.Parse(price2) == 200000)
+                        {
+                            <li> <a class="pointer theloai " href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
+                            <li><a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
+
+                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
+                            <li> <a class="pointer theloai " href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
+                        }
+                        else if (Int32.Parse(price1) == 200000 && Int32.Parse(price2) == 500000)
+                        {
+                            <li> <a class="pointer theloai " href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
+                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
+                            <li><a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
+
+                            <li> <a class="pointer theloai " href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
+                        }
+                        else if (Int32.Parse(price1) == 500000)
+                        {
+                            <li> <a class="pointer theloai " href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
+                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
+                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
+
+                            <li> <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
+
+                        }
+
+                        flag = 1;
+                    }
+                    else
+                    {
+                        <li> <a class="pointer theloai " href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
+                        <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
+                        <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
+                        <li> <a class="pointer theloai " href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
+
+                    }
+
+
+                }
+
+
+
+
+
+                @{
+                    if (flag == 1)
+                    {
+                        string categoryId = Request.QueryString["categoryId"];
+                        string publisherId = Request.QueryString["publisherId"];
+                        <div class="panel-title" style="  margin-top: 8px; margin-left: 25px; color: brown">
+                            <a class="pointer theloai " href="/BookStore?publisherId=@publisherId&categoryId=@categoryId">Hủy lựa chọn</a>
+
+                        </div>
+                        flag = 0;
+
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+
 
 </div>
-
-
-
-
-

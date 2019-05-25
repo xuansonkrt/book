@@ -16,53 +16,24 @@ namespace Web_BookStore1.Controllers
     {
         MyDBContext db = new MyDBContext();
         // GET: BookStore
-        public ActionResult Index(int? page = 1, int pageSize = 3)
+        public ActionResult Index(int? page = 1, int pageSize = 9)
         {
            
-           // Session["id"] = 1;
-            
-           // HomeVM vm = new HomeVM();
+           
             List<Category> categoryList = db.Categories.ToList();
             ViewBag.CategoryList = categoryList;
 
             List<Publisher> publisherList = db.Publishers.ToList();
             ViewBag.PublisherList = publisherList;
-            //
-            //string _CategoryId = Request.QueryString["CategoryId"];
-            //string _PublisherId = Request.QueryString["PublisherId"];
-            //string _price1 = Request.QueryString["price1"];
-            //string _price2 = Request.QueryString["price2"];
-
-            //int CategoryId = 0, PublisherId = 0;
-            //decimal price1 = 0, price2 = 0;
-
-            //if (_CategoryId != null)
-            //{
-            //    CategoryId = Int32.Parse(_CategoryId);
-            //}
-            //if (_PublisherId != null)
-            //{
-            //    PublisherId = Int32.Parse(_PublisherId);
-            //}
-            //if( _price1 != null)
-            //{
-            //    price1 = Convert.ToDecimal(_price1);
-            //}
-            //if (_price2 != null)
-            //{
-            //    price2 = Convert.ToDecimal(_price2);
-            //}
+            
 
             List<Book> books = new List<Book>();
-            //books = db.Books.SqlQuery("exec Loc @IDcategory , @Idpublisher , @price1  , @price2  ",
-            //    new SqlParameter("IDcategory", CategoryId),
-            //    new SqlParameter("Idpublisher", PublisherId),
-            //    new SqlParameter("price1", price1),
-            //    new SqlParameter("price2", price2)).ToList();
-            /////////
             string _publisherId = Request.QueryString["publisherId"];
             string _categoryId = Request.QueryString["categoryId"];
+            string _price1 = Request.QueryString["price1"];
+            string _price2 = Request.QueryString["price2"];
             int categoryId = 0, publisherId = 0;
+            decimal price1 = 0, price2 = 0;
             if (_publisherId != null)
             {
                 publisherId = Int32.Parse(_publisherId);
@@ -71,37 +42,48 @@ namespace Web_BookStore1.Controllers
             {
                 categoryId = Int32.Parse(_categoryId);
             }
-
-            books = db.Books.SqlQuery("exec Loc @categoryId, @publisherId,0,0",
-               new SqlParameter("categoryId", categoryId),
-               new SqlParameter("publisherId", publisherId)).ToList();
-            List <BookVM> list = new List<BookVM>();
-            foreach (var item in books)
+            if (_price1 != null)
             {
-                BookVM bookVM = new BookVM();
-                bookVM.ID = item.ID;
-                bookVM.Name = item.Name;
-                bookVM.Price = item.Price;
-                bookVM.MainImage = item.MainImage;
-                bookVM.Review = item.Review;
-                bookVM.Quantity = item.Quantity;
-                if (item.Category != null)
-                    bookVM.CategoryName = item.Category.Name;
-                if (item.Publisher != null)
-                    bookVM.PublisherName = item.Publisher.Name;
-                
-                list.Add(bookVM);
+                price1 = decimal.Parse(_price1);
+            }
+            if (_price2 != null)
+            {
+                price2 = decimal.Parse(_price2);
             }
 
-         //   Session["cartAmount"] = 0;
+            books = db.Books.SqlQuery("exec Loc @categoryId, @publisherId,@price1,@price2",
+               new SqlParameter("categoryId", categoryId),
+               new SqlParameter("publisherId", publisherId),
+                new SqlParameter("price1", price1),
+                 new SqlParameter("price2", price2)
+               ).ToList();
+            List <BookVM> list = new List<BookVM>();
+        //    foreach (var item in books)
+        //    {
+        //        BookVM bookVM = new BookVM();
+        //        bookVM.ID = item.ID;
+        //        bookVM.Name = item.Name;
+        //        bookVM.Price = item.Price;
+        //        bookVM.MainImage = item.MainImage;
+        //        bookVM.Review = item.Review;
+        //        bookVM.Quantity = item.Quantity;
+        //        if (item.Category != null)
+        //            bookVM.CategoryName = item.Category.Name;
+        //        if (item.Publisher != null)
+        //            bookVM.PublisherName = item.Publisher.Name;
+                
+        //        list.Add(bookVM);
+        //    }
+
+        // //   Session["cartAmount"] = 0;
             int pageNumber = page ?? 1;
-        //    IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list, pageNumber, pageSize, list.Count);
-            var vm = new HomeVM
-            {
-                //  ListTheLoai = listtheloai,
-                BookVMList = list
-            };
-            return View(vm);
+        ////    IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list, pageNumber, pageSize, list.Count);
+        //    var vm = new HomeVM
+        //    {
+        //        //  ListTheLoai = listtheloai,
+        //        BookVMList = list
+        //    };
+            return View(books.ToPagedList(pageNumber, pageSize));
         }
        
         public ActionResult SachBanChay()

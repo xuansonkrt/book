@@ -9,6 +9,7 @@ namespace book.Models.Entities
     [Table("CartDetail")]
     public partial class CartDetail
     {
+      
         [Key]
         [Column(Order = 0)]
         public int ID_Book { get; set; }

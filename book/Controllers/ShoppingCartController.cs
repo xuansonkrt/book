@@ -25,10 +25,11 @@ namespace book.Controllers
             Book book = db.Books.Find(id);
             int amount = 1;
             int idAcc = Convert.ToInt16(Session["id"]);
-            if (idAcc != 0)// kiem tra xem da login chua
+            // kiem tra xem da login chua
+            if (idAcc != 0)// da login 
             {
                 CartUserDAO cartUser = new CartUserDAO();
-                int idcart = cartUser.getID(idAcc);
+                int idcart = cartUser.getID(idAcc);// lay gia id cart của ac
                 // kiem tra da co gio hang chua
                 if (idcart == -1)// chua co gio hang
                 {
@@ -40,31 +41,41 @@ namespace book.Controllers
                     db.SaveChanges();
 
                     // tao xong gio hang , them sach da chon vao gio hang
+                    int idcart1 = cartUser.getID(idAcc);
                     CartDetail cartDetail = new CartDetail();
                     cartDetail.ID_Book = id;
-                    cartDetail.ID_Cart = cart.ID;
+                    cartDetail.ID_Cart = idcart1;
+                    db.CartDetails.Add(cartDetail);
+                    db.SaveChanges();
 
                 }
                 else  // co go hang
                 {
-                    CartDetail cartDetail = new CartDetail();
-                    cartDetail.ID_Book = id;
-                    cartDetail.ID_Cart = idcart;
+                    
                     CartUserDAO userDAO = new CartUserDAO();
                     int? q = cartUser.GetQuanity(id, idcart);
                     if (q == -1)// cuon sach chua co trong gio hang
                     {
+                        CartDetail cartDetail = new CartDetail();
+                        cartDetail.ID_Book = id;
+                        cartDetail.ID_Cart = idcart;
                         cartDetail.Quantity = 1;
+                        db.CartDetails.Add(cartDetail);
+                        db.SaveChanges();
                     }
                     else
                     {
-                        cartDetail.Quantity = cartDetail.Quantity + 1;
+                        int quanity  = (int) q + 1;
+                        
+                        CartDetail cartDetail = db.CartDetails.Find(id, idcart);
+                        cartDetail.Quantity = quanity;
+                        db.SaveChanges();
                     }
-                    db.CartDetails.Add(cartDetail);
-                    db.SaveChanges();
+                    
                 }
-
-
+                // Get total 
+                CartUserDAO cartUserDAO = new CartUserDAO();
+                Session["cartAmount"] = cartUserDAO.GetTotal(idcart);
             }
             else// chua login 
             {
@@ -121,28 +132,70 @@ namespace book.Controllers
 
         public ActionResult Remove(int id)
         {
-            ShoppingCart cart = (ShoppingCart)Session["cart"];
-            if (cart == null)
+            int idAcc = Convert.ToInt16(Session["id"]);
+
+            if (idAcc != 0)
             {
-                cart = new ShoppingCart();
+                CartUserDAO cartUser = new CartUserDAO();
+                int idcart = cartUser.getID(idAcc);
+
+                MyDBContext db = new MyDBContext();
+                CartDetail cartD = new CartDetail();
+                cartD = db.CartDetails.Find(id, idcart);
+                db.CartDetails.Remove(cartD);
+                db.SaveChanges();
+                
             }
-            cart.RemoveItem(id);
-            Session["cart"] = cart;
+            else
+            {
+                ShoppingCart cart = (ShoppingCart)Session["cart"];
+                if (cart == null)
+                {
+                    cart = new ShoppingCart();
+                }
+                cart.RemoveItem(id);
+                Session["cart"] = cart;
+            }
+            
             return Redirect(Request.UrlReferrer.ToString());
         }
 
         public JsonResult ChangeAmount(int id, int amount)
         {
-            ShoppingCart cart = (ShoppingCart)Session["cart"];
-            if (cart == null)
+            int idAcc = Convert.ToInt16(Session["id"]);
+            if (idAcc !=0)
             {
-                return Json(new
+                MyDBContext db = new MyDBContext();
+
+                CartUserDAO cartUser = new CartUserDAO();
+                int idcart = cartUser.getID(idAcc);
+                CartDetail cartDetail = new CartDetail();
+                cartDetail = db.CartDetails.Find(id, idcart);
+                if( amount > 0)
                 {
-                    ret = 1
-                }, JsonRequestBehavior.AllowGet);
+                    cartDetail.Quantity = amount;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.CartDetails.Remove(cartDetail);
+                    db.SaveChanges();
+                }
             }
-            cart.UpdateAmount(id, amount);
-            Session["cart"] = cart;
+            else
+            {
+                ShoppingCart cart = (ShoppingCart)Session["cart"];
+                if (cart == null)
+                {
+                    return Json(new
+                    {
+                        ret = 1
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                cart.UpdateAmount(id, amount);
+                Session["cart"] = cart;
+            }
+           
             return Json(new
             {
                 ret = 1

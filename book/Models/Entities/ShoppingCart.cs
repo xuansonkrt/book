@@ -42,6 +42,7 @@ namespace book.Models.Entities
 
         public void UpdateAmount(int id, int amount)
         {
+            
             foreach (var item in lst)
             {
                 if (item.id == id)
