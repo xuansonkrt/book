@@ -63,6 +63,7 @@ namespace book.Controllers
                 Session["name"] = admin.Name;
                 Session["acc"] = admin.UserName;
                 Session["avatar"] = admin.Avatar;
+                Session["ID"] = admin.ID;
             }
             return Json(new
             {

@@ -165,9 +165,9 @@ $(document).ready(function () {
                             $('#dateofbirth').val(convertDate(data.obj.DateOfBirth));
                             $('#img-avatar').attr('src', data.obj.Avatar);
                             if (data.obj.Gender == 1) {
-                                $("input[name=gender][value=male]").prop('checked', true);
+                                $("#male").prop('checked', true);
                             } else
-                                $("input[name=gender][value=female]").prop('checked', true);
+                                $("#female").prop('checked', true);
                         } else {
                             
                         }

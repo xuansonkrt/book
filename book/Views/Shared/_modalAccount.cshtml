@@ -1,0 +1,64 @@
+﻿<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog " style="width: 900px">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông tin tài khoản</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6" style="text-align: center">
+                        <img id="img-avatar" style="max-height: 300px; margin-top: 10px" />
+                        <div class="mx-auto my-auto" style="margin-top: 15px">
+                            <a class="btn btn-danger" id="uploadImage2"><i class="fa fa-upload" style="margin-right: 10px"></i>Tải ảnh lên</a>
+                        </div>
+                        <div class="hidden">
+                            <input type='file' accept=".jpg,.jpeg,.png,.bmp" id="input-image2" />
+                            <input type="text" name="MainImage" id="image2" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="hidden" type="text" id="accountId" />
+                        <div class="form-group">
+                            <label><strong>Họ và tên:</strong></label>
+                            <input class="form-control" id="name" />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Tên tài khoản:</strong></label>
+                            <input class="form-control " id="username" disabled />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Giới tính:</strong></label>
+                            <input type="radio" name="gender" id="male" value="male" style="margin-left: 20px" /> Nam
+                            <input type="radio" name="gender" id="female" value="female" style="margin-left: 20px" /> Nữ
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Ngày sinh:</strong></label>
+                            <input class="form-control date" id="dateofbirth" />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Email:</strong></label>
+                            <input class="form-control" id="email" />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Số điện thoại:</strong></label>
+                            <input class="form-control" id="phonenumber" />
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Địa chỉ:</strong></label>
+                            <input class="form-control" id="address" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-success" id="btnUpdate">Cập nhật</button>
+            </div>
+        </div>
+
+    </div>
+</div>

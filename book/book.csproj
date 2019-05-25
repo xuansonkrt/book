@@ -2289,6 +2289,7 @@
     <Content Include="Views\WareHouse\Index.cshtml" />
     <Content Include="Views\WareHouse\Import.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Shared\_modalAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
