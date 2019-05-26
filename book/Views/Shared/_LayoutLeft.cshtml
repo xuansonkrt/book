@@ -19,12 +19,15 @@
                     <h4 class="panel-title">
 
                         @{
-
+                            string categoryId = Request.QueryString["categoryId"];
                             string publisherId = Request.QueryString["publisherId"];
+                            
+
+                           // string publisherId = Request.QueryString["publisherId"];
                             if (publisherId != null)
                             {
                                 idpublisher = Convert.ToInt32(publisherId);
-                                string categoryId = Request.QueryString["categoryId"];
+                              //  string categoryId = Request.QueryString["categoryId"];
                                 if (categoryId != null)
                                 {
                                     if (item.ID == Int32.Parse(categoryId))
@@ -46,7 +49,7 @@
                             }
                             else
                             {
-                                string categoryId = Request.QueryString["categoryId"];
+                              //  string categoryId = Request.QueryString["categoryId"];
                                 if (categoryId != null)
                                 {
                                     if (item.ID == Int32.Parse(categoryId))
@@ -163,20 +166,7 @@
         </div>
     </div>
 
-    @*<div class="brands_products">
-            <h2>Price</h2>
-            <div class="brands-name">
-                <div style="margin: 25px">
-                    <input type="number" name="price1" style="width:96px; margin-right:2px" /> -
-                    <input type="number" name="price2" style="width:96px; margin-left: 2px"/>
-                </div>
-                <div style="margin-left: 25px">
-                    <input type="submit" name="name" value="OK" />
-                </div>
-
-            </div>
-
-        </div>*@
+ 
     
     <div class="brands_products" style="margin-bottom: 30px">
         <!--brands_products-->
@@ -186,9 +176,12 @@
                 @{
                     string price1 = Request.QueryString["price1"];
                     string price2 = Request.QueryString["price2"];
+
                     if (price1 != null || price2 != null)
                     {
-                        if(price1== null)
+                        string categoryId = Request.QueryString["categoryId"];
+                        string publisherId = Request.QueryString["publisherId"];
+                        if (price1== null)
                         {
                             price1 ="0";
                         }
@@ -196,17 +189,27 @@
                         {
                             price2 = "0";
                         }
+                        if(categoryId == null)
+                        {
+                            categoryId = "0";
+                        }
+                        if(publisherId == null)
+                        {
+                            publisherId = "0";
+                        }
                         if (Int32.Parse(price2) == 50000 )
                         {
-                            <li> <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
-                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
+
+
+                            <li> <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price2=50000&categoryId=@categoryId&publisherId=@publisherId">Dưới 50.000 đ</a> </li>
+                            <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000&">Từ 50.000 đ - 200.000 đ</a> </li>
                             <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
                             <li> <a class="pointer theloai " href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
                         }
                         else if (Int32.Parse(price1) == 50000 && Int32.Parse(price2) == 200000)
                         {
                             <li> <a class="pointer theloai " href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
-                            <li><a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
+                            <li><a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=50000&price2=200000&categoryId=@categoryId&publisherId=@publisherId">Từ 50.000 đ - 200.000 đ</a> </li>
 
                             <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
                             <li> <a class="pointer theloai " href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
@@ -215,7 +218,7 @@
                         {
                             <li> <a class="pointer theloai " href="/BookStore?price2=50000">Dưới 50.000 đ</a> </li>
                             <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
-                            <li><a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
+                            <li><a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=50000&price2=200000&categoryId=@categoryId&publisherId=@publisherId">Từ 200.000 đ - 500.000 đ</a> </li>
 
                             <li> <a class="pointer theloai " href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
                         }
@@ -225,7 +228,7 @@
                             <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 50.000 đ - 200.000 đ</a> </li>
                             <li><a class="pointer theloai " href="/BookStore?price1=50000&price2=200000">Từ 200.000 đ - 500.000 đ</a> </li>
 
-                            <li> <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=500000">Trên 500.000 đ</a></li>
+                            <li> <a class="pointer theloai " style="color: #fe980f;" href="/BookStore?price1=500000&categoryId=@categoryId&publisherId=@publisherId">Trên 500.000 đ</a></li>
 
                         }
 

@@ -20,11 +20,12 @@ namespace book.Controllers
 
             List<Publisher> publisherList = db.Publishers.ToList();
             ViewBag.PublisherList = publisherList;
-            ShoppingCart cart = (ShoppingCart) Session["cart"];
-            if (cart == null)
+           
+
+            int idAcc = Convert.ToInt16(Session["id"]);
+            List<Item> lst = new List<Item>();
+            if (idAcc !=0)
             {
-<<<<<<< HEAD
-                //lay id gio hang 
                 CartUserDAO cartUser = new CartUserDAO();
                 int idcart = cartUser.getID(idAcc);
                 // lay chi tiet gio hang 
@@ -40,22 +41,29 @@ namespace book.Controllers
                                amount = (int)(a.Quantity),
                                mainImage = b.MainImage
                            }).ToList<Item>();
-               
-=======
-                cart= new ShoppingCart();
->>>>>>> 6f53dc05fdb21f04bdaa42727a8221b9111d7308
+
             }
-            List<Item> lst = new List<Item>();
-            foreach (var item in cart.lst)
+            else
             {
-                Item temp = new Item();
-                temp.id = item.id;
-                temp.amount = item.amount;
-                temp.mainImage = item.mainImage;
-                temp.name = item.name;
-                temp.price = item.price;
-                lst.Add(temp);
+                ShoppingCart cart = (ShoppingCart)Session["cart"];
+                if (cart == null)
+                {
+                    cart = new ShoppingCart();
+                }
+                
+                foreach (var item in cart.lst)
+                {
+                    Item temp = new Item();
+                    temp.id = item.id;
+                    temp.amount = item.amount;
+                    temp.mainImage = item.mainImage;
+                    temp.name = item.name;
+                    temp.price = item.price;
+                    lst.Add(temp);
+                }
             }
+           
+            
             return View(lst);
         }
 
@@ -84,63 +92,58 @@ namespace book.Controllers
         public JsonResult Checkout2(Invoice customer)
         {
             MyDBContext db = new MyDBContext();
-
-            int amount = 1;
+            int idAcc = Convert.ToInt16(Session["id"]);
             ShoppingCart cart = (ShoppingCart)Session["cart"];
-            if (cart == null)
+            //if (cart == null)
+            //{
+            //    return Json(new
+            //    {
+            //        ret = -1
+            //    }, JsonRequestBehavior.AllowGet);
+            //}
+            if (idAcc != 0)// neu dang nhap
             {
+                InvoiceDAO invoiceDAO = new InvoiceDAO();
+                // kiem tra xem co hoa don 
+                int idInvoid = invoiceDAO.IDInvoice(idAcc);
+                if ( idInvoid == -1)
+                {
+                    invoiceDAO.AddInvoice(idAcc);
+                    db.SaveChanges();
+
+                    // them vao invoiddetal
+                    InvoiceDetailDAO invoice = new InvoiceDetailDAO();
+                    invoice.Add(idAcc);
+                    //
+                    Session["cartAmount"] = 0;
+                }
+                //them invoid
+                else
+                {
+                    // them vao invoiddetal
+                    InvoiceDetailDAO invoice = new InvoiceDetailDAO();
+                    invoice.Add(idAcc);
+
+                    // xóa giỏ hàng ( xoa tat ca chi tiet gio hang)
+                    CartUserDAO cartUser = new CartUserDAO();
+                    int idcart = cartUser.getID(idAcc);
+                    db.Carts.Remove(db.Carts.Find(idcart));
+                    db.SaveChanges();
+                    //
+
+                    Session["cartAmount"] = 0;
+                }
+
+
+
                 return Json(new
                 {
-                    ret = -1
+                    ret = 1
                 }, JsonRequestBehavior.AllowGet);
             }
-
-            //    CustomerDAO customerDao = new CustomerDAO();
-            //    Customer obj = new Customer();
-            //    obj.Email = customer.Email;
-            //    obj.Address = customer.Address;
-            //    obj.Telephone = customer.Telephone;
-            //    obj.Name = customer.Name;
-
-            //    db.Customers.Add(customer);
-            //    int ret = customerDao.Insert(obj);
-            //    if (ret > 0)
-            //    {
-            //        InvoiceDAO invoiceDao = new InvoiceDAO();
-            //        Invoice invoice = new Invoice();
-            //        invoice.ID_Custom = obj.ID;
-            //        invoice.OrderDate = DateTime.Now;
-            //        invoice.Price = (decimal?)cart.GetTotalMoney();
-            //        ret = invoiceDao.Insert(invoice);
-            //        if (ret > 0)
-            //        {
-            //            BookDAO bookDao = new BookDAO();
-            //            InvoiceDetailDAO invoiceDetailDao = new InvoiceDetailDAO();
-            //            foreach (var item in cart.lst)
-            //            {
-            //                InvoiceDetail invoiceDetail = new InvoiceDetail();
-            //                invoiceDetail.ID_Book = item.id;
-            //                invoiceDetail.ID_Invoice = invoice.ID;
-            //                invoiceDetail.Price = (decimal?)item.price;
-            //                invoiceDetail.Quantity = item.amount;
-            //                ret = invoiceDetailDao.Insert(invoiceDetail);
-            //                if (ret < 0)
-            //                {
-            //                    break;
-            //                }
-            //            }
-            //        }
-            //    }
-
-            //    if (ret > 0)
-            //    {
-            //        Session["cartAmount"] = 0;
-            //        Session["cart"] = null;
-            //    }
-
             return Json(new
             {
-                ret=-1
+                ret=1
             }, JsonRequestBehavior.AllowGet);
         }
     }

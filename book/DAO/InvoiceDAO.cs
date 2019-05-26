@@ -86,6 +86,48 @@ namespace book.DAO
 
             return list;
         }
+        ///////////////
+        public int GetIdByAcc( int idAcc)
+        {
+            var sql = " select * from Invoice where ID_Account= " + idAcc;
+            var lst = db.Invoices.SqlQuery(sql).ToList();
+            return lst[0].ID ;
 
+
+        }
+        public void AddInvoice( int idAcc)
+        {
+            Account ac = new Account();
+            ac = db.Accounts.Find(idAcc);
+
+            Invoice invoice = new Invoice();
+            invoice.ID_Account = ac.ID;
+            invoice.Address = ac.Address;
+            invoice.PhoneNumber = ac.Telephone;
+            invoice.Email = ac.Email;
+            invoice.OrderDate = DateTime.Now;
+            invoice.CustomerName = ac.Name;
+            invoice.ID_InvoiceStatus =1;
+            db.Invoices.Add(invoice);
+            db.SaveChanges();
+
+        }
+        public int IDInvoice( int idAcc)
+        {
+            var sql = "  select * from Invoice where ID_Account =" + idAcc;
+            var lst = db.Invoices.SqlQuery(sql).ToList();
+            if( lst.Count == 0)
+            {
+                return -1;
+            }
+            return lst[0].ID;
+        }
+
+        public List<HoaDon> lisHoaDon ( int idIn)
+        {
+            var sql = "exec HoaDon " + idIn;
+            var lst = db.Database.SqlQuery<HoaDon>(sql).ToList();
+            return lst;
+        }
     }
 }

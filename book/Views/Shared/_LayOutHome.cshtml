@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using book.Models.Entities;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -8,10 +9,10 @@
     <title>Home | E-Shopper</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet">
     @*<link href="~/Content/css/font-awesome.min.css" rel="stylesheet">*@
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
-    
+
     <link href="~/Content/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/Content/css/price-range.css" rel="stylesheet">
     <link href="~/Content/css/animate.css" rel="stylesheet">
@@ -68,32 +69,64 @@
                         <div class="logo pull-left">
                             <a href="/"><img src="~/Content/images/home/logo.png" alt="" /></a>
                         </div>
-                        
+
                     </div>
                     <div class="col-md-8 clearfix">
                         <div class="shop-menu clearfix pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href=""><i class="fa fa-user"></i>Tài khoản </a></li>
-                                <li><a href=""><i class="fa fa-star"></i>Danh sách yêu thích</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-crosshairs"></i>Kiểm tra hóa đơn</a></li>
-                                <li>
-                                    @{
-                                        var amount = Session["cartAmount"];
-                                        if (amount == null)
-                                        {
-                                            amount = 0;
-                                        }
-                                    }
+                            @{
+                                            /**/
 
-                                    <a href="/Cart/Index" class="notification-icon">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span class="badge">@amount</span>
-                                        Giỏ hàng
-                                    </a>
-                                    @*<a href="cart.html"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>*@
-                                </li>
-                                <li><a href="/Account/Login"><i class="fa fa-lock"></i>Đăng nhập</a></li>
-                            </ul>
+                                            String accName = Session["username"] + "";
+                                            int idAcc = Convert.ToInt16(Session["id"]);
+                                            if (idAcc != 0)
+                                            {
+                                                <ul class="nav navbar-nav">
+                                                    <li><a href="/Invoice/Show"><i class="fa fa-crosshairs"></i>Kiểm tra hóa đơn</a></li>
+                                                    <li>
+                                                        @{
+                                                            var amount = Session["cartAmount"];
+                                                            if (amount == null)
+                                                            {
+                                                                amount = 0;
+                                                            }
+                                                        }
+
+                                                        <a href="/Cart/Index" class="notification-icon">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            <span class="badge">@amount</span>
+                                                            Giỏ hàng
+                                                        </a>
+                                                        @*<a href="cart.html"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>*@
+                                                    </li>
+                                                    <li><a href="/Account/Login"><i class="fa fa-lock"></i>@accName</a></li>
+                                                </ul>
+
+                                            }
+                                            else
+                                            {
+                                                <ul class="nav navbar-nav">
+
+                                                    <li>
+                                                        @{
+                                                            var amount = Session["cartAmount"];
+                                                            if (amount == null)
+                                                            {
+                                                                amount = 0;
+                                                            }
+                                                        }
+
+                                                        <a href="/Cart/Index" class="notification-icon">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            <span class="badge">@amount</span>
+                                                            Giỏ hàng
+                                                        </a>
+                                                        @*<a href="cart.html"><i class="fa fa-shopping-cart"></i>Giỏ hàng</a>*@
+                                                    </li>
+                                                    <li><a href="/Account/Login"><i class="fa fa-lock"></i>Đăng nhập</a></li>
+                                                </ul>
+                                            }
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -120,25 +153,28 @@
                                     @*<a href="#">Danh mục sách<i class="fa fa-angle-down"></i></a>*@
                                     @Html.ActionLink("Danh mục sách", "Index", "BookStore")
                                     <ul role="menu" class="sub-menu">
-                                        <li>@Html.ActionLink("Văn học Việt Nam", "TieuThuyet", "BookStore")</li>
-                                        <li><a href="product-details.html">Văn học nước ngoài</a></li>
-                                        <li><a href="checkout.html">Tiểu thuyết</a></li>
-                                        <li><a href="cart.html">Sách kỹ năng</a></li>
-                                        <li><a href="login.html">Sách Song ngữ</a></li>
-                                        <li><a href="~/Views/BookStore/Index.cshtml">Sách thiếu nhi</a></li>
+                                        @{
+                                            MyDBContext db = new MyDBContext();
+                                            List<Category> categoryList = db.Categories.ToList();
+                                            foreach (Category item in categoryList)
+                                            {
+                                                <li> <a href="/BookStore?categoryId=@item.ID" style="text-transform: none">@item.Name.ToLower()</a></li>
+                                            }
+                                        }
+
 
                                     </ul>
                                 </li>
                                 @*<li class="dropdown">
-                                    <a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li>*@
+                                        <a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                        <ul role="menu" class="sub-menu">
+                                            <li><a href="blog.html">Blog List</a></li>
+                                            <li><a href="blog-single.html">Blog Single</a></li>
+                                        </ul>
+                                    </li>*@
 
-                                <li>@Html.ActionLink("Sách bán chạy","SachBanChay", "BookStore")</li>
-                                <li><a href="contact-us.html">Giới thiệu</a></li>
+                                <li> <a class="pointer theloai " href="/BookStore?&publisherId=3" style="text-transform: none">Sách bán chạy</a></li>
+                                <li><a href="/BookStore/Inf">Giới thiệu</a></li>
                             </ul>
                         </div>
                     </div>
@@ -146,9 +182,11 @@
                         @*<div class="search_box pull-right">*@
                         @using (Html.BeginForm("TimKiem", "BookStore", FormMethod.Get))
                         {
-
-                            @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" />
+                            <div class="input-group ">
+                                @Html.TextBox("SearchString") <input  type="submit" value="Tìm kiếm" />
+                            </div>
                             
+
                         }
 
                         @*</div>*@
@@ -163,7 +201,7 @@
         <div class="container">
             <div class="row">
                 @RenderSection("Slider", false)
-                
+
             </div>
         </div>
     </section><!--/slider-->
@@ -173,15 +211,15 @@
                 <div class="col-sm-3">
                     @RenderPage("~/Views/Shared/_LayoutLeft.cshtml")
                 </div>
-                
-                   @RenderBody()
-        
-                
-                
+
+                @RenderBody()
+
+
+
             </div>
         </div>
     </section>
-    
+
     @RenderPage("~/Views/Shared/_LayoutFooter.cshtml")
 
 
@@ -189,14 +227,17 @@
 
     <script src="~/Scripts/js/jquery.js"></script>
     <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
     <script src="~/Scripts/js/jquery.scrollUp.min.js"></script>
     <script src="~/Scripts/js/price-range.js"></script>
     <script src="~/Scripts/js/jquery.prettyPhoto.js"></script>
     <script src="~/Scripts/js/main.js"></script>
     <script src="~/Scripts/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
     <script src="~/Scripts/script.js"></script>
 
 </body>

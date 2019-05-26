@@ -18,14 +18,7 @@ namespace Web_BookStore1.Controllers
         // GET: BookStore
         public ActionResult Index(int? page = 1, int pageSize = 9)
         {
-<<<<<<< HEAD
-           
-           
-=======
-            Session["username"] = "manh";
-            
-           // HomeVM vm = new HomeVM();
->>>>>>> 6f53dc05fdb21f04bdaa42727a8221b9111d7308
+
             List<Category> categoryList = db.Categories.ToList();
             ViewBag.CategoryList = categoryList;
 
@@ -64,31 +57,9 @@ namespace Web_BookStore1.Controllers
                  new SqlParameter("price2", price2)
                ).ToList();
             List <BookVM> list = new List<BookVM>();
-        //    foreach (var item in books)
-        //    {
-        //        BookVM bookVM = new BookVM();
-        //        bookVM.ID = item.ID;
-        //        bookVM.Name = item.Name;
-        //        bookVM.Price = item.Price;
-        //        bookVM.MainImage = item.MainImage;
-        //        bookVM.Review = item.Review;
-        //        bookVM.Quantity = item.Quantity;
-        //        if (item.Category != null)
-        //            bookVM.CategoryName = item.Category.Name;
-        //        if (item.Publisher != null)
-        //            bookVM.PublisherName = item.Publisher.Name;
-                
-        //        list.Add(bookVM);
-        //    }
-
-        // //   Session["cartAmount"] = 0;
+        
             int pageNumber = page ?? 1;
-        ////    IPagedList<BookVM> pageBook = new StaticPagedList<BookVM>(list, pageNumber, pageSize, list.Count);
-        //    var vm = new HomeVM
-        //    {
-        //        //  ListTheLoai = listtheloai,
-        //        BookVMList = list
-        //    };
+        
             return View(books.ToPagedList(pageNumber, pageSize));
         }
        
@@ -217,7 +188,15 @@ namespace Web_BookStore1.Controllers
 
             return View(links.ToList());
         }
+        public ActionResult Inf()
+        {
+            List<Category> categoryList = db.Categories.ToList();
+            ViewBag.CategoryList = categoryList;
 
+            List<Publisher> publisherList = db.Publishers.ToList();
+            ViewBag.PublisherList = publisherList;
+            return View();
+        }
 
     }
 }

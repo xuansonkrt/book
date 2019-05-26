@@ -32,7 +32,7 @@ namespace book.Models.Entities
             {
                 Item item = new Item();
                 item.id = id;
-                item.price = price;
+                item.price = (decimal)price;
                 item.name = name;
                 item.amount = amount;
                 item.mainImage = bookDao.GetByID(id).MainImage;
@@ -83,9 +83,9 @@ namespace book.Models.Entities
             return total;
         }
 
-        public double GetTotalMoney()
+        public decimal GetTotalMoney()
         {
-            double total = 0;
+            decimal total = 0;
             foreach (var item in lst)
             {
                 total += item.amount * item.price;

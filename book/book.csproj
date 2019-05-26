@@ -225,6 +225,7 @@
     <Compile Include="DAO\AccountDAO.cs" />
     <Compile Include="DAO\AuthorDAO.cs" />
     <Compile Include="DAO\BookDAO.cs" />
+    <Compile Include="DAO\CartUserDAO.cs" />
     <Compile Include="DAO\ImportDAO.cs" />
     <Compile Include="DAO\InvoiceDetailDAO.cs" />
     <Compile Include="DAO\InvoiceDAO.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\Coupon.cs" />
     <Compile Include="Models\Entities\CouponDetail.cs" />
+    <Compile Include="Models\Entities\HoaDon.cs" />
     <Compile Include="Models\Entities\Import.cs" />
     <Compile Include="Models\Entities\ImportDetail.cs" />
     <Compile Include="Models\Entities\Invoice.cs" />
@@ -2283,6 +2285,8 @@
     <Content Include="Views\Admin\SignUp.cshtml" />
     <Content Include="Views\WareHouse\Index.cshtml" />
     <Content Include="Views\WareHouse\Import.cshtml" />
+    <Content Include="Views\Invoice\Show.cshtml" />
+    <Content Include="Views\BookStore\Inf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

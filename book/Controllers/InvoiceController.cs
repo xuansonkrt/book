@@ -73,7 +73,7 @@ namespace book.Controllers
                 Item temp = new Item();
                 temp.id = item.ID;
                 temp.amount =(int) item.Quantity;
-                temp.price = (double)item.Price;
+                temp.price = (decimal)item.Price;
                 temp.name = item.Book.Name;
                 temp.mainImage = item.Book.MainImage;
                 list.Add(temp);
@@ -102,7 +102,7 @@ namespace book.Controllers
                 Item temp = new Item();
                 temp.id = item.ID;
                 temp.amount = (int)item.Quantity;
-                temp.price = (double)item.Price;
+                temp.price = (decimal)item.Price;
                 temp.name = item.Book.Name;
                 temp.mainImage = item.Book.MainImage;
                 list.Add(temp);
@@ -114,6 +114,23 @@ namespace book.Controllers
                 list = list
             };
             return View("~/Views/Invoice/print.cshtml",vm);
+        }
+
+        public ActionResult Show()
+        {
+            List<Category> categoryList = db.Categories.ToList();
+            ViewBag.CategoryList = categoryList;
+
+            List<Publisher> publisherList = db.Publishers.ToList();
+            ViewBag.PublisherList = publisherList;
+
+            InvoiceDAO invoiceDAO = new InvoiceDAO();
+            int idAcc = Convert.ToInt16(Session["id"]);
+            int id = invoiceDAO.IDInvoice(idAcc);
+            List<HoaDon> lst = new List<HoaDon>();
+           
+            lst = invoiceDAO.lisHoaDon(id);
+            return View(lst);
         }
     }
 }

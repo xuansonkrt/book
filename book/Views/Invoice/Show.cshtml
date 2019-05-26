@@ -1,0 +1,57 @@
+﻿@model IEnumerable<book.Models.Entities.HoaDon>
+
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_LayOutHome.cshtml";
+}
+
+<div class="col-sm-9 padding-right">
+    <div class="features_items">
+        <!--features_items-->
+        <h2 class="title text-center">Hóa đơn </h2>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Mã hóa đơn")
+                </th>
+                <th>
+                    @Html.DisplayName("Ngày đặt")
+                </th>
+                <th>
+                    @Html.DisplayName("Tên sách")
+                </th>
+                <th>
+                    @Html.DisplayName("Giá tiền")
+                </th>
+                <th>
+                    @Html.DisplayName("Trạng thái")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+
+      
