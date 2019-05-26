@@ -18,6 +18,12 @@ namespace book
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "BookStore", action = "Index", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    name: "sonnx1",
+            //    url: "sonnx/{controller}/{action}/{id}",
+            //    defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+            //);
         }
     }
 }
